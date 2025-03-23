@@ -12,9 +12,7 @@ class PhotosLibrary {
 
     static func requestAuthorization(completion: @escaping (PHAuthorizationStatus) -> Void) {
         PHPhotoLibrary.requestAuthorization { status in
-            DispatchQueue.main.async {
-                completion(status)
-            }
+            completion(status)
         }
     }
 
