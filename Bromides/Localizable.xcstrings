@@ -11,6 +11,22 @@
         }
       }
     },
+    "Error.NoAlbums" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No albums found"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アルバムがありません"
+          }
+        }
+      }
+    },
     "Error.NoImage" : {
       "localizations" : {
         "en" : {

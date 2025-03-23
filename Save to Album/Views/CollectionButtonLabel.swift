@@ -89,14 +89,14 @@ struct CollectionButtonLabel: View {
                                     .frame(width: 18.0, height: 18.0)
                                     .overlay {
                                         Circle()
-                                            .stroke(.white, lineWidth: 2.0)
+                                            .stroke(.white, lineWidth: 1.5)
                                     }
                             }
                         }
                     }
                     .compositingGroup()
                     .clipShape(.rect(cornerRadius: 6.0))
-                    .shadow(radius: 3.0, y: 2.0)
+                    .shadow(radius: 2.0, y: 1.5)
                     Text(collection.title)
                         .font(.body)
                         .layoutPriority(0)

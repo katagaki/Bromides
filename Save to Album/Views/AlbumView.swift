@@ -58,29 +58,38 @@ struct AlbumView: View {
                 }
             case .list:
                 List(collections) { collection in
-                    switch collection {
-                    case .album(let album):
-                        Button {
-                            withAnimation(.smooth.speed(2.0)) {
-                                selectedCollection = album as? PHAssetCollection
+                    Group {
+                        switch collection {
+                        case .album(let album):
+                            Button {
+                                withAnimation(.smooth.speed(2.0)) {
+                                    selectedCollection = album as? PHAssetCollection
+                                }
+                            } label: {
+                                CollectionButtonLabel(
+                                    collection: collection,
+                                    mode: .row,
+                                    isSelected: { selectedCollection == album }
+                                )
                             }
-                        } label: {
-                            CollectionButtonLabel(
-                                collection: collection,
-                                mode: .row,
-                                isSelected: { selectedCollection == album }
-                            )
-                        }
-                    case .folder:
-                        NavigationLink(value: collection) {
-                            CollectionButtonLabel(
-                                collection: collection,
-                                mode: .row
-                            )
+                        case .folder:
+                            NavigationLink(value: collection) {
+                                CollectionButtonLabel(
+                                    collection: collection,
+                                    mode: .row
+                                )
+                            }
                         }
                     }
+                    .listRowInsets(.init(top: 6.0, leading: 20.0, bottom: 6.0, trailing: 20.0))
                 }
                 .listStyle(.plain)
+                .overlay {
+                    if collections.isEmpty {
+                        ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
+                            .symbolRenderingMode(.multicolor)
+                    }
+                }
             }
         }
         .navigationTitle(displayedCollection == nil ?
