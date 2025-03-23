@@ -84,12 +84,6 @@ struct AlbumView: View {
                     .listRowInsets(.init(top: 6.0, leading: 20.0, bottom: 6.0, trailing: 20.0))
                 }
                 .listStyle(.plain)
-                .overlay {
-                    if collections.isEmpty {
-                        ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
-                            .symbolRenderingMode(.multicolor)
-                    }
-                }
             }
         }
         .navigationTitle(displayedCollection == nil ?
@@ -98,6 +92,12 @@ struct AlbumView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
+        }
+        .overlay {
+            if collections.isEmpty {
+                ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
+                    .symbolRenderingMode(.multicolor)
+            }
         }
     }
 }
