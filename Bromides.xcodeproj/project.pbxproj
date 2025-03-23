@@ -139,6 +139,7 @@
 				E4DB58D32D8E8146009A20B2 /* Frameworks */,
 				E4DB58D42D8E8146009A20B2 /* Resources */,
 				E4DB59132D8E81D0009A20B2 /* Embed Foundation Extensions */,
+				E4DB59562D8FDEAF009A20B2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -231,6 +232,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E4DB59562D8FDEAF009A20B2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E4DB58D22D8E8146009A20B2 /* Sources */ = {
@@ -388,6 +410,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bromides/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
@@ -418,6 +441,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Bromides/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";

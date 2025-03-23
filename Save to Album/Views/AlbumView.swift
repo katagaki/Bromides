@@ -27,7 +27,9 @@ struct AlbumView: View {
                     switch collection {
                     case .album(let album):
                         Button {
-                            selectedCollection = album as? PHAssetCollection
+                            withAnimation(.smooth.speed(2.0)) {
+                                selectedCollection = album as? PHAssetCollection
+                            }
                         } label: {
                             CollectionButtonLabel(
                                 collection: collection,
@@ -35,7 +37,7 @@ struct AlbumView: View {
                             )
                         }
                         .buttonStyle(.plain)
-                    case .folder( _):
+                    case .folder:
                         NavigationLink(value: collection) {
                             CollectionButtonLabel(collection: collection)
                         }
@@ -45,7 +47,9 @@ struct AlbumView: View {
             }
                       .padding(.horizontal, 12.0)
         }
-        .navigationTitle(displayedCollection == nil ? NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") : displayedCollection!.title)
+        .navigationTitle(displayedCollection == nil ?
+                         NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") :
+                            displayedCollection!.title)
         .navigationBarTitleDisplayMode(.inline)
         .task {
             collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)

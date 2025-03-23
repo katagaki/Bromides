@@ -13,8 +13,9 @@ struct ShareView: View {
 
     @State var viewPath: [Collection] = []
     var imageData: Data?
-    
-    @State var selectedCollection: PHAssetCollection? = nil
+    var uiImage: UIImage?
+
+    @State var selectedCollection: PHAssetCollection?
     @State var isPhotoSaveSuccessful: Bool = false
     @State var isPhotoSaveFailed: Bool = false
     @State var isPhotosAuthorizationDenied: Bool = false
@@ -34,11 +35,14 @@ struct ShareView: View {
         } else if let data = item as? Data {
             self.imageData = data
         }
+        guard let imageData = self.imageData else { return }
+        guard let uiImage = UIImage(data: imageData) else { return }
+        self.uiImage = uiImage
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
-            if let imageData, let uiImage = UIImage(data: imageData) {
+            if let imageData, let uiImage {
                 ImagePreview(uiImage: uiImage)
                 if isPhotoSaveSuccessful {
                     VStack(alignment: .center, spacing: 16.0) {
@@ -46,7 +50,9 @@ struct ShareView: View {
                             .resizable()
                             .frame(width: 48.0, height: 48.0)
                             .symbolRenderingMode(.multicolor)
-                        Text("Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))")
+                        Text("""
+Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))
+""")
                             .bold()
                     }
                     .frame(maxWidth: .infinity)

@@ -18,7 +18,7 @@ struct CollectionButtonLabel: View {
             VStack(alignment: .center, spacing: 6.0) {
                 Group {
                     switch collection {
-                    case .album( _):
+                    case .album:
                         if let thumbnail {
                             Image(uiImage: thumbnail)
                                 .resizable()
@@ -26,7 +26,7 @@ struct CollectionButtonLabel: View {
                             Image(.genericAlbum)
                                 .resizable()
                         }
-                    case .folder( _):
+                    case .folder:
                         Image(.genericFolder)
                             .resizable()
                     }

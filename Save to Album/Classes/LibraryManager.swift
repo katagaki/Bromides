@@ -101,12 +101,11 @@ class PhotosLibrary {
             }
             let enumeration: NSArray = [placeholder]
             albumRequest.addAssets(enumeration)
-            
-        }) { success, error in
+        }, completionHandler: { success, error in
             if let error {
                 debugPrint(error.localizedDescription)
             }
             completion(success)
-        }
+        })
     }
 }
