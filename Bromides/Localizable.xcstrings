@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "Bromides" : {
-      "shouldTranslate" : false
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブロマイド"
+          }
+        }
+      }
     },
     "Error.NoImage" : {
       "localizations" : {

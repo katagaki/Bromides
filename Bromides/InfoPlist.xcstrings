@@ -7,13 +7,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save to Album"
+            "value" : "Bromides"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アルバムに保存"
+            "value" : "ブロマイド"
           }
         }
       }
@@ -24,25 +24,25 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save to Album"
+            "value" : "Bromides"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アルバムに保存"
+            "value" : "ブロマイド"
           }
         }
       }
     },
-    "NSHumanReadableCopyright" : {
-      "comment" : "Copyright (human-readable)",
+    "NSPhotoLibraryUsageDescription" : {
+      "comment" : "Privacy - Photo Library Usage Description",
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : ""
+            "value" : "Bromides uses your Photos library to show you your albums and save your photos."
           }
         }
       }
