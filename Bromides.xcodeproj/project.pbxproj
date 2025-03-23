@@ -47,11 +47,22 @@
 			);
 			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
 		};
+		E4DB594E2D8FD4EA009A20B2 /* Exceptions for "Bromides" folder in "BromidesSecretary" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				Localizable.xcstrings,
+			);
+			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E4DB58D82D8E8146009A20B2 /* Bromides */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "Bromides" folder in "BromidesSecretary" target */,
+			);
 			path = Bromides;
 			sourceTree = "<group>";
 		};
@@ -181,7 +192,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				ja,
 			);
 			mainGroup = E4DB58CD2D8E8146009A20B2;
 			minimizedProjectReferenceProxies = 1;

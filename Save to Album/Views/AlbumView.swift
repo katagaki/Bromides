@@ -29,17 +29,12 @@ struct AlbumView: View {
                         Button {
                             selectedCollection = album as? PHAssetCollection
                         } label: {
-                            CollectionButtonLabel(collection: collection)
+                            CollectionButtonLabel(
+                                collection: collection,
+                                isSelected: { selectedCollection == album }
+                            )
                         }
                         .buttonStyle(.plain)
-                        .overlay {
-                            if selectedCollection == album {
-                                ZStack(alignment: .center) {
-                                    Color.clear
-                                    Image(systemName: "checkmark.circle.fill")
-                                }
-                            }
-                        }
                     case .folder( _):
                         NavigationLink(value: collection) {
                             CollectionButtonLabel(collection: collection)
@@ -50,7 +45,7 @@ struct AlbumView: View {
             }
                       .padding(.horizontal, 12.0)
         }
-        .navigationTitle(displayedCollection == nil ? "Select an Album" : displayedCollection!.title)
+        .navigationTitle(displayedCollection == nil ? NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") : displayedCollection!.title)
         .navigationBarTitleDisplayMode(.inline)
         .task {
             collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)

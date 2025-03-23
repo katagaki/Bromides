@@ -84,7 +84,29 @@ class PhotosLibrary {
         }
     }
 
-    static func saveImage(data: Data, to: PHAssetCollection) {
-        // TODO
+    static func saveImage(data: Data, to album: PHAssetCollection, completion: @escaping (Bool) -> Void) {
+        guard let image = UIImage(data: data) else {
+            completion(false)
+            return
+        }
+        PHPhotoLibrary.shared().performChanges({
+            let imageRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+            guard let placeholder = imageRequest.placeholderForCreatedAsset else {
+                completion(false)
+                return
+            }
+            guard let albumRequest = PHAssetCollectionChangeRequest(for: album) else {
+                completion(false)
+                return
+            }
+            let enumeration: NSArray = [placeholder]
+            albumRequest.addAssets(enumeration)
+            
+        }) { success, error in
+            if let error {
+                debugPrint(error.localizedDescription)
+            }
+            completion(success)
+        }
     }
 }

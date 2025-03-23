@@ -15,6 +15,8 @@ struct ShareView: View {
     var imageData: Data?
     
     @State var selectedCollection: PHAssetCollection? = nil
+    @State var isPhotoSaveSuccessful: Bool = false
+    @State var isPhotoSaveFailed: Bool = false
     @State var isPhotosAuthorizationDenied: Bool = false
 
     init(items: [Any?]) {
@@ -38,50 +40,78 @@ struct ShareView: View {
         VStack(alignment: .leading, spacing: 0.0) {
             if let imageData, let uiImage = UIImage(data: imageData) {
                 ImagePreview(uiImage: uiImage)
-                Divider()
-                ZStack(alignment: .center) {
-                    if isPhotosAuthorizationDenied {
-                        ContentUnavailableView("Could not access your Photos library", systemImage: "xmark.circle.fill")
+                if isPhotoSaveSuccessful {
+                    VStack(alignment: .center, spacing: 16.0) {
+                        Image(systemName: "checkmark.circle.fill")
+                            .resizable()
+                            .frame(width: 48.0, height: 48.0)
                             .symbolRenderingMode(.multicolor)
-                    } else {
-                        NavigationStack(path: $viewPath) {
-                            AlbumView(selection: $selectedCollection)
-                                .navigationDestination(for: Collection.self) { collection in
-                                    AlbumView(collection, selection: $selectedCollection)
-                                }
+                        Text("Message.Save.\(selectedCollection?.localizedTitle ?? "album")")
+                            .bold()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                } else {
+                    Divider()
+                    ZStack(alignment: .center) {
+                        if isPhotosAuthorizationDenied {
+                            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
+                                .symbolRenderingMode(.multicolor)
+                        } else {
+                            NavigationStack(path: $viewPath) {
+                                AlbumView(selection: $selectedCollection)
+                                    .navigationDestination(for: Collection.self) { collection in
+                                        AlbumView(collection, selection: $selectedCollection)
+                                    }
+                            }
                         }
                     }
-                }
-                .layoutPriority(0)
-                Divider()
-                HStack {
-                    Button {
-                        // TODO
-                    } label: {
-                        ButtonLabel("Save", icon: "square.and.arrow.down")
+                    .layoutPriority(0)
+                    Divider()
+                    HStack {
+                        Button {
+                            if let selectedCollection {
+                                PhotosLibrary.saveImage(data: imageData, to: selectedCollection) { success in
+                                    if success {
+                                        withAnimation(.smooth.speed(2.0)) {
+                                            isPhotoSaveSuccessful = true
+                                        } completion: {
+                                            UINotificationFeedbackGenerator().notificationOccurred(.success)
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                                close()
+                                            }
+                                        }
+                                    } else {
+                                        isPhotoSaveFailed = true
+                                    }
+                                }
+                            }
+                        } label: {
+                            ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .clipShape(.capsule)
+                        .disabled(selectedCollection == nil)
+                        Button {
+                            close()
+                        } label: {
+                            ButtonLabel("Shared.Cancel", icon: "xmark")
+                        }
+                        .buttonStyle(.bordered)
+                        .clipShape(.capsule)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .clipShape(.capsule)
-                    .disabled(selectedCollection == nil)
-                    Button {
-                        close()
-                    } label: {
-                        ButtonLabel("Cancel", icon: "xmark")
-                    }
-                    .buttonStyle(.bordered)
-                    .clipShape(.capsule)
+                    .padding()
                 }
-                .padding()
             } else {
                 Spacer()
-                ContentUnavailableView("Could not load image", systemImage: "photo.badge.exclamationmark.fill")
+                ContentUnavailableView("Error.NoImage", systemImage: "photo.badge.exclamationmark.fill")
                     .padding()
                 Spacer()
                 Divider()
                 Button {
                     close()
                 } label: {
-                    ButtonLabel("Close", icon: "xmark")
+                    ButtonLabel("Shared.Close", icon: "xmark")
                 }
                 .buttonStyle(.borderedProminent)
                 .clipShape(.capsule)
@@ -97,6 +127,9 @@ struct ShareView: View {
                     isPhotosAuthorizationDenied = true
                 }
             }
+        }
+        .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
+            Button("Shared.Dismiss", action: {})
         }
     }
 

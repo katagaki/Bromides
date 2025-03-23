@@ -11,6 +11,7 @@ import SwiftUI
 struct CollectionButtonLabel: View {
     var collection: Collection
     @State var thumbnail: UIImage?
+    var isSelected: (() -> Bool)?
 
     var body: some View {
         HStack(alignment: .top) {
@@ -30,10 +31,26 @@ struct CollectionButtonLabel: View {
                             .resizable()
                     }
                 }
-                .clipShape(.rect(cornerRadius: 6.0))
                 .aspectRatio(contentMode: .fill)
-                .shadow(radius: 3.0, y: 2.0)
                 .frame(width: 72.0, height: 72.0)
+                .overlay {
+                    if let isSelected, isSelected() {
+                        ZStack(alignment: .center) {
+                            Color(uiColor: .systemBackground).opacity(0.3)
+                            Image(systemName: "checkmark.circle.fill")
+                                .resizable()
+                                .symbolRenderingMode(.multicolor)
+                                .frame(width: 28.0, height: 28.0)
+                                .overlay {
+                                    Circle()
+                                        .stroke(.white, lineWidth: 2.0)
+                                }
+                        }
+                    }
+                }
+                .compositingGroup()
+                .clipShape(.rect(cornerRadius: 6.0))
+                .shadow(radius: 3.0, y: 2.0)
                 Text(collection.title)
                     .lineLimit(1)
                     .font(.caption)
