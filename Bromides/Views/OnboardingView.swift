@@ -45,7 +45,21 @@ struct OnboardingView: View {
                 } header: {
                     ListSectionHeader(text: "Settings.Title")
                 }
+                Section {
+                    Link(destination: URL(string: "https://github.com/katagaki/Bromides")!) {
+                        HStack {
+                            ListRow(image: "GitHub",
+                                    title: "Settings.GitHub",
+                                    subtitle: "katagaki/Bromides",
+                                    includeSpacer: true)
+                            Image(systemName: "safari")
+                                .opacity(0.5)
+                        }
+                        .foregroundColor(.primary)
+                    }
+                }
             }
+            .listSectionSpacing(.compact)
             .navigationTitle("Bromides")
             .safeAreaInset(edge: .bottom, spacing: 0.0) {
                 ShareLink(
@@ -63,6 +77,7 @@ struct OnboardingView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .clipShape(.capsule)
+                .shadow(color: .black.opacity(0.3), radius: 4.0, y: 3.0)
                 .padding()
             }
         }

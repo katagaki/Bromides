@@ -197,6 +197,23 @@
         }
       }
     },
+    "Settings.GitHub" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Source Code"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ソースコード"
+          }
+        }
+      }
+    },
     "Settings.Title" : {
       "extractionState" : "manual",
       "localizations" : {
