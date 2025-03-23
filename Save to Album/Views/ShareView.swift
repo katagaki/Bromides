@@ -85,8 +85,12 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                     HStack {
                         Button {
                             if let selectedCollection {
-                                PhotosLibrary.saveImage(data: imageData, to: selectedCollection) { success in
-                                    if success {
+                                Task {
+                                    let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
+                                        data: imageData,
+                                        to: selectedCollection
+                                    )
+                                    if isPhotoSaved {
                                         withAnimation(.smooth.speed(2.0)) {
                                             isPhotoSaveSuccessful = true
                                         } completion: {

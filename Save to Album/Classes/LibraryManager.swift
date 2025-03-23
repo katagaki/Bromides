@@ -83,28 +83,25 @@ class PhotosLibrary {
         }
     }
 
-    static func saveImage(data: Data, to album: PHAssetCollection, completion: @escaping (Bool) -> Void) {
-        guard let image = UIImage(data: data) else {
-            completion(false)
-            return
+    static func saveImage(data: Data, to album: PHAssetCollection) async -> Bool {
+        guard let image = UIImage(data: data) else { return false }
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                let imageRequest: PHAssetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+                let placeholder: PHObjectPlaceholder? = imageRequest.placeholderForCreatedAsset
+                let albumRequest = PHAssetCollectionChangeRequest(for: album)
+                let enumeration: NSArray = [placeholder!]
+                albumRequest!.addAssets(enumeration)
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
         }
-        PHPhotoLibrary.shared().performChanges({
-            let imageRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
-            guard let placeholder = imageRequest.placeholderForCreatedAsset else {
-                completion(false)
-                return
-            }
-            guard let albumRequest = PHAssetCollectionChangeRequest(for: album) else {
-                completion(false)
-                return
-            }
-            let enumeration: NSArray = [placeholder]
-            albumRequest.addAssets(enumeration)
-        }, completionHandler: { success, error in
-            if let error {
-                debugPrint(error.localizedDescription)
-            }
-            completion(success)
-        })
+    }
+
+    enum PLError: Error {
+        case noPlaceholder
+        case noAlbumRequest
     }
 }
