@@ -15,7 +15,7 @@ struct OnboardingView: View {
         NavigationStack {
             List {
                 Section {
-                    VStack(alignment: .center, spacing: 16.0) {
+                    VStack(alignment: .center, spacing: 10.0) {
                         Text("Onboarding.1.\(Image(systemName: "square.and.arrow.up"))")
                         Image(systemName: "arrow.down")
                             .font(.title2)
