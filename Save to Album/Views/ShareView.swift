@@ -95,11 +95,12 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                                             isPhotoSaveSuccessful = true
                                         } completion: {
                                             UINotificationFeedbackGenerator().notificationOccurred(.success)
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                                 close()
                                             }
                                         }
                                     } else {
+                                        UINotificationFeedbackGenerator().notificationOccurred(.error)
                                         isPhotoSaveFailed = true
                                     }
                                 }
