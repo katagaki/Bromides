@@ -23,9 +23,9 @@ enum Collection: Identifiable, Hashable {
     var title: String {
         switch self {
         case .album(let collection):
-            return collection.localizedTitle ?? "Album"
+            return collection.localizedTitle ?? NSLocalizedString("Shared.Album", comment: "")
         case .folder(let collection):
-            return collection.localizedTitle ?? "Folder"
+            return collection.localizedTitle ?? NSLocalizedString("Shared.Folder", comment: "")
         }
     }
 }

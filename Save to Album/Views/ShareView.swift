@@ -46,7 +46,7 @@ struct ShareView: View {
                             .resizable()
                             .frame(width: 48.0, height: 48.0)
                             .symbolRenderingMode(.multicolor)
-                        Text("Message.Save.\(selectedCollection?.localizedTitle ?? "album")")
+                        Text("Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))")
                             .bold()
                     }
                     .frame(maxWidth: .infinity)
