@@ -53,6 +53,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
+				InfoPlist.xcstrings,
 				Localizable.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
@@ -501,7 +502,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Save to Album/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -528,7 +529,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Save to Album/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

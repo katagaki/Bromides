@@ -18,6 +18,7 @@ struct ShareView: View {
     @State var selectedCollection: PHAssetCollection?
     @State var isPhotoSaveSuccessful: Bool = false
     @State var isPhotoSaveFailed: Bool = false
+    @State var isPhotosAuthorizationComplete: Bool = false
     @State var isPhotosAuthorizationDenied: Bool = false
 
     init(items: [Any?]) {
@@ -60,16 +61,23 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                 } else {
                     Divider()
                     ZStack(alignment: .center) {
-                        if isPhotosAuthorizationDenied {
-                            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                .symbolRenderingMode(.multicolor)
-                        } else {
-                            NavigationStack(path: $viewPath) {
-                                AlbumView(selection: $selectedCollection)
-                                    .navigationDestination(for: Collection.self) { collection in
-                                        AlbumView(collection, selection: $selectedCollection)
-                                    }
+                        if isPhotosAuthorizationComplete {
+                            if isPhotosAuthorizationDenied {
+                                ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
+                                    .symbolRenderingMode(.multicolor)
+                            } else {
+                                NavigationStack(path: $viewPath) {
+                                    AlbumView(selection: $selectedCollection)
+                                        .navigationDestination(for: Collection.self) { collection in
+                                            AlbumView(collection, selection: $selectedCollection)
+                                        }
+                                }
                             }
+                        } else {
+                            VStack(alignment: .center) {
+                                ProgressView()
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                         }
                     }
                     .layoutPriority(0)
@@ -125,14 +133,14 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
             }
         }
         .task {
-            PhotosLibrary.requestAuthorization { status in
-                switch status {
-                case .authorized:
-                    isPhotosAuthorizationDenied = false
-                default:
-                    isPhotosAuthorizationDenied = true
-                }
+            let status = await PhotosLibrary.requestAuthorization()
+            switch status {
+            case .authorized:
+                isPhotosAuthorizationDenied = false
+            default:
+                isPhotosAuthorizationDenied = true
             }
+            isPhotosAuthorizationComplete = true
         }
         .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
             Button("Shared.Dismiss", action: {})

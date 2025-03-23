@@ -10,10 +10,11 @@ import UIKit
 
 class PhotosLibrary {
 
-    static func requestAuthorization(completion: @escaping (PHAuthorizationStatus) -> Void) {
-        PHPhotoLibrary.requestAuthorization { status in
-            completion(status)
-        }
+    @MainActor
+    static func requestAuthorization() async -> PHAuthorizationStatus {
+        // IMPORTANT: MUST be async/await API for Swift 6!
+        let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
+        return status
     }
 
     static func albumsAndFolders(in path: Collection? = nil) -> [Collection] {
