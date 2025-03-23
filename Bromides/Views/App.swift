@@ -1,5 +1,5 @@
 //
-//  BromidesApp.swift
+//  App.swift
 //  Bromides
 //
 //  Created by シン・ジャスティン on 2025/03/22.
@@ -11,7 +11,7 @@ import SwiftUI
 struct BromidesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OnboardingView()
         }
     }
 }

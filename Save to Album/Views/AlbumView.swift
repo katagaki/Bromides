@@ -9,6 +9,8 @@ import Photos
 import SwiftUI
 
 struct AlbumView: View {
+    @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
+
     @State var displayedCollection: Collection?
     @State var collections: [Collection] = []
 
@@ -20,10 +22,42 @@ struct AlbumView: View {
     }
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 80.0), spacing: 4.0)],
-                      spacing: 10.0) {
-                ForEach(collections) { collection in
+        Group {
+            switch displayMode {
+            case .grid:
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80.0), spacing: 10.0)],
+                              spacing: 10.0) {
+                        ForEach(collections) { collection in
+                            switch collection {
+                            case .album(let album):
+                                Button {
+                                    withAnimation(.smooth.speed(2.0)) {
+                                        selectedCollection = album as? PHAssetCollection
+                                    }
+                                } label: {
+                                    CollectionButtonLabel(
+                                        collection: collection,
+                                        mode: .thumbnail,
+                                        isSelected: { selectedCollection == album }
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                            case .folder:
+                                NavigationLink(value: collection) {
+                                    CollectionButtonLabel(
+                                        collection: collection,
+                                        mode: .thumbnail
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                    }
+                    .padding()
+                }
+            case .list:
+                List(collections) { collection in
                     switch collection {
                     case .album(let album):
                         Button {
@@ -33,19 +67,21 @@ struct AlbumView: View {
                         } label: {
                             CollectionButtonLabel(
                                 collection: collection,
+                                mode: .row,
                                 isSelected: { selectedCollection == album }
                             )
                         }
-                        .buttonStyle(.plain)
                     case .folder:
                         NavigationLink(value: collection) {
-                            CollectionButtonLabel(collection: collection)
+                            CollectionButtonLabel(
+                                collection: collection,
+                                mode: .row
+                            )
                         }
-                        .buttonStyle(.plain)
                     }
                 }
+                .listStyle(.plain)
             }
-                      .padding(.horizontal, 12.0)
         }
         .navigationTitle(displayedCollection == nil ?
                          NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") :

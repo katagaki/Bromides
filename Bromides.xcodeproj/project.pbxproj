@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E4DB590E2D8E81D0009A20B2 /* BromidesSecretary.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E4DB59042D8E81D0009A20B2 /* BromidesSecretary.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E4DB59592D8FE629009A20B2 /* Komponents in Frameworks */ = {isa = PBXBuildFile; productRef = E4DB59582D8FE629009A20B2 /* Komponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		E4DB58D62D8E8146009A20B2 /* Bromides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bromides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DB59042D8E81D0009A20B2 /* BromidesSecretary.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BromidesSecretary.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4DB59B02D8FE86F009A20B2 /* BromidesSecretary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BromidesSecretary.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -62,6 +64,14 @@
 			);
 			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
 		};
+		E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesSecretary" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Defaults.swift,
+				Enums/DisplayMode.swift,
+			);
+			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -82,6 +92,14 @@
 			path = "Save to Album";
 			sourceTree = "<group>";
 		};
+		E4DB59B12D8FE88D009A20B2 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesSecretary" target */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4DB59592D8FE629009A20B2 /* Komponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +124,8 @@
 		E4DB58CD2D8E8146009A20B2 = {
 			isa = PBXGroup;
 			children = (
+				E4DB59B12D8FE88D009A20B2 /* Shared */,
+				E4DB59B02D8FE86F009A20B2 /* BromidesSecretary.entitlements */,
 				E4DB58D82D8E8146009A20B2 /* Bromides */,
 				E4DB59052D8E81D0009A20B2 /* Save to Album */,
 				E4DB58FB2D8E81A2009A20B2 /* Frameworks */,
@@ -148,9 +169,11 @@
 			);
 			fileSystemSynchronizedGroups = (
 				E4DB58D82D8E8146009A20B2 /* Bromides */,
+				E4DB59B12D8FE88D009A20B2 /* Shared */,
 			);
 			name = Bromides;
 			packageProductDependencies = (
+				E4DB59582D8FE629009A20B2 /* Komponents */,
 			);
 			productName = Bromides;
 			productReference = E4DB58D62D8E8146009A20B2 /* Bromides.app */;
@@ -205,6 +228,9 @@
 			);
 			mainGroup = E4DB58CD2D8E8146009A20B2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E4DB59572D8FE5FB009A20B2 /* XCRemoteSwiftPackageReference "Komponents" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E4DB58D72D8E8146009A20B2 /* Products */;
 			projectDirPath = "";
@@ -406,6 +432,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Bromides/Bromides.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
@@ -437,6 +464,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Bromides/Bromides.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
@@ -466,6 +494,7 @@
 		E4DB59112D8E81D0009A20B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BromidesSecretary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
@@ -491,6 +520,7 @@
 		E4DB59122D8E81D0009A20B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = BromidesSecretary.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
@@ -544,6 +574,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4DB59572D8FE5FB009A20B2 /* XCRemoteSwiftPackageReference "Komponents" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/katagaki/Komponents";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4DB59582D8FE629009A20B2 /* Komponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4DB59572D8FE5FB009A20B2 /* XCRemoteSwiftPackageReference "Komponents" */;
+			productName = Komponents;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4DB58CE2D8E8146009A20B2 /* Project object */;
 }
