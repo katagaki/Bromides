@@ -16,6 +16,7 @@ struct ShareView: View {
     var uiImage: UIImage?
 
     @State var selectedCollection: PHAssetCollection?
+    @State var isPhotoSaving: Bool = false
     @State var isPhotoSaveSuccessful: Bool = false
     @State var isPhotoSaveFailed: Bool = false
     @State var isPhotosAuthorizationComplete: Bool = false
@@ -85,6 +86,7 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                     HStack {
                         Button {
                             if let selectedCollection {
+                                isPhotoSaving = true
                                 Task {
                                     let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
                                         data: imageData,
@@ -101,6 +103,7 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                                         }
                                     } else {
                                         UINotificationFeedbackGenerator().notificationOccurred(.error)
+                                        isPhotoSaving = false
                                         isPhotoSaveFailed = true
                                     }
                                 }
@@ -110,7 +113,7 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                         }
                         .buttonStyle(.borderedProminent)
                         .clipShape(.capsule)
-                        .disabled(selectedCollection == nil)
+                        .disabled(selectedCollection == nil || isPhotoSaving)
                         Button {
                             close()
                         } label: {
@@ -118,6 +121,7 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                         }
                         .buttonStyle(.bordered)
                         .clipShape(.capsule)
+                        .disabled(isPhotoSaving)
                     }
                     .padding()
                 }
