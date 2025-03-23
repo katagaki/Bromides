@@ -7,11 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E4DB590E2D8E81D0009A20B2 /* BromidesSecretary.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E4DB59042D8E81D0009A20B2 /* BromidesSecretary.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E4DAA9AB2D904D2400BBF630 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4DAA9AA2D904D2300BBF630 /* UniformTypeIdentifiers.framework */; };
+		E4DAA9B72D904D2400BBF630 /* BromidesAction.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E4DAA9A92D904D2300BBF630 /* BromidesAction.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E4DB590E2D8E81D0009A20B2 /* BromidesShare.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E4DB59042D8E81D0009A20B2 /* BromidesShare.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E4DB59592D8FE629009A20B2 /* Komponents in Frameworks */ = {isa = PBXBuildFile; productRef = E4DB59582D8FE629009A20B2 /* Komponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E4DAA9B52D904D2400BBF630 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4DB58CE2D8E8146009A20B2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E4DAA9A82D904D2300BBF630;
+			remoteInfo = "Save to Album";
+		};
 		E4DB590C2D8E81D0009A20B2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E4DB58CE2D8E8146009A20B2 /* Project object */;
@@ -28,7 +37,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E4DB590E2D8E81D0009A20B2 /* BromidesSecretary.appex in Embed Foundation Extensions */,
+				E4DAA9B72D904D2400BBF630 /* BromidesAction.appex in Embed Foundation Extensions */,
+				E4DB590E2D8E81D0009A20B2 /* BromidesShare.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -36,27 +46,80 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E4DAA9A92D904D2300BBF630 /* BromidesAction.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BromidesAction.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4DAA9AA2D904D2300BBF630 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		E4DB58D62D8E8146009A20B2 /* Bromides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bromides.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4DB59042D8E81D0009A20B2 /* BromidesSecretary.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BromidesSecretary.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4DB59B02D8FE86F009A20B2 /* BromidesSecretary.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BromidesSecretary.entitlements; sourceTree = "<group>"; };
+		E4DB59042D8E81D0009A20B2 /* BromidesShare.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BromidesShare.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E4DB590F2D8E81D0009A20B2 /* Exceptions for "Save to Album" folder in "BromidesSecretary" target */ = {
+		E4DAA9BB2D904D2400BBF630 /* Exceptions for "Save to Album" folder in "BromidesAction" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
+			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
 		};
-		E4DB594E2D8FD4EA009A20B2 /* Exceptions for "Bromides" folder in "BromidesSecretary" target */ = {
+		E4DAA9BD2D904D9B00BBF630 /* Exceptions for "Share Extension" folder in "BromidesAction" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ShareViewController.swift,
+			);
+			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
+		};
+		E4DAA9BF2D904DE500BBF630 /* Exceptions for "Bromides" folder in "BromidesAction" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				Localizable.xcstrings,
+			);
+			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
+		};
+		E4DAA9F72D904E4100BBF630 /* Exceptions for "Shared" folder in "Bromides" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Classes/LibraryManager.swift,
+				Enums/Collection.swift,
+				Enums/CollectionButtonMode.swift,
+				Views/AlbumView.swift,
+				Views/ButtonLabel.swift,
+				Views/CollectionButtonLabel.swift,
+				Views/ImagePreview.swift,
+				Views/ShareView.swift,
+			);
+			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
+		};
+		E4DAA9F82D904E4100BBF630 /* Exceptions for "Shared" folder in "BromidesAction" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Classes/LibraryManager.swift,
+				Defaults.swift,
+				Enums/Collection.swift,
+				Enums/CollectionButtonMode.swift,
+				Enums/DisplayMode.swift,
+				Views/AlbumView.swift,
+				Views/ButtonLabel.swift,
+				Views/CollectionButtonLabel.swift,
+				Views/ImagePreview.swift,
+				Views/ShareView.swift,
+			);
+			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
+		};
+		E4DB590F2D8E81D0009A20B2 /* Exceptions for "Share Extension" folder in "BromidesShare" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E4DB59032D8E81D0009A20B2 /* BromidesShare */;
+		};
+		E4DB594E2D8FD4EA009A20B2 /* Exceptions for "Bromides" folder in "BromidesShare" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Assets.xcassets,
 				InfoPlist.xcstrings,
 				Localizable.xcstrings,
 			);
-			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
+			target = E4DB59032D8E81D0009A20B2 /* BromidesShare */;
 		};
 		E4DB59522D8FD9D8009A20B2 /* Exceptions for "Bromides" folder in "Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -65,38 +128,58 @@
 			);
 			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
 		};
-		E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesSecretary" target */ = {
+		E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesShare" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Classes/LibraryManager.swift,
 				Defaults.swift,
+				Enums/Collection.swift,
+				Enums/CollectionButtonMode.swift,
 				Enums/DisplayMode.swift,
+				Views/AlbumView.swift,
+				Views/ButtonLabel.swift,
+				Views/CollectionButtonLabel.swift,
+				Views/ImagePreview.swift,
+				Views/ShareView.swift,
 			);
-			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
+			target = E4DB59032D8E81D0009A20B2 /* BromidesShare */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		E4DAA9AC2D904D2400BBF630 /* Save to Album */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4DAA9BB2D904D2400BBF630 /* Exceptions for "Save to Album" folder in "BromidesAction" target */,
+			);
+			path = "Save to Album";
+			sourceTree = "<group>";
+		};
 		E4DB58D82D8E8146009A20B2 /* Bromides */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E4DB59522D8FD9D8009A20B2 /* Exceptions for "Bromides" folder in "Bromides" target */,
-				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "Bromides" folder in "BromidesSecretary" target */,
+				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "Bromides" folder in "BromidesShare" target */,
+				E4DAA9BF2D904DE500BBF630 /* Exceptions for "Bromides" folder in "BromidesAction" target */,
 			);
 			path = Bromides;
 			sourceTree = "<group>";
 		};
-		E4DB59052D8E81D0009A20B2 /* Save to Album */ = {
+		E4DB59052D8E81D0009A20B2 /* Share Extension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E4DB590F2D8E81D0009A20B2 /* Exceptions for "Save to Album" folder in "BromidesSecretary" target */,
+				E4DB590F2D8E81D0009A20B2 /* Exceptions for "Share Extension" folder in "BromidesShare" target */,
+				E4DAA9BD2D904D9B00BBF630 /* Exceptions for "Share Extension" folder in "BromidesAction" target */,
 			);
-			path = "Save to Album";
+			path = "Share Extension";
 			sourceTree = "<group>";
 		};
 		E4DB59B12D8FE88D009A20B2 /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesSecretary" target */,
+				E4DAA9F72D904E4100BBF630 /* Exceptions for "Shared" folder in "Bromides" target */,
+				E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesShare" target */,
+				E4DAA9F82D904E4100BBF630 /* Exceptions for "Shared" folder in "BromidesAction" target */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -104,6 +187,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E4DAA9A62D904D2300BBF630 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4DAA9AB2D904D2400BBF630 /* UniformTypeIdentifiers.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4DB58D32D8E8146009A20B2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -126,9 +217,9 @@
 			isa = PBXGroup;
 			children = (
 				E4DB59B12D8FE88D009A20B2 /* Shared */,
-				E4DB59B02D8FE86F009A20B2 /* BromidesSecretary.entitlements */,
 				E4DB58D82D8E8146009A20B2 /* Bromides */,
-				E4DB59052D8E81D0009A20B2 /* Save to Album */,
+				E4DB59052D8E81D0009A20B2 /* Share Extension */,
+				E4DAA9AC2D904D2400BBF630 /* Save to Album */,
 				E4DB58FB2D8E81A2009A20B2 /* Frameworks */,
 				E4DB58D72D8E8146009A20B2 /* Products */,
 			);
@@ -138,7 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				E4DB58D62D8E8146009A20B2 /* Bromides.app */,
-				E4DB59042D8E81D0009A20B2 /* BromidesSecretary.appex */,
+				E4DB59042D8E81D0009A20B2 /* BromidesShare.appex */,
+				E4DAA9A92D904D2300BBF630 /* BromidesAction.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -146,6 +238,7 @@
 		E4DB58FB2D8E81A2009A20B2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E4DAA9AA2D904D2300BBF630 /* UniformTypeIdentifiers.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -153,6 +246,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E4DAA9A82D904D2300BBF630 /* BromidesAction */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4DAA9B82D904D2400BBF630 /* Build configuration list for PBXNativeTarget "BromidesAction" */;
+			buildPhases = (
+				E4DAA9A52D904D2300BBF630 /* Sources */,
+				E4DAA9A62D904D2300BBF630 /* Frameworks */,
+				E4DAA9A72D904D2300BBF630 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				E4DAA9AC2D904D2400BBF630 /* Save to Album */,
+			);
+			name = BromidesAction;
+			packageProductDependencies = (
+			);
+			productName = "Save to Album";
+			productReference = E4DAA9A92D904D2300BBF630 /* BromidesAction.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E4DB58D52D8E8146009A20B2 /* Bromides */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4DB58E42D8E8148009A20B2 /* Build configuration list for PBXNativeTarget "Bromides" */;
@@ -167,6 +282,7 @@
 			);
 			dependencies = (
 				E4DB590D2D8E81D0009A20B2 /* PBXTargetDependency */,
+				E4DAA9B62D904D2400BBF630 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				E4DB58D82D8E8146009A20B2 /* Bromides */,
@@ -180,9 +296,9 @@
 			productReference = E4DB58D62D8E8146009A20B2 /* Bromides.app */;
 			productType = "com.apple.product-type.application";
 		};
-		E4DB59032D8E81D0009A20B2 /* BromidesSecretary */ = {
+		E4DB59032D8E81D0009A20B2 /* BromidesShare */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4DB59102D8E81D0009A20B2 /* Build configuration list for PBXNativeTarget "BromidesSecretary" */;
+			buildConfigurationList = E4DB59102D8E81D0009A20B2 /* Build configuration list for PBXNativeTarget "BromidesShare" */;
 			buildPhases = (
 				E4DB59002D8E81D0009A20B2 /* Sources */,
 				E4DB59012D8E81D0009A20B2 /* Frameworks */,
@@ -193,13 +309,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E4DB59052D8E81D0009A20B2 /* Save to Album */,
+				E4DB59052D8E81D0009A20B2 /* Share Extension */,
 			);
-			name = BromidesSecretary;
+			name = BromidesShare;
 			packageProductDependencies = (
 			);
 			productName = "Save to Album";
-			productReference = E4DB59042D8E81D0009A20B2 /* BromidesSecretary.appex */;
+			productReference = E4DB59042D8E81D0009A20B2 /* BromidesShare.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -212,6 +328,9 @@
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
+					E4DAA9A82D904D2300BBF630 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					E4DB58D52D8E8146009A20B2 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -226,6 +345,7 @@
 			knownRegions = (
 				en,
 				ja,
+				Base,
 			);
 			mainGroup = E4DB58CD2D8E8146009A20B2;
 			minimizedProjectReferenceProxies = 1;
@@ -238,12 +358,20 @@
 			projectRoot = "";
 			targets = (
 				E4DB58D52D8E8146009A20B2 /* Bromides */,
-				E4DB59032D8E81D0009A20B2 /* BromidesSecretary */,
+				E4DB59032D8E81D0009A20B2 /* BromidesShare */,
+				E4DAA9A82D904D2300BBF630 /* BromidesAction */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E4DAA9A72D904D2300BBF630 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4DB58D42D8E8146009A20B2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -282,6 +410,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E4DAA9A52D904D2300BBF630 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4DB58D22D8E8146009A20B2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -299,14 +434,73 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E4DAA9B62D904D2400BBF630 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
+			targetProxy = E4DAA9B52D904D2400BBF630 /* PBXContainerItemProxy */;
+		};
 		E4DB590D2D8E81D0009A20B2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E4DB59032D8E81D0009A20B2 /* BromidesSecretary */;
+			target = E4DB59032D8E81D0009A20B2 /* BromidesShare */;
 			targetProxy = E4DB590C2D8E81D0009A20B2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		E4DAA9B92D904D2400BBF630 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ActionExtensionIcon;
+				CODE_SIGN_ENTITLEMENTS = "Save to Album/Save to Album.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YYM4Z6MU8F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Save to Album/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Save-to-Album";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E4DAA9BA2D904D2400BBF630 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = ActionExtensionIcon;
+				CODE_SIGN_ENTITLEMENTS = "Save to Album/Save to Album.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = YYM4Z6MU8F;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Save to Album/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Save-to-Album";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E4DB58E22D8E8148009A20B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -495,13 +689,13 @@
 		E4DB59112D8E81D0009A20B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BromidesSecretary.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Share Extension/BromidesSecretary.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Save to Album/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
+				INFOPLIST_FILE = "Share Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -509,7 +703,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Save-to-Album";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Share-with-Bromides";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -522,13 +716,13 @@
 		E4DB59122D8E81D0009A20B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = BromidesSecretary.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "Share Extension/BromidesSecretary.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Save to Album/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
+				INFOPLIST_FILE = "Share Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -536,7 +730,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Save-to-Album";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Share-with-Bromides";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -549,6 +743,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E4DAA9B82D904D2400BBF630 /* Build configuration list for PBXNativeTarget "BromidesAction" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4DAA9B92D904D2400BBF630 /* Debug */,
+				E4DAA9BA2D904D2400BBF630 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E4DB58D12D8E8146009A20B2 /* Build configuration list for PBXProject "Bromides" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -567,7 +770,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4DB59102D8E81D0009A20B2 /* Build configuration list for PBXNativeTarget "BromidesSecretary" */ = {
+		E4DB59102D8E81D0009A20B2 /* Build configuration list for PBXNativeTarget "BromidesShare" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4DB59112D8E81D0009A20B2 /* Debug */,

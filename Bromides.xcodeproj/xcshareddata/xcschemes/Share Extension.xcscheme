@@ -16,9 +16,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E4DAA9A82D904D2300BBF630"
-               BuildableName = "BromidesAction.appex"
-               BlueprintName = "BromidesAction"
+               BlueprintIdentifier = "E4DB59032D8E81D0009A20B2"
+               BuildableName = "BromidesShare.appex"
+               BlueprintName = "BromidesShare"
                ReferencedContainer = "container:Bromides.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

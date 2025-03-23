@@ -4,8 +4,6 @@
 <dict>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionPrincipalClass</key>
-		<string>BromidesAction.ShareViewController</string>
 		<key>NSExtensionAttributes</key>
 		<dict>
 			<key>NSExtensionActivationRule</key>
@@ -19,19 +17,11 @@
 				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
 				<integer>1</integer>
 			</dict>
-			<key>NSExtensionServiceAllowsFinderPreviewItem</key>
-			<true/>
-			<key>NSExtensionServiceAllowsTouchBarItem</key>
-			<true/>
-			<key>NSExtensionServiceFinderPreviewIconName</key>
-			<string>NSActionTemplate</string>
-			<key>NSExtensionServiceTouchBarBezelColorName</key>
-			<string>TouchBarBezel</string>
-			<key>NSExtensionServiceTouchBarIconName</key>
-			<string>NSActionTemplate</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.ui-services</string>
+		<string>com.apple.share-services</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>BromidesShare.ShareViewController</string>
 	</dict>
 </dict>
 </plist>

@@ -1,6 +1,6 @@
 //
 //  ShareViewController.swift
-//  Save to Album
+//  Bromides
 //
 //  Created by シン・ジャスティン on 2025/03/22.
 //
