@@ -112,13 +112,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tap ‘Bromides’"
+            "value" : "Tap ‘Bromides’ or ‘Save to Album’"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「Bromides」を選択"
+            "value" : "「ブロマイド」または「アルバムに保存」を選択"
           }
         }
       }
