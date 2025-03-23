@@ -60,6 +60,14 @@ struct OnboardingView: View {
                 }
             }
             .listSectionSpacing(.compact)
+            .scrollContentBackground(.hidden)
+            .background(
+                .linearGradient(
+                    colors: [.backgroundGradientTop, .backgroundGradientBottom],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
             .navigationTitle("Bromides")
             .safeAreaInset(edge: .bottom, spacing: 0.0) {
                 ShareLink(
