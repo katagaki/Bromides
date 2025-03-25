@@ -31,6 +31,12 @@ class ShareViewController: UIViewController {
                 utType = .fileURL
             }
             guard let utType else { fatalError() }
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(close),
+                name: NSNotification.Name("close"),
+                object: nil
+            )
             Task { @MainActor in
                 guard let loadedFile = await loadItem(attachment, type: utType) else { fatalError() }
                 let shareView = UIHostingController(rootView: ShareView(items: [loadedFile]))
@@ -42,18 +48,14 @@ class ShareViewController: UIViewController {
                 shareView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
                 shareView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
                 view.bringSubviewToFront(shareView.view)
-                NotificationCenter.default.addObserver(forName: NSNotification.Name("close"),
-                                                       object: nil, queue: nil) { _ in
-                    DispatchQueue.main.async { [self] in
-                        close()
-                    }
-                }
             }
         }
     }
 
-    func close() {
-        extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+    @objc func close() {
+        extensionContext?.completeRequest(returningItems: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("close"), object: nil)
+        self.dismiss(animated: false)
     }
 
     func loadItem(_ attachment: NSItemProvider, type: UTType) async -> (any Sendable)? {

@@ -13,7 +13,7 @@ struct ShareView: View {
 
     @State var viewPath: [Collection] = []
     var imageData: Data?
-    var uiImage: UIImage?
+    var previewImage: UIImage?
 
     @State var selectedCollection: PHAssetCollection?
     @State var isPhotoSaving: Bool = false
@@ -38,14 +38,15 @@ struct ShareView: View {
             self.imageData = data
         }
         guard let imageData = self.imageData else { return }
-        guard let uiImage = UIImage(data: imageData) else { return }
-        self.uiImage = uiImage
+        guard let uiImage = UIImage(data: imageData)?
+            .preparingThumbnail(of: .init(width: 600.0, height: 600.0)) else { return }
+        self.previewImage = uiImage
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0.0) {
-            if let imageData, let uiImage {
-                ImagePreview(uiImage: uiImage)
+            if let imageData, let previewImage {
+                ImagePreview(uiImage: previewImage)
                 if isPhotoSaveSuccessful {
                     VStack(alignment: .center, spacing: 16.0) {
                         Image(systemName: "checkmark.circle.fill")

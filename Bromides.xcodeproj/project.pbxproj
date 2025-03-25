@@ -60,13 +60,6 @@
 			);
 			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
 		};
-		E4DAA9BD2D904D9B00BBF630 /* Exceptions for "Share Extension" folder in "BromidesAction" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				ShareViewController.swift,
-			);
-			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
-		};
 		E4DAA9BF2D904DE500BBF630 /* Exceptions for "Bromides" folder in "BromidesAction" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -81,6 +74,7 @@
 				Classes/LibraryManager.swift,
 				Enums/Collection.swift,
 				Enums/CollectionButtonMode.swift,
+				ShareViewController.swift,
 				Views/AlbumView.swift,
 				Views/ButtonLabel.swift,
 				Views/CollectionButtonLabel.swift,
@@ -97,6 +91,7 @@
 				Enums/Collection.swift,
 				Enums/CollectionButtonMode.swift,
 				Enums/DisplayMode.swift,
+				ShareViewController.swift,
 				Views/AlbumView.swift,
 				Views/ButtonLabel.swift,
 				Views/CollectionButtonLabel.swift,
@@ -136,6 +131,7 @@
 				Enums/Collection.swift,
 				Enums/CollectionButtonMode.swift,
 				Enums/DisplayMode.swift,
+				ShareViewController.swift,
 				Views/AlbumView.swift,
 				Views/ButtonLabel.swift,
 				Views/CollectionButtonLabel.swift,
@@ -169,7 +165,6 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				E4DB590F2D8E81D0009A20B2 /* Exceptions for "Share Extension" folder in "BromidesShare" target */,
-				E4DAA9BD2D904D9B00BBF630 /* Exceptions for "Share Extension" folder in "BromidesAction" target */,
 			);
 			path = "Share Extension";
 			sourceTree = "<group>";
@@ -464,7 +459,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Save-to-Album";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -491,7 +486,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Save-to-Album";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -645,7 +640,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.Bromides;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -677,7 +672,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.Bromides;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -702,7 +697,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Share-with-Bromides";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -729,7 +724,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tsubuzaki.Bromides.Share-with-Bromides";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
