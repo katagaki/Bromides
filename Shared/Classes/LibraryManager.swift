@@ -54,6 +54,60 @@ class PhotosLibrary {
         return items
     }
 
+    static func createAlbum(in path: Collection? = nil, named name: String) async -> Bool {
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                let newAlbumRequest: PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest
+                    .creationRequestForAssetCollection(withTitle: name)
+                if let path {
+                    let placeholder: PHObjectPlaceholder? = newAlbumRequest.placeholderForCreatedAssetCollection
+                    switch path {
+                    case .folder(let collection):
+                        if let collection = collection as? PHCollectionList {
+                            let albumRequest = PHCollectionListChangeRequest(for: collection)
+                            let enumeration: NSArray = [placeholder!]
+                            albumRequest?.addChildCollections(enumeration)
+                        } else {
+                            debugPrint(collection.self)
+                        }
+                    default: break
+                    }
+                }
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+    }
+
+    static func createFolder(in path: Collection? = nil, named name: String) async -> Bool {
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                let newFolderRequest: PHCollectionListChangeRequest = PHCollectionListChangeRequest
+                    .creationRequestForCollectionList(withTitle: name)
+                if let path {
+                    let placeholder: PHObjectPlaceholder? = newFolderRequest.placeholderForCreatedCollectionList
+                    switch path {
+                    case .folder(let collection):
+                        if let collection = collection as? PHCollectionList {
+                            let albumRequest = PHCollectionListChangeRequest(for: collection)
+                            let enumeration: NSArray = [placeholder!]
+                            albumRequest?.addChildCollections(enumeration)
+                        } else {
+                            debugPrint(collection.self)
+                        }
+                    default: break
+                    }
+                }
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+    }
+
     static func images(in album: PHAssetCollection) -> [PHAsset] {
         var photos: [PHAsset] = []
         let assets = PHAsset.fetchAssets(in: album, options: nil)
