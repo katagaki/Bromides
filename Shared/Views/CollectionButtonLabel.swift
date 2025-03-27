@@ -126,13 +126,7 @@ struct CollectionButtonLabel: View {
             if let album = collection as? PHAssetCollection,
                let imageAsset = PhotosLibrary.thumbnail(in: album) {
                 PhotosLibrary.image(from: imageAsset) { uiImage in
-                    Task {
-                        if let uiImage = await uiImage?.byPreparingThumbnail(
-                            ofSize: CGSize(width: 100.0, height: 100.0)
-                        ) {
-                            thumbnail = uiImage
-                        }
-                    }
+                    thumbnail = uiImage
                 }
             }
         default: break
