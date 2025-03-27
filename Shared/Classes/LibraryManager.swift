@@ -50,6 +50,7 @@ class PhotosLibrary {
                 }
             }
         }
+        items.sort(by: { $0.title.localizedStandardCompare($1.title) == .orderedAscending })
         return items
     }
 

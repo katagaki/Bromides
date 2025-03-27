@@ -27,12 +27,18 @@ struct CollectionButtonLabel: View {
                                     Image(uiImage: thumbnail)
                                         .resizable()
                                 } else {
-                                    Image(.genericAlbum)
-                                        .resizable()
+                                    GenericThumbnail(
+                                        text: collection.title,
+                                        iconName: "photo.on.rectangle.angled",
+                                        iconSize: 32.0
+                                    )
                                 }
                             case .folder:
-                                Image(.genericFolder)
-                                    .resizable()
+                                GenericThumbnail(
+                                    text: collection.title,
+                                    iconName: "folder",
+                                    iconSize: 32.0
+                                )
                             }
                         }
                         .aspectRatio(contentMode: .fill)
@@ -69,12 +75,18 @@ struct CollectionButtonLabel: View {
                                 Image(uiImage: thumbnail)
                                     .resizable()
                             } else {
-                                Image(.genericAlbum)
-                                    .resizable()
+                                GenericThumbnail(
+                                    text: collection.title,
+                                    iconName: "photo.on.rectangle.angled",
+                                    iconSize: 24.0
+                                )
                             }
                         case .folder:
-                            Image(.genericFolder)
-                                .resizable()
+                            GenericThumbnail(
+                                text: collection.title,
+                                iconName: "folder",
+                                iconSize: 24.0
+                            )
                         }
                     }
                     .aspectRatio(contentMode: .fill)
