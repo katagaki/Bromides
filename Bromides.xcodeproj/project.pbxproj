@@ -79,10 +79,15 @@
 				Enums/CollectionButtonMode.swift,
 				Extensions/Color.swift,
 				ShareViewController.swift,
+				Views/Collections/CollectionCheckmark.swift,
+				Views/Collections/CollectionCover.swift,
+				Views/Collections/CollectionGrid.swift,
+				Views/Collections/CollectionGridButtonLabel.swift,
+				Views/Collections/CollectionList.swift,
+				Views/Collections/CollectionPanels.swift,
 				Views/Collections/CollectionView.swift,
 				Views/Search/SearchField.swift,
 				Views/Shared/ButtonLabel.swift,
-				Views/Shared/CollectionButtonLabel.swift,
 				Views/Shared/GenericThumbnail.swift,
 				Views/Shared/ImagePreview.swift,
 				Views/ShareView.swift,
@@ -100,10 +105,15 @@
 				Enums/DisplayMode.swift,
 				Extensions/Color.swift,
 				ShareViewController.swift,
+				Views/Collections/CollectionCheckmark.swift,
+				Views/Collections/CollectionCover.swift,
+				Views/Collections/CollectionGrid.swift,
+				Views/Collections/CollectionGridButtonLabel.swift,
+				Views/Collections/CollectionList.swift,
+				Views/Collections/CollectionPanels.swift,
 				Views/Collections/CollectionView.swift,
 				Views/Search/SearchField.swift,
 				Views/Shared/ButtonLabel.swift,
-				Views/Shared/CollectionButtonLabel.swift,
 				Views/Shared/GenericThumbnail.swift,
 				Views/Shared/ImagePreview.swift,
 				Views/ShareView.swift,
@@ -144,10 +154,15 @@
 				Enums/DisplayMode.swift,
 				Extensions/Color.swift,
 				ShareViewController.swift,
+				Views/Collections/CollectionCheckmark.swift,
+				Views/Collections/CollectionCover.swift,
+				Views/Collections/CollectionGrid.swift,
+				Views/Collections/CollectionGridButtonLabel.swift,
+				Views/Collections/CollectionList.swift,
+				Views/Collections/CollectionPanels.swift,
 				Views/Collections/CollectionView.swift,
 				Views/Search/SearchField.swift,
 				Views/Shared/ButtonLabel.swift,
-				Views/Shared/CollectionButtonLabel.swift,
 				Views/Shared/GenericThumbnail.swift,
 				Views/Shared/ImagePreview.swift,
 				Views/ShareView.swift,
@@ -339,7 +354,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					E4DAA9A82D904D2300BBF630 = {
 						CreatedOnToolsVersion = 16.2;
@@ -467,7 +482,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Save to Album/Save to Album.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Save to Album/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
@@ -494,7 +508,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Save to Album/Save to Album.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Save to Album/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
@@ -519,6 +532,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -549,6 +563,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -583,6 +598,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -613,6 +629,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -643,7 +660,6 @@
 				CODE_SIGN_ENTITLEMENTS = Bromides/Bromides.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -675,7 +691,6 @@
 				CODE_SIGN_ENTITLEMENTS = Bromides/Bromides.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -705,7 +720,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/BromidesSecretary.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
@@ -732,7 +746,6 @@
 				CODE_SIGN_ENTITLEMENTS = "Share Extension/BromidesSecretary.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = YYM4Z6MU8F;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Share Extension/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";

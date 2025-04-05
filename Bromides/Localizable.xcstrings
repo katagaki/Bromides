@@ -284,6 +284,22 @@
         }
       }
     },
+    "Settings.DisplayMode.Panels" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Panels"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パネル"
+          }
+        }
+      }
+    },
     "Settings.GitHub" : {
       "extractionState" : "manual",
       "localizations" : {

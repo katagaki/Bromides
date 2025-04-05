@@ -31,65 +31,11 @@ struct CollectionView: View {
         Group {
             switch displayMode {
             case .grid:
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80.0), spacing: 10.0)],
-                              spacing: 10.0) {
-                        ForEach(collections) { collection in
-                            switch collection {
-                            case .album(let album):
-                                Button {
-                                    withAnimation(.smooth.speed(2.0)) {
-                                        selectedCollection = album as? PHAssetCollection
-                                    }
-                                } label: {
-                                    CollectionButtonLabel(
-                                        collection: collection,
-                                        mode: .thumbnail,
-                                        isSelected: { selectedCollection == album }
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                            case .folder:
-                                NavigationLink(value: collection) {
-                                    CollectionButtonLabel(
-                                        collection: collection,
-                                        mode: .thumbnail
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                            }
-                        }
-                    }
-                              .padding()
-                }
+                CollectionGrid(collections, selection: $selectedCollection)
             case .list:
-                List(collections) { collection in
-                    Group {
-                        switch collection {
-                        case .album(let album):
-                            Button {
-                                withAnimation(.smooth.speed(2.0)) {
-                                    selectedCollection = album as? PHAssetCollection
-                                }
-                            } label: {
-                                CollectionButtonLabel(
-                                    collection: collection,
-                                    mode: .row,
-                                    isSelected: { selectedCollection == album }
-                                )
-                            }
-                        case .folder:
-                            NavigationLink(value: collection) {
-                                CollectionButtonLabel(
-                                    collection: collection,
-                                    mode: .row
-                                )
-                            }
-                        }
-                    }
-                    .listRowInsets(.init(top: 6.0, leading: 20.0, bottom: 6.0, trailing: 20.0))
-                }
-                .listStyle(.plain)
+                CollectionList(collections, selection: $selectedCollection)
+            case .panels:
+                CollectionPanels(collections, selection: $selectedCollection)
             }
         }
         .scrollDismissesKeyboard(.immediately)

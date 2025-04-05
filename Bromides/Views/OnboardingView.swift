@@ -42,6 +42,8 @@ struct OnboardingView: View {
                             .tag(DisplayMode.grid)
                         Text("Settings.DisplayMode.List")
                             .tag(DisplayMode.list)
+                        Text("Settings.DisplayMode.Panels")
+                            .tag(DisplayMode.panels)
                     } label: {
                         Text("Settings.DisplayMode")
                     }
