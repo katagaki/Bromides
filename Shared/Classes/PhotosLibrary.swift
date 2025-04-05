@@ -66,7 +66,9 @@ class PhotosLibrary {
         collections.enumerateObjects { (collection, _, _) in
             items.append(.album(collection: collection))
         }
-        items.removeAll(where: { !$0.title.localizedCaseInsensitiveContains(searchTerm) })
+        items.removeAll(where: { !$0.title.localizedCaseInsensitiveContains(
+            searchTerm.trimmingCharacters(in: .whitespaces)
+        ) })
         items.sort(by: { $0.title.localizedStandardCompare($1.title) == .orderedAscending })
         return items
     }

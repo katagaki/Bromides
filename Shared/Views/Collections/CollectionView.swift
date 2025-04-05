@@ -87,8 +87,8 @@ struct CollectionView: View {
             reloadCollections(animate: false)
         }
         .onChange(of: navigator.searchTerm) { _, newValue in
-            if !newValue.isEmpty {
-                reloadCollections(animate: false)
+            if !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
+                reloadCollections()
             }
         }
         .alert("Alert.CreateAlbum", isPresented: $isCreatingAlbum) {
@@ -105,7 +105,7 @@ struct CollectionView: View {
 
     func reloadCollections(animate: Bool = true) {
         if animate {
-            withAnimation {
+            withAnimation(.smooth.speed(1.7)) {
                 reloadCollections(animate: false)
             }
         } else {

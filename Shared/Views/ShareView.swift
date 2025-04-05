@@ -134,9 +134,9 @@ struct ShareView: View {
             isPhotosAuthorizationComplete = true
         }
         .onChange(of: navigator.searchTerm) { _, newValue in
-            if !newValue.isEmpty {
+            if !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
                 navigator.startSearching()
-            } else if newValue.isEmpty {
+            } else if newValue.trimmingCharacters(in: .whitespaces).isEmpty {
                 navigator.stopSearching()
             }
         }
