@@ -34,5 +34,8 @@ class Navigator {
                 )
             )
         }
+        if !searchTerm.trimmingCharacters(in: .whitespaces).isEmpty {
+            searchTerm = ""
+        }
     }
 }
