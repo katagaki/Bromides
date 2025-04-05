@@ -17,6 +17,7 @@ struct OnboardingView: View {
                 Section {
                     VStack(alignment: .center, spacing: 10.0) {
                         Text("Onboarding.1.\(Image(systemName: "square.and.arrow.up"))")
+                            .multilineTextAlignment(.center)
                         Image(systemName: "arrow.down")
                             .font(.title2)
                         Image(.appIconMasked)
@@ -25,9 +26,11 @@ struct OnboardingView: View {
                             .clipShape(.rect(cornerRadius: 14.0))
                             .shadow(radius: 2.0, y: 2.0)
                         Text("Onboarding.2")
+                            .multilineTextAlignment(.center)
                         Image(systemName: "arrow.down")
                             .font(.title2)
                         Text("Onboarding.3")
+                            .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity)
                 } header: {

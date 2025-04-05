@@ -1,30 +1,32 @@
 //
-//  AlbumView.swift
+//  CollectionView.swift
 //  Bromides
 //
 //  Created by シン・ジャスティン on 2025/03/23.
 //
 
+import Komponents
 import Photos
 import SwiftUI
 
-struct AlbumView: View {
+struct CollectionView: View {
+    @Environment(Detective.self) var detective
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
-    
+
     @State var displayedCollection: Collection?
     @State var collections: [Collection] = []
-    
+
     @State var isCreatingAlbum: Bool = false
     @State var isCreatingFolder: Bool = false
     @State var newCollectionName: String = ""
-    
+
     @Binding var selectedCollection: PHAssetCollection?
-    
+
     init(_ collection: Collection? = nil, selection: Binding<PHAssetCollection?>) {
         self.displayedCollection = collection
         self._selectedCollection = selection
     }
-    
+
     var body: some View {
         Group {
             switch displayMode {
@@ -90,6 +92,7 @@ struct AlbumView: View {
                 .listStyle(.plain)
             }
         }
+        .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?
                          NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") :
                             displayedCollection!.title)
@@ -118,6 +121,9 @@ struct AlbumView: View {
                     .symbolRenderingMode(.multicolor)
             }
         }
+        .onChange(of: detective.searchTerm) { oldValue, newValue in
+            debugPrint(oldValue, newValue)
+        }
         .alert("Alert.CreateAlbum", isPresented: $isCreatingAlbum) {
             TextField("Alert.CreateAlbum.Name", text: $newCollectionName)
             Button("Shared.Create", action: createAlbum)
@@ -133,7 +139,7 @@ struct AlbumView: View {
     func reloadCollections(animate: Bool = true) {
         if animate {
             withAnimation {
-                collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
+                reloadCollections(animate: false)
             }
         } else {
             collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)

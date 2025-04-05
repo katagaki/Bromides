@@ -24,8 +24,8 @@ struct ImagePreview: View {
         }
         .frame(
             maxWidth: .infinity,
-            minHeight: (verticalSizeClass == .regular && horizontalSizeClass == .compact ? 200.0 : 90.0),
-            maxHeight: (verticalSizeClass == .regular && horizontalSizeClass == .compact ? 200.0 : 90.0)
+            minHeight: (verticalSizeClass == .regular && horizontalSizeClass == .compact ? 160.0 : 90.0),
+            maxHeight: (verticalSizeClass == .regular && horizontalSizeClass == .compact ? 160.0 : 90.0)
         )
     }
 }

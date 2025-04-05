@@ -335,6 +335,22 @@
         }
       }
     },
+    "Shared.AlbumOrFolderName.%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Album/Folder Name"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ アルバムまたはフォルダー名"
+          }
+        }
+      }
+    },
     "Shared.Cancel" : {
       "localizations" : {
         "en" : {
