@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct SearchField: View {
-    @Binding var searchTerm: String
+    @Environment(Navigator.self) var navigator
 
     var body: some View {
-        TextField(
+        @Bindable var navigator = navigator
+        UITextField.appearance().clearButtonMode = .whileEditing
+        return TextField(
             "Shared.AlbumOrFolderName.\(Image(systemName: "magnifyingglass"))",
-            text: $searchTerm
+            text: $navigator.searchTerm
         )
         .padding(.horizontal, 10.0)
         .padding(.vertical, 10.0)
@@ -21,5 +23,6 @@ struct SearchField: View {
         .background(Material.ultraThin)
         .clipShape(.rect(cornerRadius: 10.0))
         .shadow(color: .black.opacity(0.2), radius: 5.0, y: 3.0)
+        .submitLabel(.search)
     }
 }

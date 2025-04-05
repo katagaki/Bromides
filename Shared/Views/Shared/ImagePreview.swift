@@ -13,6 +13,10 @@ struct ImagePreview: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     var uiImage: UIImage
 
+    init(_ uiImage: UIImage) {
+        self.uiImage = uiImage
+    }
+
     var body: some View {
         VStack(alignment: .center) {
             Image(uiImage: uiImage)

@@ -10,11 +10,12 @@ import Photos
 import SwiftUI
 
 struct CollectionView: View {
-    @Environment(Detective.self) var detective
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
+    @Environment(Navigator.self) var navigator
 
     @State var displayedCollection: Collection?
     @State var collections: [Collection] = []
+    @State var searchTerm: String?
 
     @State var isCreatingAlbum: Bool = false
     @State var isCreatingFolder: Bool = false
@@ -27,6 +28,12 @@ struct CollectionView: View {
         self._selectedCollection = selection
     }
 
+    init(searchTerm: String, selection: Binding<PHAssetCollection?>) {
+        self.displayedCollection = .search
+        self._selectedCollection = selection
+        self.searchTerm = searchTerm
+    }
+
     var body: some View {
         Group {
             switch displayMode {
@@ -37,6 +44,24 @@ struct CollectionView: View {
             case .panels:
                 CollectionPanels(collections, selection: $selectedCollection)
             }
+        }
+        .overlay {
+            if collections.isEmpty {
+                ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
+                    .symbolRenderingMode(.multicolor)
+            }
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0.0) {
+            BarAccessory(placement: .bottom) {
+                VStack(spacing: 16.0) {
+                    SearchField()
+                    HStack {
+                        ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                    }
+                }
+                .padding()
+            }
+            .opacity(0.0)
         }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?
@@ -61,25 +86,21 @@ struct CollectionView: View {
         .task {
             reloadCollections(animate: false)
         }
-        .overlay {
-            if collections.isEmpty {
-                ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
-                    .symbolRenderingMode(.multicolor)
+        .onChange(of: navigator.searchTerm) { _, newValue in
+            if !newValue.isEmpty {
+                reloadCollections(animate: false)
             }
-        }
-        .onChange(of: detective.searchTerm) { oldValue, newValue in
-            debugPrint(oldValue, newValue)
         }
         .alert("Alert.CreateAlbum", isPresented: $isCreatingAlbum) {
             TextField("Alert.CreateAlbum.Name", text: $newCollectionName)
             Button("Shared.Create", action: createAlbum)
             Button("Shared.Cancel", role: .cancel, action: stopCreatingAlbum)
-        } message: { }
+        }
         .alert("Alert.CreateFolder", isPresented: $isCreatingFolder) {
             TextField("Alert.CreateFolder.Name", text: $newCollectionName)
             Button("Shared.Create", action: createFolder)
             Button("Shared.Cancel", role: .cancel, action: stopCreatingFolder)
-        } message: { }
+        }
     }
 
     func reloadCollections(animate: Bool = true) {
@@ -88,7 +109,11 @@ struct CollectionView: View {
                 reloadCollections(animate: false)
             }
         } else {
-            collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
+            if displayedCollection == .search {
+                collections = PhotosLibrary.albums(containing: navigator.searchTerm)
+            } else {
+                collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
+            }
         }
     }
 

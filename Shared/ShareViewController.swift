@@ -17,28 +17,22 @@ class ShareViewController: UIViewController {
 
         if let item = extensionContext?.inputItems.first as? NSExtensionItem {
             guard let attachment = item.attachments?.first else { fatalError() }
-            var utType: UTType?
+            let utType: UTType = utTypeOf(attachment)
+            setUpCloseObserver()
 
-            if attachment.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
-                utType = .image
-            } else if attachment.hasItemConformingToTypeIdentifier(UTType.png.identifier) {
-                utType = .png
-            } else if attachment.hasItemConformingToTypeIdentifier(UTType.jpeg.identifier) {
-                utType = .jpeg
-            } else if attachment.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
-                utType = .url
-            } else if attachment.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
-                utType = .fileURL
-            }
-            guard let utType else { fatalError() }
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(close),
-                name: NSNotification.Name("close"),
-                object: nil
-            )
             Task { @MainActor in
-                guard let loadedFile = await loadItem(attachment, type: utType) else { fatalError() }
+                // Load attachment as image
+                let file: Any? = try? await attachment.loadItem(forTypeIdentifier: utType.identifier)
+                let loadedFile: (any Sendable)?
+                switch file {
+                case let url as URL: loadedFile = url
+                case let uiImage as UIImage: loadedFile = uiImage
+                case let data as Data: loadedFile = data
+                default: loadedFile = nil
+                }
+                guard let loadedFile else { fatalError() }
+
+                // Attach SwiftUI view to UIKit view
                 let shareView = UIHostingController(rootView: ShareView(items: [loadedFile]))
                 addChild(shareView)
                 view.addSubview(shareView.view)
@@ -52,25 +46,35 @@ class ShareViewController: UIViewController {
         }
     }
 
+    func setUpCloseObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(close),
+            name: NSNotification.Name("close"),
+            object: nil
+        )
+    }
+
     @objc func close() {
         extensionContext?.completeRequest(returningItems: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("close"), object: nil)
         self.dismiss(animated: false)
     }
 
-    func loadItem(_ attachment: NSItemProvider, type: UTType) async -> (any Sendable)? {
-        let file: Any? = try? await attachment.loadItem(forTypeIdentifier: type.identifier)
-        let sendableResult: (any Sendable)?
-        switch file {
-        case let url as URL:
-            sendableResult = url
-        case let uiImage as UIImage:
-            sendableResult = uiImage
-        case let data as Data:
-            sendableResult = data
-        default:
-            sendableResult = nil
+    func utTypeOf(_ attachment: NSItemProvider) -> UTType {
+        var utType: UTType?
+        if attachment.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+            utType = .image
+        } else if attachment.hasItemConformingToTypeIdentifier(UTType.png.identifier) {
+            utType = .png
+        } else if attachment.hasItemConformingToTypeIdentifier(UTType.jpeg.identifier) {
+            utType = .jpeg
+        } else if attachment.hasItemConformingToTypeIdentifier(UTType.url.identifier) {
+            utType = .url
+        } else if attachment.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
+            utType = .fileURL
         }
-        return sendableResult
+        guard let utType else { fatalError() }
+        return utType
     }
 }

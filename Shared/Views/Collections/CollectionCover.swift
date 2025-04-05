@@ -38,6 +38,8 @@ struct CollectionCover: View {
                     iconName: "folder",
                     iconSize: iconSize
                 )
+            case .search:
+                Color.clear
             }
         }
         .aspectRatio(contentMode: .fill)

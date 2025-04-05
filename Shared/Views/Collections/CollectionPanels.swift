@@ -46,6 +46,8 @@ struct CollectionPanels: View {
                             )
                         }
                         .buttonStyle(.plain)
+                    case .search:
+                        Color.clear
                     }
                 }
             }

@@ -22,5 +22,6 @@ struct ButtonLabel: View {
             .padding(.vertical, 8.0)
             .frame(maxWidth: .infinity)
             .bold()
+            .lineLimit(1)
     }
 }

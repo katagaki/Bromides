@@ -46,6 +46,8 @@ struct CollectionGrid: View {
                             )
                         }
                         .buttonStyle(.plain)
+                    case .search:
+                        Color.clear
                     }
                 }
             }

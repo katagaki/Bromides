@@ -40,6 +40,8 @@ struct CollectionList: View {
                             mode: .list
                         )
                     }
+                case .search:
+                    Color.clear
                 }
             }
             .listRowInsets(.init(top: 6.0, leading: 20.0, bottom: 6.0, trailing: 20.0))

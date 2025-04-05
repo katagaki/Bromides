@@ -12,7 +12,7 @@ import SwiftUI
 
 struct ShareView: View {
 
-    @State var viewPath: [Collection] = []
+    @State var navigator: Navigator = Navigator()
     var imageData: Data?
     var previewImage: UIImage?
 
@@ -22,8 +22,6 @@ struct ShareView: View {
     @State var isPhotoSaveFailed: Bool = false
     @State var isPhotosAuthorizationComplete: Bool = false
     @State var isPhotosAuthorizationDenied: Bool = false
-
-    @State var detective: Detective = Detective()
 
     init(items: [Any?]) {
         guard let item = items.first else { return }
@@ -47,20 +45,12 @@ struct ShareView: View {
     }
 
     var body: some View {
+        @Bindable var navigator = navigator
         VStack(alignment: .leading, spacing: 0.0) {
-            if let imageData, let previewImage {
-                ImagePreview(uiImage: previewImage)
+            if imageData != nil, let previewImage {
+                ImagePreview(previewImage)
                 if isPhotoSaveSuccessful {
-                    VStack(alignment: .center, spacing: 16.0) {
-                        Image(systemName: "checkmark.circle.fill")
-                            .resizable()
-                            .frame(width: 48.0, height: 48.0)
-                            .symbolRenderingMode(.multicolor)
-                        Text("""
-Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))
-""")
-                            .bold()
-                    }
+                    SaveSuccessfulView(selectedCollection)
                     .frame(maxWidth: .infinity)
                     .padding()
                 } else {
@@ -71,13 +61,41 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                                 ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
                                     .symbolRenderingMode(.multicolor)
                             } else {
-                                NavigationStack(path: $viewPath) {
+                                NavigationStack(path: $navigator.viewPath) {
                                     CollectionView(selection: $selectedCollection)
-                                        .environment(detective)
+                                        .environment(navigator)
                                         .navigationDestination(for: Collection.self) { collection in
                                             CollectionView(collection, selection: $selectedCollection)
-                                                .environment(detective)
+                                                .environment(navigator)
                                         }
+                                }
+                                .safeAreaInset(edge: .bottom, spacing: 0.0) {
+                                    BarAccessory(placement: .bottom, isBackgroundSolid: false) {
+                                        VStack(spacing: 16.0) {
+                                            SearchField()
+                                                .environment(navigator)
+                                            HStack {
+                                                Group {
+                                                    Button {
+                                                        save()
+                                                    } label: {
+                                                        ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                                                    }
+                                                    .buttonStyle(.borderedProminent)
+                                                    .disabled(selectedCollection == nil || isPhotoSaving)
+                                                    Button {
+                                                        close()
+                                                    } label: {
+                                                        ButtonLabel("Shared.Cancel", icon: "xmark")
+                                                    }
+                                                    .buttonStyle(.bordered)
+                                                    .disabled(isPhotoSaving)
+                                                }
+                                                .clipShape(.capsule)
+                                            }
+                                        }
+                                        .padding()
+                                    }
                                 }
                             }
                         } else {
@@ -88,53 +106,6 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
                         }
                     }
                     .layoutPriority(0)
-                    BarAccessory(placement: .bottom, isBackgroundSolid: true) {
-                        VStack(spacing: 16.0) {
-                            SearchField(searchTerm: $detective.searchTerm)
-                            HStack {
-                                Group {
-                                    Button {
-                                        if let selectedCollection {
-                                            isPhotoSaving = true
-                                            Task {
-                                                let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
-                                                    data: imageData,
-                                                    to: selectedCollection
-                                                )
-                                                if isPhotoSaved {
-                                                    withAnimation(.smooth.speed(2.0)) {
-                                                        isPhotoSaveSuccessful = true
-                                                    } completion: {
-                                                        UINotificationFeedbackGenerator().notificationOccurred(.success)
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                                            close()
-                                                        }
-                                                    }
-                                                } else {
-                                                    UINotificationFeedbackGenerator().notificationOccurred(.error)
-                                                    isPhotoSaving = false
-                                                    isPhotoSaveFailed = true
-                                                }
-                                            }
-                                        }
-                                    } label: {
-                                        ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
-                                    }
-                                    .buttonStyle(.borderedProminent)
-                                    .disabled(selectedCollection == nil || isPhotoSaving)
-                                    Button {
-                                        close()
-                                    } label: {
-                                        ButtonLabel("Shared.Cancel", icon: "xmark")
-                                    }
-                                    .buttonStyle(.bordered)
-                                    .disabled(isPhotoSaving)
-                                }
-                                .clipShape(.capsule)
-                            }
-                        }
-                        .padding()
-                    }
                 }
             } else {
                 Spacer()
@@ -162,6 +133,18 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
             }
             isPhotosAuthorizationComplete = true
         }
+        .onChange(of: navigator.searchTerm) { _, newValue in
+            if !newValue.isEmpty {
+                navigator.startSearching()
+            } else if newValue.isEmpty {
+                navigator.stopSearching()
+            }
+        }
+        .onChange(of: navigator.viewPath) { oldValue, newValue in
+            if oldValue.contains(.search) && !newValue.contains(.search) {
+                navigator.stopSearching()
+            }
+        }
         .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
             Button("Shared.Dismiss", action: {})
         }
@@ -169,5 +152,33 @@ Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.A
 
     func close() {
         NotificationCenter.default.post(name: NSNotification.Name("close"), object: nil)
+    }
+
+    func save() {
+        if let imageData, let selectedCollection {
+            isPhotoSaving = true
+            Task {
+                let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
+                    data: imageData,
+                    to: selectedCollection
+                )
+                if isPhotoSaved {
+                    withAnimation(.smooth.speed(2.0)) {
+                        isPhotoSaveSuccessful = true
+                    } completion: {
+                        UINotificationFeedbackGenerator().notificationOccurred(.success)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            close()
+                        }
+                    }
+                } else {
+                    UINotificationFeedbackGenerator().notificationOccurred(.error)
+                    isPhotoSaving = false
+                    isPhotoSaveFailed = true
+                }
+            }
+        } else {
+            isPhotoSaveFailed = true
+        }
     }
 }

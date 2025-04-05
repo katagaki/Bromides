@@ -73,7 +73,7 @@
 		E4DAA9F72D904E4100BBF630 /* Exceptions for "Shared" folder in "Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Classes/Detective.swift,
+				Classes/Navigator.swift,
 				Classes/PhotosLibrary.swift,
 				Enums/Collection.swift,
 				Enums/CollectionButtonMode.swift,
@@ -90,6 +90,7 @@
 				Views/Shared/ButtonLabel.swift,
 				Views/Shared/GenericThumbnail.swift,
 				Views/Shared/ImagePreview.swift,
+				Views/Shared/SaveSuccessfulView.swift,
 				Views/ShareView.swift,
 			);
 			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
@@ -97,7 +98,7 @@
 		E4DAA9F82D904E4100BBF630 /* Exceptions for "Shared" folder in "BromidesAction" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Classes/Detective.swift,
+				Classes/Navigator.swift,
 				Classes/PhotosLibrary.swift,
 				Defaults.swift,
 				Enums/Collection.swift,
@@ -116,6 +117,7 @@
 				Views/Shared/ButtonLabel.swift,
 				Views/Shared/GenericThumbnail.swift,
 				Views/Shared/ImagePreview.swift,
+				Views/Shared/SaveSuccessfulView.swift,
 				Views/ShareView.swift,
 			);
 			target = E4DAA9A82D904D2300BBF630 /* BromidesAction */;
@@ -146,7 +148,7 @@
 		E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "BromidesShare" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Classes/Detective.swift,
+				Classes/Navigator.swift,
 				Classes/PhotosLibrary.swift,
 				Defaults.swift,
 				Enums/Collection.swift,
@@ -165,6 +167,7 @@
 				Views/Shared/ButtonLabel.swift,
 				Views/Shared/GenericThumbnail.swift,
 				Views/Shared/ImagePreview.swift,
+				Views/Shared/SaveSuccessfulView.swift,
 				Views/ShareView.swift,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* BromidesShare */;
@@ -496,7 +499,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -522,7 +525,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -678,7 +681,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.Bromides;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -709,7 +712,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tsubuzaki.Bromides;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

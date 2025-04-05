@@ -54,6 +54,23 @@ class PhotosLibrary {
         return items
     }
 
+    static func albums(containing searchTerm: String) -> [Collection] {
+        var items: [Collection] = []
+        let options: PHFetchOptions = PHFetchOptions()
+        options.sortDescriptors = [
+            NSSortDescriptor(key: "localizedTitle", ascending: true)
+        ]
+        let collections: PHFetchResult = PHAssetCollection.fetchAssetCollections(
+            with: .album, subtype: .any, options: options
+        )
+        collections.enumerateObjects { (collection, _, _) in
+            items.append(.album(collection: collection))
+        }
+        items.removeAll(where: { !$0.title.localizedCaseInsensitiveContains(searchTerm) })
+        items.sort(by: { $0.title.localizedStandardCompare($1.title) == .orderedAscending })
+        return items
+    }
+
     static func createAlbum(in path: Collection? = nil, named name: String) async -> Bool {
         do {
             try await PHPhotoLibrary.shared().performChanges {
