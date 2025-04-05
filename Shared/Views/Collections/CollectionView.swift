@@ -55,9 +55,10 @@ struct CollectionView: View {
             BarAccessory(placement: .bottom) {
                 VStack(spacing: 16.0) {
                     SearchField()
-                    HStack {
+                    Button { } label: {
                         ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
                     }
+                    .buttonStyle(.bordered)
                 }
                 .padding()
             }
