@@ -356,13 +356,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ Album/Folder Name"
+            "value" : "%@ Album Name"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ アルバムまたはフォルダー名"
+            "value" : "%@ アルバム名"
           }
         }
       }
