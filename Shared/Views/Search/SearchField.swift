@@ -18,7 +18,7 @@ struct SearchField: View {
             text: $navigator.searchTerm
         )
         .padding(.horizontal, 10.0)
-        .padding(.vertical, 10.0)
+        .padding(.vertical, 12.0)
         .frame(maxWidth: .infinity)
         .background(Material.ultraThin)
         .clipShape(.rect(cornerRadius: 10.0))
