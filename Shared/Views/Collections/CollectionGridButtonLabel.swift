@@ -66,7 +66,7 @@ struct CollectionButtonLabel: View {
                 .frame(maxWidth: .infinity, maxHeight: 46.0, alignment: .leading)
                 .background(Material.ultraThin)
                 .clipShape(.rect(cornerRadius: 10.0))
-                .shadow(color: .black.opacity(0.2), radius: 5.0, y: 4.0)
+                .shadow(color: .black.opacity(0.15), radius: 3.5, y: 2.5)
             }
         }
     }
