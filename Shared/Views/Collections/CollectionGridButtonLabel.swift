@@ -53,12 +53,14 @@ struct CollectionButtonLabel: View {
             case .panels:
                 HStack(alignment: .center, spacing: 10.0) {
                     CollectionCover(collection, iconSize: 24.0)
-                        .frame(width: 46.0, height: 46.0)
+                        .frame(minWidth: 46.0, maxWidth: 46.0, minHeight: 46.0, maxHeight: 46.0)
                         .overlay {
                             if let isSelected, isSelected() {
                                 CollectionCheckmark(circumference: 22.0, lineWidth: 1.5)
                             }
                         }
+                        .compositingGroup()
+                        .clipShape(.rect)
                     Text(collection.title)
                         .font(.subheadline)
                         .layoutPriority(0)
