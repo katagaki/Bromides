@@ -54,7 +54,7 @@ struct CollectionView: View {
         .safeAreaInset(edge: .bottom, spacing: 0.0) {
             BarAccessory(placement: .bottom) {
                 VStack(spacing: 16.0) {
-                    SearchField()
+                    SearchField(.constant(""))
                     Button { } label: {
                         ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
                     }

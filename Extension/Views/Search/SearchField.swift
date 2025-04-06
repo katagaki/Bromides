@@ -8,15 +8,18 @@
 import SwiftUI
 
 struct SearchField: View {
-    @Environment(Navigator.self) var navigator
+    @Binding var searchTerm: String
     @FocusState private var isFocused: Bool
 
+    init(_ searchTerm: Binding<String>) {
+        self._searchTerm = searchTerm
+    }
+
     var body: some View {
-        @Bindable var navigator = navigator
         UITextField.appearance().clearButtonMode = .whileEditing
         return TextField(
             "Shared.AlbumOrFolderName.\(Image(systemName: "magnifyingglass"))",
-            text: $navigator.searchTerm
+            text: $searchTerm
         )
         .padding(.horizontal, 10.0)
         .padding(.vertical, 12.0)

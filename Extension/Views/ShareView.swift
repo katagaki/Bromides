@@ -45,7 +45,6 @@ struct ShareView: View {
     }
 
     var body: some View {
-        @Bindable var navigator = navigator
         VStack(alignment: .leading, spacing: 0.0) {
             if imageData != nil, let previewImage {
                 ImagePreview(previewImage)
@@ -55,56 +54,32 @@ struct ShareView: View {
                     .padding()
                 } else {
                     Divider()
+                        .ignoresSafeArea(.all, edges: .horizontal)
                     ZStack(alignment: .center) {
                         if isPhotosAuthorizationComplete {
                             if isPhotosAuthorizationDenied {
                                 ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
                                     .symbolRenderingMode(.multicolor)
                             } else {
-                                NavigationStack(path: $navigator.viewPath) {
-                                    CollectionView(selection: $selectedCollection)
-                                        .environment(navigator)
-                                        .navigationDestination(for: Collection.self) { collection in
-                                            CollectionView(collection, selection: $selectedCollection)
-                                                .environment(navigator)
-                                        }
-                                }
-                                .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                    BarAccessory(placement: .bottom, isBackgroundSolid: false) {
-                                        VStack(spacing: 16.0) {
-                                            SearchField()
-                                                .environment(navigator)
-                                            HStack {
-                                                Group {
-                                                    Button {
-                                                        save()
-                                                    } label: {
-                                                        ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
-                                                    }
-                                                    .buttonStyle(.borderedProminent)
-                                                    .disabled(selectedCollection == nil || isPhotoSaving)
-                                                    Button {
-                                                        close()
-                                                    } label: {
-                                                        ButtonLabel("Shared.Cancel", icon: "xmark")
-                                                    }
-                                                    .buttonStyle(.bordered)
-                                                    .disabled(isPhotoSaving)
+                                CollectionsStack($navigator, selection: $selectedCollection)
+                                    .safeAreaInset(edge: .bottom, spacing: 0.0) {
+                                        BarAccessory(placement: .bottom, isBackgroundSolid: false) {
+                                            VStack(spacing: 16.0) {
+                                                SearchField($navigator.searchTerm)
+                                                HStack {
+                                                    saveButton()
+                                                    closeButton()
                                                 }
-                                                .clipShape(.capsule)
                                             }
+                                            .padding()
                                         }
-                                        .padding()
                                     }
-                                }
                             }
                         } else {
-                            VStack(alignment: .center) {
-                                ProgressView()
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            ProgressView()
                         }
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .layoutPriority(0)
                 }
             } else {
@@ -113,14 +88,8 @@ struct ShareView: View {
                     .padding()
                 Spacer()
                 Divider()
-                Button {
-                    close()
-                } label: {
-                    ButtonLabel("Shared.Close", icon: "xmark")
-                }
-                .buttonStyle(.borderedProminent)
-                .clipShape(.capsule)
-                .padding()
+                closeButton(isProminent: true)
+                    .padding()
             }
         }
         .task {
@@ -133,21 +102,39 @@ struct ShareView: View {
             }
             isPhotosAuthorizationComplete = true
         }
-        .onChange(of: navigator.searchTerm) { _, newValue in
-            if !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
-                navigator.startSearching()
-            } else if newValue.trimmingCharacters(in: .whitespaces).isEmpty {
-                navigator.stopSearching()
-            }
-        }
-        .onChange(of: navigator.viewPath) { oldValue, newValue in
-            if oldValue.contains(.search) && !newValue.contains(.search) {
-                navigator.stopSearching()
-            }
-        }
         .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
             Button("Shared.Dismiss", action: {})
         }
+    }
+
+    @ViewBuilder func saveButton() -> some View {
+        Button {
+            save()
+        } label: {
+            ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+        }
+        .buttonStyle(.borderedProminent)
+        .disabled(selectedCollection == nil || isPhotoSaving)
+        .clipShape(.capsule)
+    }
+
+    @ViewBuilder func closeButton(isProminent: Bool = false) -> some View {
+        let button = Button {
+            close()
+        } label: {
+            ButtonLabel("Shared.Close", icon: "xmark")
+        }
+        Group {
+            if isProminent {
+                button
+                    .buttonStyle(.borderedProminent)
+            } else {
+                button
+                    .buttonStyle(.bordered)
+            }
+        }
+        .clipShape(.capsule)
+        .disabled(isPhotoSaving)
     }
 
     func close() {
