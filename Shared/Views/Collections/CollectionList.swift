@@ -9,16 +9,16 @@ import Photos
 import SwiftUI
 
 struct CollectionList: View {
-    var collections: [Collection]
+    var collections: [Collection]?
     @Binding var selectedCollection: PHAssetCollection?
 
-    init(_ collections: [Collection], selection selectedCollection: Binding<PHAssetCollection?>) {
+    init(_ collections: [Collection]?, selection selectedCollection: Binding<PHAssetCollection?>) {
         self.collections = collections
         self._selectedCollection = selectedCollection
     }
 
     var body: some View {
-        List(collections) { collection in
+        List(collections ?? []) { collection in
             Group {
                 switch collection {
                 case .album(let album):

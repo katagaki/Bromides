@@ -9,10 +9,10 @@ import Photos
 import SwiftUI
 
 struct CollectionGrid: View {
-    var collections: [Collection]
+    var collections: [Collection]?
     @Binding var selectedCollection: PHAssetCollection?
 
-    init(_ collections: [Collection], selection selectedCollection: Binding<PHAssetCollection?>) {
+    init(_ collections: [Collection]?, selection selectedCollection: Binding<PHAssetCollection?>) {
         self.collections = collections
         self._selectedCollection = selectedCollection
     }
@@ -23,7 +23,7 @@ struct CollectionGrid: View {
                 columns: [GridItem(.adaptive(minimum: 80.0), spacing: 10.0)],
                 spacing: 10.0
             ) {
-                ForEach(collections) { collection in
+                ForEach(collections ?? []) { collection in
                     switch collection {
                     case .album(let album):
                         Button {

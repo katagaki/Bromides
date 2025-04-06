@@ -14,7 +14,7 @@ struct CollectionView: View {
     @Environment(Navigator.self) var navigator
 
     @State var displayedCollection: Collection?
-    @State var collections: [Collection] = []
+    @State var collections: [Collection]?
     @State var searchTerm: String?
 
     @State var isCreatingAlbum: Bool = false
@@ -46,7 +46,7 @@ struct CollectionView: View {
             }
         }
         .overlay {
-            if collections.isEmpty {
+            if let collections, collections.isEmpty {
                 ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
                     .symbolRenderingMode(.multicolor)
             }
