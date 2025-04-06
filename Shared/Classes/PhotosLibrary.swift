@@ -143,10 +143,10 @@ class PhotosLibrary {
     static func image(from asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
         let options = PHImageRequestOptions()
         options.version = .current
-        options.resizeMode = .exact
-        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .fast
+        options.deliveryMode = .opportunistic
         options.isNetworkAccessAllowed = true
-        options.isSynchronous = true
+        options.isSynchronous = false
         PHImageManager.default().requestImage(
             for: asset,
             targetSize: CGSize(width: 100.0, height: 100.0),
