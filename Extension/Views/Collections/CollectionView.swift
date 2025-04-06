@@ -10,8 +10,10 @@ import Photos
 import SwiftUI
 
 struct CollectionView: View {
-    @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(Navigator.self) var navigator
+    @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
 
     @State var displayedCollection: Collection?
     @State var collections: [Collection]?
@@ -52,18 +54,20 @@ struct CollectionView: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0.0) {
-            BarAccessory(placement: .bottom) {
-                VStack(spacing: 16.0) {
-                    SearchField(.constant(""))
-                    Button { } label: {
-                        ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+            if verticalSizeClass == .regular && horizontalSizeClass == .compact {
+                BarAccessory(placement: .bottom) {
+                    VStack(spacing: 16.0) {
+                        SearchField(.constant(""))
+                        Button { } label: {
+                            ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                        }
+                        .buttonStyle(.bordered)
                     }
-                    .buttonStyle(.bordered)
+                    .padding()
                 }
-                .padding()
+                .opacity(0.0)
+                .allowsHitTesting(false)
             }
-            .opacity(0.0)
-            .allowsHitTesting(false)
         }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?

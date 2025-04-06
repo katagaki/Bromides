@@ -11,6 +11,8 @@ import SwiftData
 import SwiftUI
 
 struct ShareView: View {
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
 
     @State var navigator: Navigator = Navigator()
     var imageData: Data?
@@ -45,44 +47,106 @@ struct ShareView: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 0.0) {
-            if imageData != nil, let previewImage {
-                ImagePreview(previewImage)
-                if isPhotoSaveSuccessful {
-                    SaveSuccessfulView(selectedCollection)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                } else {
-                    Divider()
-                        .ignoresSafeArea(.all, edges: .horizontal)
-                    ZStack(alignment: .center) {
-                        if isPhotosAuthorizationComplete {
-                            if isPhotosAuthorizationDenied {
-                                ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                    .symbolRenderingMode(.multicolor)
-                            } else {
-                                CollectionsStack($navigator, selection: $selectedCollection)
-                                    .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                        BarAccessory(placement: .bottom, isBackgroundSolid: false) {
-                                            VStack(spacing: 16.0) {
-                                                SearchField($navigator.searchTerm)
-                                                HStack {
-                                                    saveButton()
-                                                    closeButton()
+        if imageData != nil, let previewImage {
+            Group {
+                if verticalSizeClass == .regular && horizontalSizeClass == .compact {
+                    // Portrait
+                    VStack(alignment: .leading, spacing: 0.0) {
+                        ImagePreview(previewImage)
+                        if isPhotoSaveSuccessful {
+                            SaveSuccessfulView(selectedCollection)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                        } else {
+                            Divider()
+                                .ignoresSafeArea(.all, edges: .horizontal)
+                            ZStack(alignment: .center) {
+                                if isPhotosAuthorizationComplete {
+                                    if isPhotosAuthorizationDenied {
+                                        ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
+                                            .symbolRenderingMode(.multicolor)
+                                    } else {
+                                        CollectionsStack($navigator, selection: $selectedCollection)
+                                            .safeAreaInset(edge: .bottom, spacing: 0.0) {
+                                                BarAccessory(placement: .bottom, isBackgroundSolid: false) {
+                                                    VStack(spacing: 16.0) {
+                                                        SearchField($navigator.searchTerm)
+                                                        HStack {
+                                                            saveButton()
+                                                            closeButton()
+                                                        }
+                                                    }
+                                                    .padding()
                                                 }
                                             }
-                                            .padding()
-                                        }
                                     }
+                                } else {
+                                    ProgressView()
+                                }
                             }
-                        } else {
-                            ProgressView()
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .layoutPriority(0)
                         }
                     }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .layoutPriority(0)
+                } else {
+                    // Landscape
+                    HStack(alignment: .top, spacing: 0.0) {
+                        if !isPhotoSaveSuccessful {
+                            ZStack(alignment: .center) {
+                                if isPhotosAuthorizationComplete {
+                                    if isPhotosAuthorizationDenied {
+                                        ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
+                                            .symbolRenderingMode(.multicolor)
+                                    } else {
+                                        CollectionsStack($navigator, selection: $selectedCollection)
+                                    }
+                                } else {
+                                    ProgressView()
+                                }
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .layoutPriority(0)
+                            Divider()
+                                .ignoresSafeArea(.all, edges: .vertical)
+                        }
+                        VStack(alignment: .leading, spacing: 0.0) {
+                            Spacer()
+                            ImagePreview(previewImage)
+                            if isPhotoSaveSuccessful {
+                                SaveSuccessfulView(selectedCollection)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                Spacer()
+                            } else {
+                                Spacer()
+                                VStack(spacing: 16.0) {
+                                    SearchField($navigator.searchTerm)
+                                    HStack {
+                                        saveButton()
+                                        closeButton()
+                                    }
+                                }
+                                .padding()
+                            }
+                        }
+                    }
                 }
-            } else {
+            }
+            .task {
+                let status = await PhotosLibrary.requestAuthorization()
+                switch status {
+                case .authorized:
+                    isPhotosAuthorizationDenied = false
+                default:
+                    isPhotosAuthorizationDenied = true
+                }
+                isPhotosAuthorizationComplete = true
+            }
+            .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
+                Button("Shared.Dismiss", action: {})
+            }
+        } else {
+            VStack(alignment: .leading, spacing: 0.0) {
                 Spacer()
                 ContentUnavailableView("Error.NoImage", systemImage: "photo.badge.exclamationmark.fill")
                     .padding()
@@ -91,19 +155,6 @@ struct ShareView: View {
                 closeButton(isProminent: true)
                     .padding()
             }
-        }
-        .task {
-            let status = await PhotosLibrary.requestAuthorization()
-            switch status {
-            case .authorized:
-                isPhotosAuthorizationDenied = false
-            default:
-                isPhotosAuthorizationDenied = true
-            }
-            isPhotosAuthorizationComplete = true
-        }
-        .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
-            Button("Shared.Dismiss", action: {})
         }
     }
 

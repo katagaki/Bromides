@@ -9,8 +9,6 @@ import SwiftUI
 import UIKit
 
 struct ImagePreview: View {
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    @Environment(\.verticalSizeClass) var verticalSizeClass
     var uiImage: UIImage
 
     init(_ uiImage: UIImage) {
@@ -26,10 +24,6 @@ struct ImagePreview: View {
                 .shadow(radius: 3.0, y: 2.0)
                 .padding()
         }
-        .frame(
-            maxWidth: .infinity,
-            minHeight: (verticalSizeClass == .regular && horizontalSizeClass == .compact ? 160.0 : 90.0),
-            maxHeight: (verticalSizeClass == .regular && horizontalSizeClass == .compact ? 160.0 : 90.0)
-        )
+        .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)
     }
 }
