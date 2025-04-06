@@ -52,24 +52,6 @@
           }
         }
       }
-    },
-    "NSPhotoLibraryUsageDescription" : {
-      "comment" : "Privacy - Photo Library Usage Description",
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "Bromides uses your Photos library to show you your albums and save your photos."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバム一覧の表示と写真の保存に写真ライブラリを使用します。"
-          }
-        }
-      }
     }
   },
   "version" : "1.0"

@@ -53,160 +53,51 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E4DAA9BB2D904D2400BBF630 /* Exceptions for "Save to Album" folder in "Save to Album" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = E4DAA9A82D904D2300BBF630 /* Save to Album */;
-		};
-		E4DAA9BF2D904DE500BBF630 /* Exceptions for "App" folder in "Save to Album" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Assets.xcassets,
-				Localizable.xcstrings,
-			);
-			target = E4DAA9A82D904D2300BBF630 /* Save to Album */;
-		};
-		E4DAA9F72D904E4100BBF630 /* Exceptions for "Shared" folder in "Bromides" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Classes/Navigator.swift,
-				Classes/PhotosLibrary.swift,
-				Enums/Collection.swift,
-				Enums/CollectionButtonMode.swift,
-				Extensions/Color.swift,
-				ShareViewController.swift,
-				Views/Collections/CollectionCheckmark.swift,
-				Views/Collections/CollectionCover.swift,
-				Views/Collections/CollectionGrid.swift,
-				Views/Collections/CollectionGridButtonLabel.swift,
-				Views/Collections/CollectionList.swift,
-				Views/Collections/CollectionPanels.swift,
-				Views/Collections/CollectionView.swift,
-				Views/Search/SearchField.swift,
-				Views/Shared/ButtonLabel.swift,
-				Views/Shared/GenericThumbnail.swift,
-				Views/Shared/ImagePreview.swift,
-				Views/Shared/SaveSuccessfulView.swift,
-				Views/ShareView.swift,
-			);
-			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
-		};
-		E4DAA9F82D904E4100BBF630 /* Exceptions for "Shared" folder in "Save to Album" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Classes/Navigator.swift,
-				Classes/PhotosLibrary.swift,
-				Defaults.swift,
-				Enums/Collection.swift,
-				Enums/CollectionButtonMode.swift,
-				Enums/DisplayMode.swift,
-				Extensions/Color.swift,
-				ShareViewController.swift,
-				Views/Collections/CollectionCheckmark.swift,
-				Views/Collections/CollectionCover.swift,
-				Views/Collections/CollectionGrid.swift,
-				Views/Collections/CollectionGridButtonLabel.swift,
-				Views/Collections/CollectionList.swift,
-				Views/Collections/CollectionPanels.swift,
-				Views/Collections/CollectionView.swift,
-				Views/Search/SearchField.swift,
-				Views/Shared/ButtonLabel.swift,
-				Views/Shared/GenericThumbnail.swift,
-				Views/Shared/ImagePreview.swift,
-				Views/Shared/SaveSuccessfulView.swift,
-				Views/ShareView.swift,
-			);
-			target = E4DAA9A82D904D2300BBF630 /* Save to Album */;
-		};
-		E4DB590F2D8E81D0009A20B2 /* Exceptions for "Share with Bromides" folder in "Share with Bromides" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
-		};
 		E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Assets.xcassets,
 				InfoPlist.xcstrings,
-				Localizable.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
 		};
-		E4DB59522D8FD9D8009A20B2 /* Exceptions for "App" folder in "Bromides" target */ = {
+		E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
-			);
-			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
-		};
-		E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "Share with Bromides" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Classes/Navigator.swift,
-				Classes/PhotosLibrary.swift,
-				Defaults.swift,
-				Enums/Collection.swift,
-				Enums/CollectionButtonMode.swift,
-				Enums/DisplayMode.swift,
-				Extensions/Color.swift,
-				ShareViewController.swift,
-				Views/Collections/CollectionCheckmark.swift,
-				Views/Collections/CollectionCover.swift,
-				Views/Collections/CollectionGrid.swift,
-				Views/Collections/CollectionGridButtonLabel.swift,
-				Views/Collections/CollectionList.swift,
-				Views/Collections/CollectionPanels.swift,
-				Views/Collections/CollectionView.swift,
-				Views/Search/SearchField.swift,
-				Views/Shared/ButtonLabel.swift,
-				Views/Shared/GenericThumbnail.swift,
-				Views/Shared/ImagePreview.swift,
-				Views/Shared/SaveSuccessfulView.swift,
-				Views/ShareView.swift,
+				"Info-SaveToAlbum.plist",
+				InfoPlist.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
+		};
+		E4FF3BF62DA22D2D00EB68DF /* Exceptions for "Extension" folder in "Save to Album" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Info-ShareWithBromides.plist",
+			);
+			target = E4DAA9A82D904D2300BBF630 /* Save to Album */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E4DAA9AC2D904D2400BBF630 /* Save to Album */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				E4DAA9BB2D904D2400BBF630 /* Exceptions for "Save to Album" folder in "Save to Album" target */,
-			);
-			path = "Save to Album";
-			sourceTree = "<group>";
-		};
 		E4DB58D82D8E8146009A20B2 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E4DB59522D8FD9D8009A20B2 /* Exceptions for "App" folder in "Bromides" target */,
 				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */,
-				E4DAA9BF2D904DE500BBF630 /* Exceptions for "App" folder in "Save to Album" target */,
 			);
 			path = App;
 			sourceTree = "<group>";
 		};
-		E4DB59052D8E81D0009A20B2 /* Share with Bromides */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				E4DB590F2D8E81D0009A20B2 /* Exceptions for "Share with Bromides" folder in "Share with Bromides" target */,
-			);
-			path = "Share with Bromides";
-			sourceTree = "<group>";
-		};
 		E4DB59B12D8FE88D009A20B2 /* Shared */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				E4DAA9F72D904E4100BBF630 /* Exceptions for "Shared" folder in "Bromides" target */,
-				E4DB59B62D8FE8A1009A20B2 /* Exceptions for "Shared" folder in "Share with Bromides" target */,
-				E4DAA9F82D904E4100BBF630 /* Exceptions for "Shared" folder in "Save to Album" target */,
-			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		E4FF3BE72DA22BBD00EB68DF /* Extension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */,
+				E4FF3BF62DA22D2D00EB68DF /* Exceptions for "Extension" folder in "Save to Album" target */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -242,10 +133,9 @@
 		E4DB58CD2D8E8146009A20B2 = {
 			isa = PBXGroup;
 			children = (
-				E4DB58D82D8E8146009A20B2 /* App */,
-				E4DAA9AC2D904D2400BBF630 /* Save to Album */,
-				E4DB59052D8E81D0009A20B2 /* Share with Bromides */,
 				E4DB59B12D8FE88D009A20B2 /* Shared */,
+				E4DB58D82D8E8146009A20B2 /* App */,
+				E4FF3BE72DA22BBD00EB68DF /* Extension */,
 				E4DB58D72D8E8146009A20B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -276,7 +166,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E4DAA9AC2D904D2400BBF630 /* Save to Album */,
+				E4DB59B12D8FE88D009A20B2 /* Shared */,
+				E4FF3BE72DA22BBD00EB68DF /* Extension */,
 			);
 			name = "Save to Album";
 			packageProductDependencies = (
@@ -327,7 +218,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				E4DB59052D8E81D0009A20B2 /* Share with Bromides */,
+				E4DB59B12D8FE88D009A20B2 /* Shared */,
+				E4FF3BE72DA22BBD00EB68DF /* Extension */,
 			);
 			name = "Share with Bromides";
 			packageProductDependencies = (
@@ -470,11 +362,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionExtensionIcon;
-				CODE_SIGN_ENTITLEMENTS = App/Entitlements.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Save to Album/Info.plist";
+				INFOPLIST_FILE = "Extension/Info-SaveToAlbum.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -501,11 +393,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = ActionExtensionIcon;
-				CODE_SIGN_ENTITLEMENTS = App/Entitlements.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Save to Album/Info.plist";
+				INFOPLIST_FILE = "Extension/Info-SaveToAlbum.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -658,13 +550,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = App/Entitlements.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -694,13 +586,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = App/Entitlements.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -728,13 +620,12 @@
 		E4DB59112D8E81D0009A20B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = App/Entitlements.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Share with Bromides/Info.plist";
+				INFOPLIST_FILE = "Extension/Info-ShareWithBromides.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -759,13 +650,12 @@
 		E4DB59122D8E81D0009A20B2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = App/Entitlements.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Share with Bromides/Info.plist";
+				INFOPLIST_FILE = "Extension/Info-ShareWithBromides.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
