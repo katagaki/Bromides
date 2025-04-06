@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4DB59032D8E81D0009A20B2"
-               BuildableName = "BromidesShare.appex"
-               BlueprintName = "BromidesShare"
+               BuildableName = "Share with Bromides.appex"
+               BlueprintName = "Share with Bromides"
                ReferencedContainer = "container:Bromides.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

@@ -17,8 +17,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4DAA9A82D904D2300BBF630"
-               BuildableName = "BromidesAction.appex"
-               BlueprintName = "BromidesAction"
+               BuildableName = "Save to Album.appex"
+               BlueprintName = "Save to Album"
                ReferencedContainer = "container:Bromides.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

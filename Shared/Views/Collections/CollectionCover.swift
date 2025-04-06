@@ -43,7 +43,7 @@ struct CollectionCover: View {
             }
         }
         .aspectRatio(contentMode: .fill)
-        .task {
+        .task(priority: .background) {
             fetchThumbnail()
         }
     }
