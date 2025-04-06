@@ -48,10 +48,8 @@
 
 /* Begin PBXFileReference section */
 		E4DAA9A92D904D2300BBF630 /* Save to Album.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Save to Album.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4DAA9AA2D904D2300BBF630 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 		E4DB58D62D8E8146009A20B2 /* Bromides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bromides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DB59042D8E81D0009A20B2 /* Share with Bromides.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share with Bromides.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4FF3BE22DA212FA00EB68DF /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -248,7 +246,6 @@
 				E4DAA9AC2D904D2400BBF630 /* Save to Album */,
 				E4DB59052D8E81D0009A20B2 /* Share with Bromides */,
 				E4DB59B12D8FE88D009A20B2 /* Shared */,
-				E4DB58FB2D8E81A2009A20B2 /* Frameworks */,
 				E4DB58D72D8E8146009A20B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -261,15 +258,6 @@
 				E4DAA9A92D904D2300BBF630 /* Save to Album.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E4DB58FB2D8E81A2009A20B2 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E4FF3BE22DA212FA00EB68DF /* UniformTypeIdentifiers.framework */,
-				E4DAA9AA2D904D2300BBF630 /* UniformTypeIdentifiers.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
