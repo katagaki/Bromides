@@ -54,20 +54,24 @@ struct CollectionView: View {
             }
         }
         .safeAreaInset(edge: .bottom, spacing: 0.0) {
-            if verticalSizeClass == .regular && horizontalSizeClass == .compact {
-                BarAccessory(placement: .bottom) {
-                    VStack(spacing: 16.0) {
-                        SearchField(.constant(""))
-                        Button { } label: {
-                            ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+            Group {
+                if verticalSizeClass == .regular && horizontalSizeClass == .compact {
+                    BarAccessory(placement: .bottom) {
+                        VStack(spacing: 16.0) {
+                            SearchField(.constant(""))
+                            Button { } label: {
+                                ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                            }
+                            .buttonStyle(.bordered)
                         }
-                        .buttonStyle(.bordered)
+                        .padding()
                     }
-                    .padding()
+                } else {
+                    EmptyView()
                 }
-                .opacity(0.0)
-                .allowsHitTesting(false)
             }
+            .opacity(0.0)
+            .allowsHitTesting(false)
         }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?

@@ -105,7 +105,6 @@ struct ShareView: View {
                                 }
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .layoutPriority(0)
                             Divider()
                                 .ignoresSafeArea(.all, edges: .vertical)
                         }
@@ -119,12 +118,9 @@ struct ShareView: View {
                                 Spacer()
                             } else {
                                 Spacer()
-                                VStack(spacing: 16.0) {
-                                    SearchField($navigator.searchTerm)
-                                    HStack {
-                                        saveButton()
-                                        closeButton()
-                                    }
+                                HStack {
+                                    saveButton()
+                                    closeButton()
                                 }
                                 .padding()
                             }
