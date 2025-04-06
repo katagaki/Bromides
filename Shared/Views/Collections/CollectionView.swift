@@ -63,6 +63,7 @@ struct CollectionView: View {
                 .padding()
             }
             .opacity(0.0)
+            .allowsHitTesting(false)
         }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?

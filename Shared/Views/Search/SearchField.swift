@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchField: View {
     @Environment(Navigator.self) var navigator
+    @FocusState private var isFocused: Bool
 
     var body: some View {
         @Bindable var navigator = navigator
@@ -21,6 +22,10 @@ struct SearchField: View {
         .padding(.vertical, 12.0)
         .frame(maxWidth: .infinity)
         .background(Material.ultraThin)
+        .focused($isFocused)
+        .onTapGesture {
+            isFocused = true
+        }
         .clipShape(.rect(cornerRadius: 10.0))
         .shadow(color: .black.opacity(0.2), radius: 5.0, y: 3.0)
         .submitLabel(.search)
