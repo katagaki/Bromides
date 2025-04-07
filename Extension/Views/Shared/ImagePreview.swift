@@ -24,6 +24,5 @@ struct ImagePreview: View {
                 .shadow(radius: 3.0, y: 2.0)
                 .padding()
         }
-        .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)
     }
 }

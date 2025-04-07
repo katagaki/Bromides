@@ -53,6 +53,8 @@ struct ShareView: View {
                     // Portrait
                     VStack(alignment: .leading, spacing: 0.0) {
                         ImagePreview(previewImage)
+                            .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)
+                            .id("@$_bromidesPrivateIdentifier_preview")
                         if isPhotoSaveSuccessful {
                             SaveSuccessfulView(selectedCollection)
                                 .frame(maxWidth: .infinity)
@@ -73,12 +75,15 @@ struct ShareView: View {
                                                         SearchField($navigator.searchTerm)
                                                         HStack {
                                                             saveButton()
+                                                                .id("@$_bromidesPrivateIdentifier_save")
                                                             closeButton()
+                                                                .id("@$_bromidesPrivateIdentifier_close")
                                                         }
                                                     }
                                                     .padding()
                                                 }
                                             }
+                                            .id("@$_bromidesPrivateIdentifier_albumBrowser")
                                     }
                                 } else {
                                     ProgressView()
@@ -99,6 +104,7 @@ struct ShareView: View {
                                             .symbolRenderingMode(.multicolor)
                                     } else {
                                         CollectionsStack($navigator, selection: $selectedCollection)
+                                            .id("@$_bromidesPrivateIdentifier_albumBrowser")
                                     }
                                 } else {
                                     ProgressView()
@@ -111,6 +117,8 @@ struct ShareView: View {
                         VStack(alignment: .leading, spacing: 0.0) {
                             Spacer()
                             ImagePreview(previewImage)
+                                .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: .infinity)
+                                .id("@$_bromidesPrivateIdentifier_preview")
                             if isPhotoSaveSuccessful {
                                 SaveSuccessfulView(selectedCollection)
                                     .frame(maxWidth: .infinity)
@@ -120,7 +128,9 @@ struct ShareView: View {
                                 Spacer()
                                 HStack {
                                     saveButton()
+                                        .id("@$_bromidesPrivateIdentifier_save")
                                     closeButton()
+                                        .id("@$_bromidesPrivateIdentifier_close")
                                 }
                                 .padding()
                             }
