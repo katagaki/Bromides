@@ -14,6 +14,7 @@ struct CollectionView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(Navigator.self) var navigator
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
+    @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
 
     @State var displayedCollection: Collection?
     @State var collections: [Collection]?
@@ -121,6 +122,13 @@ struct CollectionView: View {
         } else {
             if displayedCollection == .search {
                 collections = PhotosLibrary.albums(containing: navigator.searchTerm)
+                if autoSelectFirstSearchResult, let collections, collections.count == 1 {
+                    switch collections.first {
+                    case .album(let album):
+                        selectedCollection = album as? PHAssetCollection
+                    default: break
+                    }
+                }
             } else {
                 collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
             }

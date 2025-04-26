@@ -12,6 +12,7 @@ struct OnboardingView: View {
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
+    @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     var body: some View {
@@ -71,8 +72,9 @@ struct OnboardingView: View {
                     } label: {
                         Text("Settings.DisplayMode")
                     }
-                    Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
                     Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
+                    Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
+                    Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
                 } header: {
                     ListSectionHeader(text: "Settings.Title")
                 }

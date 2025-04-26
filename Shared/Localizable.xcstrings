@@ -236,6 +236,22 @@
         }
       }
     },
+    "Settings.AutoSelectFirstSearchResult" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatically Select First Search Result"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自動的に最初の検索結果を選択"
+          }
+        }
+      }
+    },
     "Settings.DisplayMode" : {
       "localizations" : {
         "en" : {
