@@ -10,6 +10,9 @@ import SwiftUI
 
 struct OnboardingView: View {
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
+    @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
+    @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
+    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     var body: some View {
         NavigationStack {
@@ -68,6 +71,8 @@ struct OnboardingView: View {
                     } label: {
                         Text("Settings.DisplayMode")
                     }
+                    Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
+                    Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
                 } header: {
                     ListSectionHeader(text: "Settings.Title")
                 }
@@ -116,6 +121,11 @@ struct OnboardingView: View {
                 .padding()
             }
             #endif
+            .onChange(of: saveRecentAlbums) { oldValue, newValue in
+                if oldValue && !newValue {
+                    recentAlbumsData = Data()
+                }
+            }
         }
     }
 }

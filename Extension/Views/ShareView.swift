@@ -13,6 +13,9 @@ import SwiftUI
 struct ShareView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
+    @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
+    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     @State var navigator: Navigator = Navigator()
     var imageData: Data?
@@ -79,8 +82,8 @@ struct ShareView: View {
                                                             closeButton()
                                                                 .id("@$_bromidesPrivateIdentifier_close")
                                                         }
+                                                        .padding([.leading, .trailing, .bottom])
                                                     }
-                                                    .padding()
                                                 }
                                             }
                                             .id("@$_bromidesPrivateIdentifier_albumBrowser")
@@ -207,13 +210,30 @@ struct ShareView: View {
                     to: selectedCollection
                 )
                 if isPhotoSaved {
-                    withAnimation(.smooth.speed(2.0)) {
-                        isPhotoSaveSuccessful = true
-                    } completion: {
-                        UINotificationFeedbackGenerator().notificationOccurred(.success)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                            close()
+                    if saveRecentAlbums {
+                        if let albumName = selectedCollection.localizedTitle {
+                            var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
+                                [String].self,
+                                from: recentAlbumsData
+                            )) ?? []
+                            if existingRecentAlbums.contains(where: { $0 == albumName}) {
+                                existingRecentAlbums.removeAll(where: { $0 == albumName})
+                            }
+                            existingRecentAlbums.append(albumName)
+                            if existingRecentAlbums.count > 5 {
+                                existingRecentAlbums = Array(existingRecentAlbums.suffix(5))
+                            }
+                            recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
                         }
+                    }
+                    if showSaveAnimation {
+                        withAnimation(.smooth.speed(2.0)) {
+                            isPhotoSaveSuccessful = true
+                        } completion: {
+                            closeWithHaptics()
+                        }
+                    } else {
+                        closeWithHaptics(shouldWait: false)
                     }
                 } else {
                     UINotificationFeedbackGenerator().notificationOccurred(.error)
@@ -223,6 +243,17 @@ struct ShareView: View {
             }
         } else {
             isPhotoSaveFailed = true
+        }
+    }
+
+    func closeWithHaptics(shouldWait: Bool = true) {
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        if shouldWait {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                close()
+            }
+        } else {
+            close()
         }
     }
 }

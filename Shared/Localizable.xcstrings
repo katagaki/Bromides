@@ -300,6 +300,22 @@
         }
       }
     },
+    "Settings.EnableSaveAnimation" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Animation When Saving"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存時にアニメーションを再生"
+          }
+        }
+      }
+    },
     "Settings.GitHub" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -313,6 +329,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "ソースコード"
+          }
+        }
+      }
+    },
+    "Settings.SaveRecents" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remember Recent Albums"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近使用したアルバムを記憶"
           }
         }
       }

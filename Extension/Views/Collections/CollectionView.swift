@@ -63,8 +63,8 @@ struct CollectionView: View {
                                 ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
                             }
                             .buttonStyle(.bordered)
+                            .padding([.leading, .trailing, .bottom])
                         }
-                        .padding()
                     }
                 } else {
                     EmptyView()
