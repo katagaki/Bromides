@@ -415,22 +415,6 @@
         }
       }
     },
-    "Shared.Close" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Close"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "閉じる"
-          }
-        }
-      }
-    },
     "Shared.Create" : {
       "localizations" : {
         "en" : {

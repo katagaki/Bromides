@@ -182,7 +182,7 @@ struct ShareView: View {
         let button = Button {
             close()
         } label: {
-            ButtonLabel("Shared.Close", icon: "xmark")
+            ButtonLabel("Shared.Cancel", icon: "xmark")
         }
         Group {
             if isProminent {
