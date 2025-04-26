@@ -12,7 +12,10 @@ struct CollectionList: View {
     var collections: [Collection]?
     @Binding var selectedCollection: PHAssetCollection?
 
-    init(_ collections: [Collection]?, selection selectedCollection: Binding<PHAssetCollection?>) {
+    init(
+        _ collections: [Collection]?,
+        selection selectedCollection: Binding<PHAssetCollection?>
+    ) {
         self.collections = collections
         self._selectedCollection = selectedCollection
     }

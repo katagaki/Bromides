@@ -28,6 +28,8 @@ struct ShareView: View {
     @State var isPhotosAuthorizationComplete: Bool = false
     @State var isPhotosAuthorizationDenied: Bool = false
 
+    @Namespace var namespace
+
     init(items: [Any?]) {
         guard let item = items.first else { return }
         if let url = item as? URL, let imageData = try? Data(contentsOf: url) {
@@ -57,7 +59,7 @@ struct ShareView: View {
                     VStack(alignment: .leading, spacing: 0.0) {
                         ImagePreview(previewImage)
                             .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)
-                            .id("@$_bromidesPrivateIdentifier_preview")
+                            .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_preview", in: namespace)
                         if isPhotoSaveSuccessful {
                             SaveSuccessfulView(selectedCollection)
                                 .frame(maxWidth: .infinity)
@@ -72,15 +74,25 @@ struct ShareView: View {
                                             .symbolRenderingMode(.multicolor)
                                     } else {
                                         CollectionsStack($navigator, selection: $selectedCollection)
+                                            .matchedGeometryEffect(
+                                                id: "@$_bromidesPrivateIdentifier_albumBrowser",
+                                                in: namespace
+                                            )
                                             .safeAreaInset(edge: .bottom, spacing: 0.0) {
                                                 BarAccessory(placement: .bottom, isBackgroundSolid: false) {
                                                     VStack(spacing: 16.0) {
                                                         SearchField($navigator.searchTerm)
                                                         HStack {
                                                             saveButton()
-                                                                .id("@$_bromidesPrivateIdentifier_save")
+                                                                .matchedGeometryEffect(
+                                                                    id: "@$_bromidesPrivateIdentifier_save",
+                                                                    in: namespace
+                                                                )
                                                             closeButton()
-                                                                .id("@$_bromidesPrivateIdentifier_close")
+                                                                .matchedGeometryEffect(
+                                                                    id: "@$_bromidesPrivateIdentifier_close",
+                                                                    in: namespace
+                                                                )
                                                         }
                                                         .padding([.leading, .trailing, .bottom])
                                                     }
@@ -107,7 +119,10 @@ struct ShareView: View {
                                             .symbolRenderingMode(.multicolor)
                                     } else {
                                         CollectionsStack($navigator, selection: $selectedCollection)
-                                            .id("@$_bromidesPrivateIdentifier_albumBrowser")
+                                            .matchedGeometryEffect(
+                                                id: "@$_bromidesPrivateIdentifier_albumBrowser",
+                                                in: namespace
+                                            )
                                     }
                                 } else {
                                     ProgressView()
@@ -121,7 +136,7 @@ struct ShareView: View {
                             Spacer()
                             ImagePreview(previewImage)
                                 .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: .infinity)
-                                .id("@$_bromidesPrivateIdentifier_preview")
+                                .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_preview", in: namespace)
                             if isPhotoSaveSuccessful {
                                 SaveSuccessfulView(selectedCollection)
                                     .frame(maxWidth: .infinity)
@@ -129,11 +144,11 @@ struct ShareView: View {
                                 Spacer()
                             } else {
                                 Spacer()
-                                HStack {
+                                VStack(spacing: 12.0) {
                                     saveButton()
-                                        .id("@$_bromidesPrivateIdentifier_save")
+                                        .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_save", in: namespace)
                                     closeButton()
-                                        .id("@$_bromidesPrivateIdentifier_close")
+                                        .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_close", in: namespace)
                                 }
                                 .padding()
                             }
