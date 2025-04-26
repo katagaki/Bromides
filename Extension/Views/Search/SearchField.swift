@@ -29,16 +29,18 @@ struct SearchField: View {
                             } label: {
                                 Text(albumName)
                                     .font(.subheadline)
-                                    .padding(.horizontal, 8.0)
-                                    .padding(.vertical, 4.0)
+                                    .padding(.horizontal, 10.0)
+                                    .padding(.vertical, 6.0)
                                     .lineLimit(1)
-                                    .background(.background.opacity(0.3))
+                                    .background(.ultraThinMaterial)
+                                    .foregroundStyle(.primary.opacity(0.9))
                             }
+                            .buttonStyle(.plain)
                             .clipShape(.capsule)
                             .overlay(
                                 Capsule()
-                                    .stroke(.accent, lineWidth: 1)
-                                    .opacity(0.5)
+                                    .stroke(.primary, lineWidth: 1)
+                                    .opacity(0.1)
                             )
                         }
                     }
