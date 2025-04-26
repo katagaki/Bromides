@@ -220,8 +220,8 @@ struct ShareView: View {
                                 existingRecentAlbums.removeAll(where: { $0 == albumName})
                             }
                             existingRecentAlbums.append(albumName)
-                            if existingRecentAlbums.count > 5 {
-                                existingRecentAlbums = Array(existingRecentAlbums.suffix(5))
+                            if existingRecentAlbums.count > 10 {
+                                existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
                             }
                             recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
                         }
