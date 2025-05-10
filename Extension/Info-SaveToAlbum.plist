@@ -4,8 +4,6 @@
 <dict>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionServiceRoleType</key>
-		<string>NSExtensionServiceRoleTypeViewer</string>
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).ShareViewController</string>
 		<key>NSExtensionAttributes</key>
@@ -27,6 +25,8 @@
 			<true/>
 			<key>NSExtensionServiceFinderPreviewIconName</key>
 			<string>NSActionTemplate</string>
+			<key>NSExtensionServiceRoleType</key>
+			<string>NSExtensionServiceRoleTypeViewer</string>
 			<key>NSExtensionServiceTouchBarBezelColorName</key>
 			<string>TouchBarBezel</string>
 			<key>NSExtensionServiceTouchBarIconName</key>

@@ -4,8 +4,6 @@
 <dict>
 	<key>NSExtension</key>
 	<dict>
-		<key>NSExtensionServiceRoleType</key>
-		<string>NSExtensionServiceRoleTypeViewer</string>
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).ShareViewController</string>
 		<key>NSExtensionAttributes</key>
@@ -21,6 +19,8 @@
 				<key>NSExtensionActivationSupportsWebURLWithMaxCount</key>
 				<integer>1</integer>
 			</dict>
+			<key>NSExtensionServiceRoleType</key>
+			<string>NSExtensionServiceRoleTypeViewer</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.share-services</string>
