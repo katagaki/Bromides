@@ -11,7 +11,11 @@ import SwiftUI
 struct BromidesApp: App {
     var body: some Scene {
         WindowGroup {
+            #if !targetEnvironment(macCatalyst)
             OnboardingView()
+            #else
+            MacOnboardingView()
+            #endif
         }
     }
 }

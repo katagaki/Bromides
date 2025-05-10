@@ -1,6 +1,54 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "About.Developer" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you for using Bromides!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「ブロマイド」をご利用いただきありがとうございます！"
+          }
+        }
+      }
+    },
+    "About.SourceCode" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Read Bromide’s source code:"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ソースコードを閲覧："
+          }
+        }
+      }
+    },
+    "About.Title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アプリ情報"
+          }
+        }
+      }
+    },
     "Alert.CreateAlbum" : {
       "localizations" : {
         "en" : {
@@ -138,6 +186,9 @@
           }
         }
       }
+    },
+    "katagaki/GitHub" : {
+      "shouldTranslate" : false
     },
     "Message.Save.%@" : {
       "localizations" : {

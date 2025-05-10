@@ -37,30 +37,9 @@ struct OnboardingView: View {
                             .multilineTextAlignment(.center)
                     }
                     .frame(maxWidth: .infinity)
-                    #if targetEnvironment(macCatalyst)
-                    .padding()
-                    #endif
                 } header: {
                     ListSectionHeader(text: "Onboarding.Title")
                 }
-                #if targetEnvironment(macCatalyst)
-                Section {
-                    ShareLink(
-                        item: Image(uiImage: UIImage(resource: .sample)),
-                        preview: SharePreview(
-                            "Shared.SamplePhoto",
-                            image: Image(uiImage: UIImage(resource: .sample))
-                        )
-                    ) {
-                        Label("Onboarding.Share", systemImage: "square.and.arrow.up")
-                            .padding(.horizontal, 16.0)
-                            .padding(.vertical, 8.0)
-                            .frame(maxWidth: .infinity)
-                            .bold()
-                    }
-                    .padding(2.0)
-                }
-                #endif
                 Section {
                     Picker(selection: $displayMode) {
                         Text("Settings.DisplayMode.Grid")
@@ -102,7 +81,6 @@ struct OnboardingView: View {
                 )
             )
             .navigationTitle("Bromides")
-            #if !targetEnvironment(macCatalyst)
             .safeAreaInset(edge: .bottom, spacing: 0.0) {
                 ShareLink(
                     item: Image(uiImage: UIImage(resource: .sample)),
@@ -122,7 +100,6 @@ struct OnboardingView: View {
                 .shadow(color: .black.opacity(0.3), radius: 4.0, y: 3.0)
                 .padding()
             }
-            #endif
             .onChange(of: saveRecentAlbums) { oldValue, newValue in
                 if oldValue && !newValue {
                     recentAlbumsData = Data()

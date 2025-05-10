@@ -54,107 +54,15 @@ struct ShareView: View {
     var body: some View {
         if imageData != nil, let previewImage {
             Group {
+                #if !targetEnvironment(macCatalyst)
                 if verticalSizeClass == .regular && horizontalSizeClass == .compact {
-                    // Portrait
-                    VStack(alignment: .leading, spacing: 0.0) {
-                        ImagePreview(previewImage)
-                            .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)
-                            .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_preview", in: namespace)
-                        if isPhotoSaveSuccessful {
-                            SaveSuccessfulView(selectedCollection)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                        } else {
-                            Divider()
-                                .ignoresSafeArea(.all, edges: .horizontal)
-                            ZStack(alignment: .center) {
-                                if isPhotosAuthorizationComplete {
-                                    if isPhotosAuthorizationDenied {
-                                        ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                            .symbolRenderingMode(.multicolor)
-                                    } else {
-                                        CollectionsStack($navigator, selection: $selectedCollection)
-                                            .matchedGeometryEffect(
-                                                id: "@$_bromidesPrivateIdentifier_albumBrowser",
-                                                in: namespace
-                                            )
-                                            .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                                BarAccessory(placement: .bottom, isBackgroundSolid: false) {
-                                                    VStack(spacing: 16.0) {
-                                                        SearchField($navigator.searchTerm)
-                                                        HStack {
-                                                            saveButton()
-                                                                .matchedGeometryEffect(
-                                                                    id: "@$_bromidesPrivateIdentifier_save",
-                                                                    in: namespace
-                                                                )
-                                                            closeButton()
-                                                                .matchedGeometryEffect(
-                                                                    id: "@$_bromidesPrivateIdentifier_close",
-                                                                    in: namespace
-                                                                )
-                                                        }
-                                                        .padding([.leading, .trailing, .bottom])
-                                                    }
-                                                }
-                                            }
-                                            .id("@$_bromidesPrivateIdentifier_albumBrowser")
-                                    }
-                                } else {
-                                    ProgressView()
-                                }
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .layoutPriority(0)
-                        }
-                    }
+                    portraitView(previewImage: previewImage)
                 } else {
-                    // Landscape
-                    HStack(alignment: .top, spacing: 0.0) {
-                        if !isPhotoSaveSuccessful {
-                            ZStack(alignment: .center) {
-                                if isPhotosAuthorizationComplete {
-                                    if isPhotosAuthorizationDenied {
-                                        ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                            .symbolRenderingMode(.multicolor)
-                                    } else {
-                                        CollectionsStack($navigator, selection: $selectedCollection)
-                                            .matchedGeometryEffect(
-                                                id: "@$_bromidesPrivateIdentifier_albumBrowser",
-                                                in: namespace
-                                            )
-                                    }
-                                } else {
-                                    ProgressView()
-                                }
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            Divider()
-                                .ignoresSafeArea(.all, edges: .vertical)
-                        }
-                        VStack(alignment: .leading, spacing: 0.0) {
-                            Spacer()
-                            ImagePreview(previewImage)
-                                .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: .infinity)
-                                .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_preview", in: namespace)
-                            if isPhotoSaveSuccessful {
-                                SaveSuccessfulView(selectedCollection)
-                                    .frame(maxWidth: .infinity)
-                                    .padding()
-                                Spacer()
-                            } else {
-                                Spacer()
-                                VStack(spacing: 12.0) {
-                                    saveButton()
-                                        .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_save", in: namespace)
-                                    closeButton()
-                                        .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_close", in: namespace)
-                                }
-                                .padding()
-                            }
-                        }
-                    }
+                    landscapeView(previewImage: previewImage)
                 }
+                #else
+                macView(previewImage: previewImage)
+                #endif
             }
             .task {
                 let status = await PhotosLibrary.requestAuthorization()

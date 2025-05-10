@@ -42,6 +42,10 @@ class ShareViewController: UIViewController {
                 shareView.view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
                 shareView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
                 view.bringSubviewToFront(shareView.view)
+                #if targetEnvironment(macCatalyst)
+                view.layer.cornerRadius = 10.0
+                view.clipsToBounds = true
+                #endif
             }
         }
     }
