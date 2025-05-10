@@ -13,6 +13,7 @@ struct MacOnboardingView: View {
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
+    @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     var body: some View {
@@ -74,6 +75,7 @@ struct MacOnboardingView: View {
                     }
                     Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
                     Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
+                    Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
                     Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

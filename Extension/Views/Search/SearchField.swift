@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct SearchField: View {
+    @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
+    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
+
     @Binding var searchTerm: String
     @FocusState private var isFocused: Bool
-    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
+    @State var shouldAllowFocus: Bool
     @State var recentAlbums: [String] = []
 
-    init(_ searchTerm: Binding<String>) {
+    init(_ searchTerm: Binding<String>, shouldAllowFocus: Bool = true) {
         self._searchTerm = searchTerm
+        self.shouldAllowFocus = shouldAllowFocus
     }
 
     var body: some View {
@@ -59,7 +63,9 @@ struct SearchField: View {
             .background(Material.ultraThin)
             .focused($isFocused)
             .onTapGesture {
-                isFocused = true
+                if shouldAllowFocus {
+                    isFocused = true
+                }
             }
             .clipShape(.rect(cornerRadius: 10.0))
             .shadow(color: .black.opacity(0.2), radius: 5.0, y: 3.0)
@@ -73,6 +79,9 @@ struct SearchField: View {
                 from: recentAlbumsData
             )) ?? []
             self.recentAlbums = recentAlbums.reversed()
+            if shouldAllowFocus && autoOpenKeyboard {
+                isFocused = true
+            }
         }
     }
 }

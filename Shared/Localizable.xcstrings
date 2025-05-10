@@ -287,18 +287,58 @@
         }
       }
     },
+    "Settings.AutoOpenKeyboard" : {
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "device" : {
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Make Search Bar Active on Launch"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Open Keyboard on Launch"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "device" : {
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "起動時に検索バーを有効化"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "起動時にキーボードを開く"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "Settings.AutoSelectFirstSearchResult" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatically Select First Search Result"
+            "value" : "Automatically Select Sole Search Result"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "自動的に最初の検索結果を選択"
+            "value" : "検索結果が一件の場合自動的に選択"
           }
         }
       }

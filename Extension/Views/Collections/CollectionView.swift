@@ -59,7 +59,7 @@ struct CollectionView: View {
                 if verticalSizeClass == .regular && horizontalSizeClass == .compact {
                     BarAccessory(placement: .bottom) {
                         VStack(spacing: 16.0) {
-                            SearchField(.constant(""))
+                            SearchField(.constant(""), shouldAllowFocus: false)
                             Button { } label: {
                                 ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
                             }
