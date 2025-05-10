@@ -56,20 +56,15 @@ struct CollectionView: View {
         }
         .safeAreaInset(edge: .bottom, spacing: 0.0) {
             Group {
+                #if !targetEnvironment(macCatalyst)
                 if verticalSizeClass == .regular && horizontalSizeClass == .compact {
-                    BarAccessory(placement: .bottom) {
-                        VStack(spacing: 16.0) {
-                            SearchField(.constant(""), shouldAllowFocus: false)
-                            Button { } label: {
-                                ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
-                            }
-                            .buttonStyle(.bordered)
-                            .padding([.leading, .trailing, .bottom])
-                        }
-                    }
+                    bottomSafeAreaOffsetView()
                 } else {
                     EmptyView()
                 }
+                #else
+                bottomSafeAreaOffsetView()
+                #endif
             }
             .opacity(0.0)
             .allowsHitTesting(false)
@@ -111,6 +106,19 @@ struct CollectionView: View {
             TextField("Alert.CreateFolder.Name", text: $newCollectionName)
             Button("Shared.Create", action: createFolder)
             Button("Shared.Cancel", role: .cancel, action: stopCreatingFolder)
+        }
+    }
+
+    @ViewBuilder func bottomSafeAreaOffsetView() -> some View {
+        BarAccessory(placement: .bottom) {
+            VStack(spacing: 16.0) {
+                SearchField(.constant(""), shouldAllowFocus: false)
+                Button { } label: {
+                    ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                }
+                .buttonStyle(.bordered)
+                .padding([.leading, .trailing, .bottom])
+            }
         }
     }
 
