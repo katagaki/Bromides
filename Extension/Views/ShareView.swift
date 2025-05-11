@@ -94,8 +94,15 @@ struct ShareView: View {
         Button {
             save()
         } label: {
+            #if !targetEnvironment(macCatalyst)
             ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+            #else
+            Label("Shared.Save", systemImage: "square.and.arrow.down")
+            #endif
         }
+        #if targetEnvironment(macCatalyst)
+            .controlSize(.large)
+        #endif
         .buttonStyle(.borderedProminent)
         .disabled(selectedCollection == nil || isPhotoSaving)
         .clipShape(.capsule)
@@ -105,8 +112,15 @@ struct ShareView: View {
         let button = Button {
             close()
         } label: {
+            #if !targetEnvironment(macCatalyst)
             ButtonLabel("Shared.Cancel", icon: "xmark")
+            #else
+            Label("Shared.Cancel", systemImage: "xmark")
+            #endif
         }
+        #if targetEnvironment(macCatalyst)
+            .controlSize(.large)
+        #endif
         Group {
             if isProminent {
                 button

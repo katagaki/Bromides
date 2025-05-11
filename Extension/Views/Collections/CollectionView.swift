@@ -114,8 +114,15 @@ struct CollectionView: View {
             VStack(spacing: 16.0) {
                 SearchField(.constant(""), shouldAllowFocus: false)
                 Button { } label: {
+                    #if !targetEnvironment(macCatalyst)
                     ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
+                    #else
+                    Label("Shared.Save", systemImage: "square.and.arrow.down")
+                    #endif
                 }
+                #if targetEnvironment(macCatalyst)
+                    .controlSize(.large)
+                #endif
                 .buttonStyle(.bordered)
                 .padding([.leading, .trailing, .bottom])
             }
