@@ -97,7 +97,7 @@ struct ShareView: View {
             #if !targetEnvironment(macCatalyst)
             ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
             #else
-            Label("Shared.Save", systemImage: "square.and.arrow.down")
+            Text("Shared.Save")
             #endif
         }
         #if targetEnvironment(macCatalyst)
@@ -117,7 +117,7 @@ struct ShareView: View {
             #if !targetEnvironment(macCatalyst)
             ButtonLabel("Shared.Cancel", icon: "xmark")
             #else
-            Label("Shared.Cancel", systemImage: "xmark")
+            Text("Shared.Cancel")
             #endif
         }
         #if targetEnvironment(macCatalyst)
