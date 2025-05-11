@@ -57,9 +57,6 @@ struct SearchField: View {
                 "Shared.AlbumOrFolderName.\(Image(systemName: "magnifyingglass"))",
                 text: $searchTerm
             )
-            #if targetEnvironment(macCatalyst)
-            .focusEffectDisabled()
-            #endif
             .padding(.horizontal, 10.0)
             .padding(.vertical, 12.0)
             .frame(maxWidth: .infinity)
@@ -87,4 +84,15 @@ struct SearchField: View {
             }
         }
     }
+}
+
+// Disables highlight outline around TextField
+// From: https://stackoverflow.com/questions/57577345/blue-highlighting-focus-ring-on-catalyst-app
+extension UITextView {
+    #if targetEnvironment(macCatalyst)
+    @objc(_focusRingType)
+    var focusRingType: UInt {
+        return 1 // NSFocusRingTypeNone
+    }
+    #endif
 }

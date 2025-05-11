@@ -101,11 +101,13 @@ struct ShareView: View {
             #endif
         }
         #if targetEnvironment(macCatalyst)
-            .controlSize(.large)
+        .controlSize(.large)
         #endif
         .buttonStyle(.borderedProminent)
         .disabled(selectedCollection == nil || isPhotoSaving)
+        #if !targetEnvironment(macCatalyst)
         .clipShape(.capsule)
+        #endif
     }
 
     @ViewBuilder func closeButton(isProminent: Bool = false) -> some View {
@@ -130,7 +132,9 @@ struct ShareView: View {
                     .buttonStyle(.bordered)
             }
         }
+        #if !targetEnvironment(macCatalyst)
         .clipShape(.capsule)
+        #endif
         .disabled(isPhotoSaving)
     }
 
