@@ -15,7 +15,12 @@ struct BromidesApp: App {
             OnboardingView()
             #else
             MacOnboardingView()
+                .frame(width: 600.0, height: 400.0)
             #endif
         }
+        #if targetEnvironment(macCatalyst)
+        .windowResizability(.contentSize)
+        .commandsRemoved()
+        #endif
     }
 }

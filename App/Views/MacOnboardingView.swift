@@ -88,7 +88,7 @@ struct MacOnboardingView: View {
                     Divider()
                     Text("About.SourceCode")
                     Link(destination: URL(string: "https://github.com/katagaki/Bromides")!) {
-                        Label("katagaki/Bromides", image: "GitHub")
+                        Text("katagaki/Bromides")
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)

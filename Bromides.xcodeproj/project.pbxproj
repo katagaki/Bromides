@@ -47,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E47FA0932DD033D700DFD7C5 /* Bromides-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Bromides-Info.plist"; sourceTree = "<group>"; };
 		E4DAA9A92D904D2300BBF630 /* Save to Album.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Save to Album.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DB58D62D8E8146009A20B2 /* Bromides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bromides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DB59042D8E81D0009A20B2 /* Share with Bromides.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share with Bromides.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +136,7 @@
 		E4DB58CD2D8E8146009A20B2 = {
 			isa = PBXGroup;
 			children = (
+				E47FA0932DD033D700DFD7C5 /* Bromides-Info.plist */,
 				E4DB59B12D8FE88D009A20B2 /* Shared */,
 				E4DB58D82D8E8146009A20B2 /* App */,
 				E4FF3BE72DA22BBD00EB68DF /* Extension */,
@@ -559,10 +561,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Bromides-Info.plist";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -595,10 +597,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Bromides-Info.plist";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
