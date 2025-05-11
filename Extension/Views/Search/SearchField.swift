@@ -57,6 +57,9 @@ struct SearchField: View {
                 "Shared.AlbumOrFolderName.\(Image(systemName: "magnifyingglass"))",
                 text: $searchTerm
             )
+            #if targetEnvironment(macCatalyst)
+            .focusEffectDisabled()
+            #endif
             .padding(.horizontal, 10.0)
             .padding(.vertical, 12.0)
             .frame(maxWidth: .infinity)
