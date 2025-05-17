@@ -123,6 +123,86 @@
         }
       }
     },
+    "EnableExtension.1" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open “System Settings”, and select \"General\""
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「システム設定」アプリを開き、「一般」画面に移動"
+          }
+        }
+      }
+    },
+    "EnableExtension.2" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select “Login Items & Extensions\""
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「ログイン項目と拡張機能」を選択"
+          }
+        }
+      }
+    },
+    "EnableExtension.3" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scroll down and select “Sharing”, and turn on \"Bromides\""
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下にスクロールし、「共有」を選択し、「ブロマイド」を有効化"
+          }
+        }
+      }
+    },
+    "EnableExtension.OpenSystemSettings" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open System Settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「システム設定」を開く"
+          }
+        }
+      }
+    },
+    "EnableExtension.Title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "準備"
+          }
+        }
+      }
+    },
     "Error.NoAlbums" : {
       "localizations" : {
         "en" : {
@@ -209,15 +289,39 @@
     "Onboarding.1.%@" : {
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap the %@ icon from any other app"
+          "variations" : {
+            "device" : {
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Share %@ a photo from any other app"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Tap the %@ icon on a photo from any other app"
+                }
+              }
+            }
           }
         },
         "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "他のアプリで「%@」アイコンをタッチ"
+          "variations" : {
+            "device" : {
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "他のアプリから写真を共有 %@"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "他のアプリで写真の「%@」アイコンをタッチ"
+                }
+              }
+            }
           }
         }
       }
@@ -225,15 +329,39 @@
     "Onboarding.2" : {
       "localizations" : {
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tap ‘Bromides’ or ‘Save to Album’"
+          "variations" : {
+            "device" : {
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Select ‘Bromides’ or ‘Save to Album’"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Tap ‘Bromides’ or ‘Save to Album’"
+                }
+              }
+            }
           }
         },
         "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「ブロマイド」または「アルバムに保存」を選択"
+          "variations" : {
+            "device" : {
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "「ブロマイド」または「アルバムに保存」を選択"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "「ブロマイド」または「アルバムに保存」をタッチ"
+                }
+              }
+            }
           }
         }
       }

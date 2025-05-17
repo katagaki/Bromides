@@ -18,6 +18,39 @@ struct MacOnboardingView: View {
 
     var body: some View {
         TabView {
+            Tab("EnableExtension.Title", systemImage: "info.circle") {
+                List {
+                    Section {
+                        VStack(alignment: .center, spacing: 10.0) {
+                            Text("EnableExtension.1")
+                                .multilineTextAlignment(.center)
+                            Image(systemName: "arrow.down")
+                                .font(.title2)
+                            Text("EnableExtension.2")
+                                .multilineTextAlignment(.center)
+                            Image(systemName: "arrow.down")
+                                .font(.title2)
+                            Text("EnableExtension.3")
+                                .multilineTextAlignment(.center)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .listRowBackground(Color.clear)
+                    }
+                    Section {
+                        Link(destination: URL(
+                            string:
+                                "x-apple.systempreferences:com.apple.LoginItems-Settings.extension?ExtensionItems"
+                        )!) {
+                            Text("EnableExtension.OpenSystemSettings")
+                                .padding(.horizontal, 16.0)
+                                .padding(.vertical, 8.0)
+                                .frame(maxWidth: .infinity)
+                                .bold()
+                        }
+                    }
+                }
+            }
             Tab("Onboarding.Title", systemImage: "questionmark.circle") {
                 List {
                     Section {
@@ -42,7 +75,6 @@ struct MacOnboardingView: View {
                         .padding()
                         .listRowBackground(Color.clear)
                     }
-                    .scrollContentBackground(.hidden)
                     Section {
                         ShareLink(
                             item: Image(uiImage: UIImage(resource: .sample)),
@@ -95,6 +127,7 @@ struct MacOnboardingView: View {
                 .padding()
             }
         }
+        .tabViewStyle(.sidebarAdaptable)
         .onChange(of: saveRecentAlbums) { oldValue, newValue in
             if oldValue && !newValue {
                 recentAlbumsData = Data()
