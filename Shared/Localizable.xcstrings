@@ -160,13 +160,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scroll down and select “Actions”, and turn on \"Bromides\""
+            "value" : "Scroll down and turn on “Bromides” in “Actions” and “Sharing”"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "下にスクロールし、「アクション」を選択し、「ブロマイド」を有効化"
+            "value" : "下にスクロールし、「アクション」と「共有」の画面で「ブロマイド」を有効化"
           }
         }
       }
