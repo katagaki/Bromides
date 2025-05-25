@@ -12,6 +12,7 @@
 		E4DAA9B72D904D2400BBF630 /* Save to Album.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E4DAA9A92D904D2300BBF630 /* Save to Album.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E4DB590E2D8E81D0009A20B2 /* Share with Bromides.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E4DB59042D8E81D0009A20B2 /* Share with Bromides.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E4DB59592D8FE629009A20B2 /* Komponents in Frameworks */ = {isa = PBXBuildFile; productRef = E4DB59582D8FE629009A20B2 /* Komponents */; };
+		E4FDF1AB2DE2A32B008BF313 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E4FDF1AA2DE2A32B008BF313 /* UniformTypeIdentifiers.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,10 +48,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		E47FA0932DD033D700DFD7C5 /* Bromides-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Bromides-Info.plist"; sourceTree = "<group>"; };
 		E4DAA9A92D904D2300BBF630 /* Save to Album.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Save to Album.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DB58D62D8E8146009A20B2 /* Bromides.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bromides.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4DB59042D8E81D0009A20B2 /* Share with Bromides.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Share with Bromides.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4FDF1AA2DE2A32B008BF313 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -60,6 +61,13 @@
 				InfoPlist.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
+		};
+		E4FDF1642DE2A0F1008BF313 /* Exceptions for "App" folder in "Bromides" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
 		};
 		E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -84,6 +92,7 @@
 		E4DB58D82D8E8146009A20B2 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
+				E4FDF1642DE2A0F1008BF313 /* Exceptions for "App" folder in "Bromides" target */,
 				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */,
 			);
 			path = App;
@@ -110,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4FDF1AB2DE2A32B008BF313 /* UniformTypeIdentifiers.framework in Frameworks */,
 				E4B68F0B2D997DFE00E02B68 /* Komponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,10 +146,10 @@
 		E4DB58CD2D8E8146009A20B2 = {
 			isa = PBXGroup;
 			children = (
-				E47FA0932DD033D700DFD7C5 /* Bromides-Info.plist */,
 				E4DB59B12D8FE88D009A20B2 /* Shared */,
 				E4DB58D82D8E8146009A20B2 /* App */,
 				E4FF3BE72DA22BBD00EB68DF /* Extension */,
+				E4FDF1A92DE2A32B008BF313 /* Frameworks */,
 				E4DB58D72D8E8146009A20B2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -152,6 +162,14 @@
 				E4DAA9A92D904D2300BBF630 /* Save to Album.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E4FDF1A92DE2A32B008BF313 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E4FDF1AA2DE2A32B008BF313 /* UniformTypeIdentifiers.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +391,7 @@
 				INFOPLIST_FILE = "Extension/Info-SaveToAlbum.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -404,6 +423,7 @@
 				INFOPLIST_FILE = "Extension/Info-SaveToAlbum.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Save to Album";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -561,13 +581,15 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Bromides-Info.plist";
+				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -597,13 +619,15 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Bromides-Info.plist";
+				INFOPLIST_FILE = App/Info.plist;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bromides uses your Photos library to show you your albums and save your photos.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -630,6 +654,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extension/Info-ShareWithBromides.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -660,6 +685,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Extension/Info-ShareWithBromides.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Share with Bromides";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
