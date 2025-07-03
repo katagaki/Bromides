@@ -84,7 +84,7 @@ struct ShareView: View {
                     .padding()
                 Spacer()
                 Divider()
-                closeButton(isProminent: true)
+                closeButton()
                     .padding()
             }
         }
@@ -103,14 +103,14 @@ struct ShareView: View {
         #if targetEnvironment(macCatalyst)
         .controlSize(.large)
         #endif
-        .buttonStyle(.borderedProminent)
+        .buttonStyle(.glass)
         .disabled(selectedCollection == nil || isPhotoSaving)
         #if !targetEnvironment(macCatalyst)
         .clipShape(.capsule)
         #endif
     }
 
-    @ViewBuilder func closeButton(isProminent: Bool = false) -> some View {
+    @ViewBuilder func closeButton() -> some View {
         let button = Button {
             close()
         } label: {
@@ -123,19 +123,9 @@ struct ShareView: View {
         #if targetEnvironment(macCatalyst)
             .controlSize(.large)
         #endif
-        Group {
-            if isProminent {
-                button
-                    .buttonStyle(.borderedProminent)
-            } else {
-                button
-                    .buttonStyle(.bordered)
-            }
-        }
-        #if !targetEnvironment(macCatalyst)
-        .clipShape(.capsule)
-        #endif
-        .disabled(isPhotoSaving)
+        button
+            .buttonStyle(.glass)
+            .disabled(isPhotoSaving)
     }
 
     func close() {

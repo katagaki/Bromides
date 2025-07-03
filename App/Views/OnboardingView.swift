@@ -97,7 +97,7 @@ struct OnboardingView: View {
                         .frame(maxWidth: .infinity)
                         .bold()
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.glass)
                 .clipShape(.capsule)
                 .shadow(color: .black.opacity(0.3), radius: 4.0, y: 3.0)
                 .padding()

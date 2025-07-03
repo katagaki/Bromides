@@ -33,23 +33,21 @@ extension ShareView {
                                     in: namespace
                                 )
                                 .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                    BarAccessory(placement: .bottom, isBackgroundSolid: false) {
-                                        VStack(spacing: 16.0) {
-                                            SearchField($navigator.searchTerm)
-                                            HStack {
-                                                saveButton()
-                                                    .matchedGeometryEffect(
-                                                        id: "@$_bromidesPrivateIdentifier_save",
-                                                        in: namespace
-                                                    )
-                                                closeButton()
-                                                    .matchedGeometryEffect(
-                                                        id: "@$_bromidesPrivateIdentifier_close",
-                                                        in: namespace
-                                                    )
-                                            }
-                                            .padding([.leading, .trailing, .bottom])
+                                    VStack(spacing: 16.0) {
+                                        SearchField($navigator.searchTerm)
+                                        HStack {
+                                            saveButton()
+                                                .matchedGeometryEffect(
+                                                    id: "@$_bromidesPrivateIdentifier_save",
+                                                    in: namespace
+                                                )
+                                            closeButton()
+                                                .matchedGeometryEffect(
+                                                    id: "@$_bromidesPrivateIdentifier_close",
+                                                    in: namespace
+                                                )
                                         }
+                                        .padding([.leading, .trailing, .bottom])
                                     }
                                 }
                                 .id("@$_bromidesPrivateIdentifier_albumBrowser")

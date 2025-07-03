@@ -36,10 +36,8 @@ struct SearchField: View {
                                     .padding(.horizontal, 10.0)
                                     .padding(.vertical, 6.0)
                                     .lineLimit(1)
-                                    .background(.ultraThinMaterial)
-                                    .foregroundStyle(.primary.opacity(0.9))
                             }
-                            .buttonStyle(.plain)
+                            .buttonStyle(.glass)
                             .clipShape(.capsule)
                             .overlay(
                                 Capsule()
@@ -61,7 +59,7 @@ struct SearchField: View {
             .padding(.horizontal, 10.0)
             .padding(.vertical, 12.0)
             .frame(maxWidth: .infinity)
-            .background(Material.ultraThin)
+            .glassEffect()
             .focused($isFocused)
             .onTapGesture {
                 if shouldAllowFocus {
