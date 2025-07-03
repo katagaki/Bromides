@@ -103,7 +103,7 @@ struct ShareView: View {
         #if targetEnvironment(macCatalyst)
         .controlSize(.large)
         #endif
-        .buttonStyle(.glass)
+        .buttonStyle(.glassProminent)
         .disabled(selectedCollection == nil || isPhotoSaving)
         #if !targetEnvironment(macCatalyst)
         .clipShape(.capsule)
