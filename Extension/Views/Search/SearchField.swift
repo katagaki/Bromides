@@ -38,7 +38,7 @@ struct SearchField: View {
                                     .lineLimit(1)
                             }
                             .clipShape(.capsule)
-                            .buttonStyle(.glassProminent)
+                            .buttonStyle(.glass)
                         }
                     }
                     .padding(.horizontal)
@@ -55,15 +55,15 @@ struct SearchField: View {
             .padding(.horizontal, 10.0)
             .padding(.vertical, 10.0)
             .frame(maxWidth: .infinity)
-            .glassEffect()
+            .glassEffect(.regular.interactive())
             .focused($isFocused)
             .onTapGesture {
                 if shouldAllowFocus {
                     isFocused = true
                 }
             }
-            .clipShape(.rect(cornerRadius: 10.0))
-            .shadow(color: .black.opacity(0.2), radius: 5.0, y: 3.0)
+            .clipShape(.capsule)
+            .shadow(color: .black.opacity(0.1), radius: 5.0, y: 3.0)
             .submitLabel(.search)
             .padding(.horizontal)
             #else
