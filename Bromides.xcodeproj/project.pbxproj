@@ -72,6 +72,7 @@
 		E4FF3BF52DA22D2B00EB68DF /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Assets.xcassets,
 				"Info-SaveToAlbum.plist",
 				"Info-ShareWithBromides.plist",
 				InfoPlist.xcstrings,
