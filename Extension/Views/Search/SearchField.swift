@@ -26,7 +26,7 @@ struct SearchField: View {
         return VStack(spacing: 0.0) {
             if !recentAlbums.isEmpty {
                 ScrollView(.horizontal) {
-                    HStack(spacing: 8.0) {
+                    HStack(spacing: 6.0) {
                         ForEach(recentAlbums, id: \.self) { albumName in
                             Button {
                                 searchTerm = albumName
@@ -37,16 +37,12 @@ struct SearchField: View {
                                     .padding(.vertical, 6.0)
                                     .lineLimit(1)
                             }
-                            .buttonStyle(.glass)
                             .clipShape(.capsule)
-                            .overlay(
-                                Capsule()
-                                    .stroke(.primary, lineWidth: 1)
-                                    .opacity(0.1)
-                            )
+                            .buttonStyle(.glassProminent)
                         }
                     }
-                    .padding([.horizontal, .bottom])
+                    .padding(.horizontal)
+                    .padding(.bottom, 10.0)
                     .padding(.top, 1.0)
                 }
                 .scrollIndicators(.hidden)
@@ -57,7 +53,7 @@ struct SearchField: View {
             )
             #if !targetEnvironment(macCatalyst)
             .padding(.horizontal, 10.0)
-            .padding(.vertical, 12.0)
+            .padding(.vertical, 10.0)
             .frame(maxWidth: .infinity)
             .glassEffect()
             .focused($isFocused)

@@ -33,7 +33,7 @@ extension ShareView {
                                     in: namespace
                                 )
                                 .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                    VStack(spacing: 16.0) {
+                                    VStack(spacing: 10.0) {
                                         SearchField($navigator.searchTerm)
                                         HStack {
                                             saveButton()

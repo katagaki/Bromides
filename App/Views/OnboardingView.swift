@@ -28,7 +28,6 @@ struct OnboardingView: View {
                         Image(.appIconMasked)
                             .resizable()
                             .frame(width: 64.0, height: 64.0)
-                            .clipShape(.rect(cornerRadius: 14.0))
                             .shadow(radius: 2.0, y: 2.0)
                         Text("Onboarding.2")
                             .multilineTextAlignment(.center)
@@ -97,7 +96,7 @@ struct OnboardingView: View {
                         .frame(maxWidth: .infinity)
                         .bold()
                 }
-                .buttonStyle(.glass)
+                .buttonStyle(.glassProminent)
                 .clipShape(.capsule)
                 .shadow(color: .black.opacity(0.3), radius: 4.0, y: 3.0)
                 .padding()
