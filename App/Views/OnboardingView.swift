@@ -25,7 +25,7 @@ struct OnboardingView: View {
                             .multilineTextAlignment(.center)
                         Image(systemName: "arrow.down")
                             .font(.title2)
-                        Image(.appIconMasked)
+                        Image(.onboardingIcon)
                             .resizable()
                             .frame(width: 64.0, height: 64.0)
                             .shadow(radius: 2.0, y: 2.0)

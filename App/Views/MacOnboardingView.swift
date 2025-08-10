@@ -59,7 +59,7 @@ struct MacOnboardingView: View {
                                 .multilineTextAlignment(.center)
                             Image(systemName: "arrow.down")
                                 .font(.title2)
-                            Image(.appIconMasked)
+                            Image(.onboardingIcon)
                                 .resizable()
                                 .frame(width: 64.0, height: 64.0)
                                 .clipShape(.rect(cornerRadius: 14.0))
