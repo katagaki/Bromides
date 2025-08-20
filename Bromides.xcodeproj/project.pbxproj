@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,31 +55,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E4DB594E2D8FD4EA009A20B2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				InfoPlist.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
 		};
-		E4FDF1642DE2A0F1008BF313 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		E4FDF1642DE2A0F1008BF313 /* Exceptions for "App" folder in "Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
 			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
 		};
-		E4FF3BF52DA22D2B00EB68DF /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Assets.xcassets,
 				"Info-SaveToAlbum.plist",
 				"Info-ShareWithBromides.plist",
 				InfoPlist.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
 		};
-		E4FF3BF62DA22D2D00EB68DF /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+		E4FF3BF62DA22D2D00EB68DF /* Exceptions for "Extension" folder in "Save to Album" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Info-SaveToAlbum.plist",
@@ -90,9 +89,29 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		E4DB58D82D8E8146009A20B2 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E4FDF1642DE2A0F1008BF313 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E4DB594E2D8FD4EA009A20B2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
-		E4DB59B12D8FE88D009A20B2 /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
-		E4FF3BE72DA22BBD00EB68DF /* Extension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (E4FF3BF52DA22D2B00EB68DF /* PBXFileSystemSynchronizedBuildFileExceptionSet */, E4FF3BF62DA22D2D00EB68DF /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Extension; sourceTree = "<group>"; };
+		E4DB58D82D8E8146009A20B2 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4FDF1642DE2A0F1008BF313 /* Exceptions for "App" folder in "Bromides" target */,
+				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E4DB59B12D8FE88D009A20B2 /* Shared */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E4FF3BE72DA22BBD00EB68DF /* Extension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */,
+				E4FF3BF62DA22D2D00EB68DF /* Exceptions for "Extension" folder in "Save to Album" target */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,7 +273,6 @@
 				};
 			};
 			buildConfigurationList = E4DB58D12D8E8146009A20B2 /* Build configuration list for PBXProject "Bromides" */;
-			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -266,6 +284,7 @@
 			packageReferences = (
 				E4DB59572D8FE5FB009A20B2 /* XCRemoteSwiftPackageReference "Komponents" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = E4DB58D72D8E8146009A20B2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -560,6 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Bromides;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -603,6 +623,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Bromides;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = Shared/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
