@@ -618,34 +618,18 @@
         }
       }
     },
-    "Shared.AlbumOrFolderName.%@" : {
+    "Shared.AlbumOrFolderName" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ Album Name"
+            "value" : "Album Name"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ アルバム名"
-          }
-        }
-      }
-    },
-    "Shared.Cancel" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キャンセル"
+            "value" : "アルバム名"
           }
         }
       }
@@ -667,6 +651,7 @@
       }
     },
     "Shared.Dismiss" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

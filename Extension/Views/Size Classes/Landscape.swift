@@ -11,27 +11,6 @@ import SwiftUI
 extension ShareView {
     @ViewBuilder func landscapeView(previewImage: UIImage) -> some View {
         HStack(alignment: .top, spacing: 0.0) {
-            if !isPhotoSaveSuccessful {
-                ZStack(alignment: .center) {
-                    if isPhotosAuthorizationComplete {
-                        if isPhotosAuthorizationDenied {
-                            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                .symbolRenderingMode(.multicolor)
-                        } else {
-                            CollectionsStack($navigator, selection: $selectedCollection)
-                                .matchedGeometryEffect(
-                                    id: "@$_bromidesPrivateIdentifier_albumBrowser",
-                                    in: namespace
-                                )
-                        }
-                    } else {
-                        ProgressView()
-                    }
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                Divider()
-                    .ignoresSafeArea(.all, edges: .vertical)
-            }
             VStack(alignment: .leading, spacing: 0.0) {
                 Spacer()
                 ImagePreview(previewImage)
@@ -44,14 +23,27 @@ extension ShareView {
                     Spacer()
                 } else {
                     Spacer()
-                    VStack(spacing: 12.0) {
-                        saveButton()
-                            .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_save", in: namespace)
-                        closeButton()
-                            .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_close", in: namespace)
-                    }
-                    .padding()
                 }
+            }
+            if !isPhotoSaveSuccessful {
+                ZStack(alignment: .center) {
+                    if isPhotosAuthorizationComplete {
+                        if isPhotosAuthorizationDenied {
+                            noAccessView()
+                        } else {
+                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
+                                .matchedGeometryEffect(
+                                    id: "@$_bromidesPrivateIdentifier_albumBrowser",
+                                    in: namespace
+                                )
+                        }
+                    } else {
+                        ProgressView()
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                Divider()
+                    .ignoresSafeArea(.all, edges: .vertical)
             }
         }
     }

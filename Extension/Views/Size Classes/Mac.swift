@@ -19,23 +19,9 @@ extension ShareView {
                 ZStack(alignment: .center) {
                     if isPhotosAuthorizationComplete {
                         if isPhotosAuthorizationDenied {
-                            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                .symbolRenderingMode(.multicolor)
+                            noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection)
-                                .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                    BarAccessory(placement: .bottom, isBackgroundSolid: false) {
-                                        VStack(spacing: 16.0) {
-                                            SearchField($navigator.searchTerm)
-                                            HStack {
-                                                Spacer()
-                                                closeButton()
-                                                saveButton()
-                                            }
-                                            .padding([.leading, .trailing, .bottom])
-                                        }
-                                    }
-                                }
+                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
                         }
                     } else {
                         ProgressView()

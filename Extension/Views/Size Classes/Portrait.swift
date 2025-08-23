@@ -24,32 +24,13 @@ extension ShareView {
                 ZStack(alignment: .center) {
                     if isPhotosAuthorizationComplete {
                         if isPhotosAuthorizationDenied {
-                            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                .symbolRenderingMode(.multicolor)
+                            noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection)
+                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
                                 .matchedGeometryEffect(
                                     id: "@$_bromidesPrivateIdentifier_albumBrowser",
                                     in: namespace
                                 )
-                                .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                    VStack(spacing: 10.0) {
-                                        SearchField($navigator.searchTerm)
-                                        HStack {
-                                            saveButton()
-                                                .matchedGeometryEffect(
-                                                    id: "@$_bromidesPrivateIdentifier_save",
-                                                    in: namespace
-                                                )
-                                            closeButton()
-                                                .matchedGeometryEffect(
-                                                    id: "@$_bromidesPrivateIdentifier_close",
-                                                    in: namespace
-                                                )
-                                        }
-                                        .padding([.leading, .trailing, .bottom])
-                                    }
-                                }
                                 .id("@$_bromidesPrivateIdentifier_albumBrowser")
                         }
                     } else {

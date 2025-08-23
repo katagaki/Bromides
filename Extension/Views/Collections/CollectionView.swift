@@ -13,11 +13,13 @@ struct CollectionView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @Environment(Navigator.self) var navigator
+
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
 
     @State var displayedCollection: Collection?
     @State var collections: [Collection]?
+
     @State var searchTerm: String?
 
     @State var isCreatingAlbum: Bool = false
@@ -54,21 +56,6 @@ struct CollectionView: View {
                     .symbolRenderingMode(.multicolor)
             }
         }
-        .safeAreaInset(edge: .bottom, spacing: 0.0) {
-            Group {
-                #if !targetEnvironment(macCatalyst)
-                if verticalSizeClass == .regular && horizontalSizeClass == .compact {
-                    bottomSafeAreaOffsetView()
-                } else {
-                    EmptyView()
-                }
-                #else
-                bottomSafeAreaOffsetView()
-                #endif
-            }
-            .opacity(0.0)
-            .allowsHitTesting(false)
-        }
         .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?
                          NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") :
@@ -84,48 +71,40 @@ struct CollectionView: View {
                     } label: {
                         Label("Shared.New", systemImage: "plus")
                     }
-                default:
-                    EmptyView()
+                default: EmptyView()
+                }
+            }
+            ToolbarSpacer(.flexible, placement: .topBarTrailing)
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(role: .cancel) {
+                    NotificationCenter.default.post(name: NSNotification.Name("close"), object: nil)
                 }
             }
         }
         .task {
             reloadCollections(animate: false)
+            checkAndResetSelection()
         }
-        .onChange(of: navigator.searchTerm) { _, newValue in
-            if !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
-                reloadCollections()
+        .onChange(of: navigator.searchTerm) { _, _ in
+            if navigator.isSearching {
+                self.displayedCollection = .search
+            } else {
+                self.displayedCollection = nil
             }
+            reloadCollections()
+        }
+        .onChange(of: collections) { _, _ in
+            checkAndResetSelection()
         }
         .alert("Alert.CreateAlbum", isPresented: $isCreatingAlbum) {
             TextField("Alert.CreateAlbum.Name", text: $newCollectionName)
-            Button("Shared.Create", action: createAlbum)
-            Button("Shared.Cancel", role: .cancel, action: stopCreatingAlbum)
+            Button("Shared.Create", role: .confirm, action: createAlbum)
+            Button(role: .cancel, action: stopCreatingAlbum)
         }
         .alert("Alert.CreateFolder", isPresented: $isCreatingFolder) {
             TextField("Alert.CreateFolder.Name", text: $newCollectionName)
-            Button("Shared.Create", action: createFolder)
-            Button("Shared.Cancel", role: .cancel, action: stopCreatingFolder)
-        }
-    }
-
-    @ViewBuilder func bottomSafeAreaOffsetView() -> some View {
-        BarAccessory(placement: .bottom) {
-            VStack(spacing: 16.0) {
-                SearchField(.constant(""), shouldAllowFocus: false)
-                Button { } label: {
-                    #if !targetEnvironment(macCatalyst)
-                    ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
-                    #else
-                    Label("Shared.Save", systemImage: "square.and.arrow.down")
-                    #endif
-                }
-                #if targetEnvironment(macCatalyst)
-                    .controlSize(.large)
-                #endif
-                .buttonStyle(.bordered)
-                .padding([.leading, .trailing, .bottom])
-            }
+            Button("Shared.Create", role: .confirm, action: createFolder)
+            Button(role: .cancel, action: stopCreatingFolder)
         }
     }
 
@@ -147,6 +126,14 @@ struct CollectionView: View {
             } else {
                 collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
             }
+        }
+    }
+
+    func checkAndResetSelection() {
+        if !(collections ?? []).contains(where: {
+            $0.id == selectedCollection?.localIdentifier
+        }) {
+            selectedCollection = nil
         }
     }
 

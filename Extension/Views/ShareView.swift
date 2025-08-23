@@ -13,6 +13,7 @@ import SwiftUI
 struct ShareView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
+
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
@@ -74,58 +75,34 @@ struct ShareView: View {
                 }
                 isPhotosAuthorizationComplete = true
             }
+            .onChange(of: navigator.debouncingSearchTerm) { _, _ in
+                navigator.debounceSearch()
+            }
             .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
-                Button("Shared.Dismiss", action: {})
+                Button(role: .close, action: {})
             }
         } else {
-            VStack(alignment: .leading, spacing: 0.0) {
+            VStack(alignment: .center) {
                 Spacer()
                 ContentUnavailableView("Error.NoImage", systemImage: "photo.badge.exclamationmark.fill")
-                    .padding()
+                Button(role: .close, action: close)
+                    .controlSize(.large)
+                    .buttonStyle(.glass)
                 Spacer()
-                Divider()
-                closeButton()
-                    .padding()
             }
+            .padding()
         }
     }
 
-    @ViewBuilder func saveButton() -> some View {
-        Button {
-            save()
-        } label: {
-            #if !targetEnvironment(macCatalyst)
-            ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
-            #else
-            Text("Shared.Save")
-            #endif
+    @ViewBuilder
+    func noAccessView() -> some View {
+        VStack(alignment: .center) {
+            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
+                .symbolRenderingMode(.multicolor)
+            Button(role: .close, action: close)
+                .controlSize(.large)
+                .buttonStyle(.glass)
         }
-        #if targetEnvironment(macCatalyst)
-        .controlSize(.large)
-        #endif
-        .buttonStyle(.glassProminent)
-        .disabled(selectedCollection == nil || isPhotoSaving)
-        #if !targetEnvironment(macCatalyst)
-        .clipShape(.capsule)
-        #endif
-    }
-
-    @ViewBuilder func closeButton() -> some View {
-        let button = Button {
-            close()
-        } label: {
-            #if !targetEnvironment(macCatalyst)
-            ButtonLabel("Shared.Cancel", icon: "xmark")
-            #else
-            Text("Shared.Cancel")
-            #endif
-        }
-        #if targetEnvironment(macCatalyst)
-            .controlSize(.large)
-        #endif
-        button
-            .buttonStyle(.glass)
-            .disabled(isPhotoSaving)
     }
 
     func close() {
