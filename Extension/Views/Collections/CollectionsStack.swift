@@ -42,6 +42,7 @@ struct CollectionsStack: View {
             @Bindable var navigator = navigator
             CollectionView(selection: $selectedCollection, saveAction: saveAction)
                 .environment(navigator)
+                #if !targetEnvironment(macCatalyst)
                 .safeAreaInset(edge: .bottom, spacing: 0.0) {
                     if !recentAlbums.isEmpty && isSearchFieldFocused {
                         ScrollView(.horizontal) {
@@ -68,11 +69,20 @@ struct CollectionsStack: View {
                         .scrollIndicators(.hidden)
                     }
                 }
+                #endif
                 .searchable(
                     text: $navigator.debouncingSearchTerm,
                     placement: .toolbar,
                     prompt: "Shared.AlbumOrFolderName"
                 )
+                #if targetEnvironment(macCatalyst)
+                .searchSuggestions {
+                    ForEach(recentAlbums, id: \.self) { albumName in
+                        Text(albumName)
+                            .searchCompletion(albumName)
+                    }
+                }
+                #endif
                 .searchFocused($isSearchFieldFocused)
                 .scrollDismissesKeyboard(.immediately)
                 .navigationDestination(for: Collection.self) { collection in
