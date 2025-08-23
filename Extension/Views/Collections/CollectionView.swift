@@ -26,17 +26,29 @@ struct CollectionView: View {
     @State var isCreatingFolder: Bool = false
     @State var newCollectionName: String = ""
 
+    var saveAction: () -> Void
+
     @Binding var selectedCollection: PHAssetCollection?
 
-    init(_ collection: Collection? = nil, selection: Binding<PHAssetCollection?>) {
+    init(
+        _ collection: Collection? = nil,
+        selection: Binding<PHAssetCollection?>,
+        saveAction: @escaping () -> Void
+    ) {
         self.displayedCollection = collection
         self._selectedCollection = selection
+        self.saveAction = saveAction
     }
 
-    init(searchTerm: String, selection: Binding<PHAssetCollection?>) {
+    init(
+        searchTerm: String,
+        selection: Binding<PHAssetCollection?>,
+        saveAction: @escaping () -> Void
+    ) {
         self.displayedCollection = .search
         self._selectedCollection = selection
         self.searchTerm = searchTerm
+        self.saveAction = saveAction
     }
 
     var body: some View {
@@ -56,13 +68,12 @@ struct CollectionView: View {
                     .symbolRenderingMode(.multicolor)
             }
         }
-        .scrollDismissesKeyboard(.immediately)
         .navigationTitle(displayedCollection == nil ?
                          NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") :
                             displayedCollection!.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .bottomBar) {
                 switch displayedCollection {
                 case .folder, nil:
                     Menu {
@@ -74,7 +85,16 @@ struct CollectionView: View {
                 default: EmptyView()
                 }
             }
-            ToolbarSpacer(.flexible, placement: .topBarTrailing)
+            ToolbarSpacer(.flexible, placement: .bottomBar)
+            ToolbarItem(placement: .bottomBar) {
+                Button(
+                    "Shared.Save",
+                    systemImage: "square.and.arrow.down",
+                    role: .confirm,
+                    action: saveAction
+                )
+                .disabled(selectedCollection == nil)
+            }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(role: .cancel) {
                     NotificationCenter.default.post(name: NSNotification.Name("close"), object: nil)
@@ -99,11 +119,13 @@ struct CollectionView: View {
         .alert("Alert.CreateAlbum", isPresented: $isCreatingAlbum) {
             TextField("Alert.CreateAlbum.Name", text: $newCollectionName)
             Button("Shared.Create", role: .confirm, action: createAlbum)
+                .disabled(newCollectionName == "")
             Button(role: .cancel, action: stopCreatingAlbum)
         }
         .alert("Alert.CreateFolder", isPresented: $isCreatingFolder) {
             TextField("Alert.CreateFolder.Name", text: $newCollectionName)
             Button("Shared.Create", role: .confirm, action: createFolder)
+                .disabled(newCollectionName == "")
             Button(role: .cancel, action: stopCreatingFolder)
         }
     }

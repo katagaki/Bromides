@@ -39,10 +39,11 @@ struct CollectionsStack: View {
 
     var body: some View {
         NavigationStack(path: $navigator.viewPath) {
-            CollectionView(selection: $selectedCollection)
+            @Bindable var navigator = navigator
+            CollectionView(selection: $selectedCollection, saveAction: saveAction)
                 .environment(navigator)
                 .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                    if !recentAlbums.isEmpty {
+                    if !recentAlbums.isEmpty && isSearchFieldFocused {
                         ScrollView(.horizontal) {
                             HStack(spacing: 6.0) {
                                 ForEach(recentAlbums, id: \.self) { albumName in
@@ -67,55 +68,23 @@ struct CollectionsStack: View {
                         .scrollIndicators(.hidden)
                     }
                 }
-                .toolbar {
-                    ToolbarItemGroup(placement: .bottomBar) {
-                        @Bindable var navigator = navigator
-                        TextField(
-                            "Shared.AlbumOrFolderName",
-                            text: $navigator.debouncingSearchTerm
-                        )
-                        .safeAreaInset(edge: .leading) {
-                            Image(systemName: "magnifyingglass")
-                                .font(.caption)
-                                .foregroundStyle(.tertiary)
-                                .padding(.leading)
-                        }
-                        .focused($isSearchFieldFocused)
-                        Button(
-                            "Shared.Save",
-                            systemImage: "square.and.arrow.down",
-                            role: .confirm,
-                            action: saveAction
-                        )
-                        .disabled(selectedCollection == nil)
-                    }
-                }
+                .searchable(
+                    text: $navigator.debouncingSearchTerm,
+                    placement: .toolbar,
+                    prompt: "Shared.AlbumOrFolderName"
+                )
+                .searchFocused($isSearchFieldFocused)
+                .scrollDismissesKeyboard(.immediately)
                 .navigationDestination(for: Collection.self) { collection in
-                    CollectionView(collection, selection: $selectedCollection)
+                    CollectionView(
+                        collection, selection: $selectedCollection, saveAction: saveAction
+                    )
                         .environment(navigator)
-                        .toolbar {
-                            ToolbarSpacer(.flexible, placement: .bottomBar)
-                            ToolbarItemGroup(placement: .bottomBar) {
-                                Button(
-                                    "Shared.Save",
-                                    systemImage: "square.and.arrow.down",
-                                    role: .confirm,
-                                    action: saveAction
-                                )
-                                .disabled(selectedCollection == nil)
-                            }
-                        }
-                        .onAppear {
-                            isSearchFieldFocused = false
-                        }
                 }
         }
         .onAppear {
             if autoOpenKeyboard {
-                Task {
-                    try await Task.sleep(nanoseconds: 100000000)
-                    isSearchFieldFocused = true
-                }
+                isSearchFieldFocused = true
             }
         }
     }
