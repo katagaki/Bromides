@@ -84,7 +84,7 @@ struct CollectionsStack: View {
                 }
                 #endif
                 .searchFocused($isSearchFieldFocused)
-                .scrollDismissesKeyboard(.immediately)
+                .scrollDismissesKeyboard(.never)
                 .navigationDestination(for: Collection.self) { collection in
                     CollectionView(
                         collection, selection: $selectedCollection, saveAction: saveAction
