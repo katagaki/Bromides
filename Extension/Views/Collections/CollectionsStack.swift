@@ -51,6 +51,7 @@ struct CollectionsStack: View {
                                     Button {
                                         navigator.searchTerm = albumName
                                         navigator.debouncingSearchTerm = albumName
+                                        isSearchFieldFocused = false
                                     } label: {
                                         Text(albumName)
                                             .font(.subheadline)
@@ -72,7 +73,6 @@ struct CollectionsStack: View {
                 #endif
                 .searchable(
                     text: $navigator.debouncingSearchTerm,
-                    placement: .toolbar,
                     prompt: "Shared.AlbumOrFolderName"
                 )
                 #if targetEnvironment(macCatalyst)

@@ -43,7 +43,7 @@ class ShareViewController: UIViewController {
                 shareView.view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
                 view.bringSubviewToFront(shareView.view)
                 #if targetEnvironment(macCatalyst)
-                view.layer.cornerRadius = 18.0
+                view.layer.cornerRadius = 12.0
                 view.clipsToBounds = true
                 #endif
             }
