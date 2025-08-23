@@ -55,30 +55,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				InfoPlist.xcstrings,
-			);
-			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
-		};
-		E4FDF1642DE2A0F1008BF313 /* Exceptions for "App" folder in "Bromides" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
-		};
-		E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */ = {
+		E48F0E0F2E5963D3006F33CD /* Exceptions for "Extension" folder in "Share with Bromides" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Info-SaveToAlbum.plist",
 				"Info-ShareWithBromides.plist",
-				InfoPlist.xcstrings,
 			);
 			target = E4DB59032D8E81D0009A20B2 /* Share with Bromides */;
 		};
-		E4FF3BF62DA22D2D00EB68DF /* Exceptions for "Extension" folder in "Save to Album" target */ = {
+		E48F0E102E5963D4006F33CD /* Exceptions for "Extension" folder in "Save to Album" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Info-SaveToAlbum.plist",
@@ -86,14 +71,20 @@
 			);
 			target = E4DAA9A82D904D2300BBF630 /* Save to Album */;
 		};
+		E48F0E112E5963E1006F33CD /* Exceptions for "App" folder in "Bromides" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = E4DB58D52D8E8146009A20B2 /* Bromides */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E4DB58D82D8E8146009A20B2 /* App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E4FDF1642DE2A0F1008BF313 /* Exceptions for "App" folder in "Bromides" target */,
-				E4DB594E2D8FD4EA009A20B2 /* Exceptions for "App" folder in "Share with Bromides" target */,
+				E48F0E112E5963E1006F33CD /* Exceptions for "App" folder in "Bromides" target */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -106,8 +97,8 @@
 		E4FF3BE72DA22BBD00EB68DF /* Extension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				E4FF3BF52DA22D2B00EB68DF /* Exceptions for "Extension" folder in "Share with Bromides" target */,
-				E4FF3BF62DA22D2D00EB68DF /* Exceptions for "Extension" folder in "Save to Album" target */,
+				E48F0E0F2E5963D3006F33CD /* Exceptions for "Extension" folder in "Share with Bromides" target */,
+				E48F0E102E5963D4006F33CD /* Exceptions for "Extension" folder in "Save to Album" target */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
