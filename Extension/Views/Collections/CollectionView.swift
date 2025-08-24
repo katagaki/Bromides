@@ -113,6 +113,8 @@ struct CollectionView: View {
         #endif
         .task {
             reloadCollections(animate: false)
+        }
+        .onAppear {
             checkAndResetSelection()
         }
         .onChange(of: navigator.searchTerm) { _, _ in
