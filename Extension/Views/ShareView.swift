@@ -110,7 +110,7 @@ struct ShareView: View {
     }
 
     func save() {
-        if let imageData, let selectedCollection {
+        if !isPhotoSaving, let imageData, let selectedCollection {
             isPhotoSaving = true
             Task {
                 let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
