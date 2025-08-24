@@ -26,6 +26,7 @@ struct MacToolbar: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            #if os(macOS)
             .safeAreaInset(edge: .top, spacing: 0.0) {
                 HStack(alignment: .center) {
                     Button(role: .cancel, action: close) {
@@ -92,6 +93,7 @@ struct MacToolbar: ViewModifier {
                         .ignoresSafeArea(edges: [.leading, .trailing])
                 }
             }
+            #endif
     }
 }
 
