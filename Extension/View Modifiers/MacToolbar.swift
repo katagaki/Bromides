@@ -49,6 +49,11 @@ struct MacToolbar: ViewModifier {
                         }
                         .buttonStyle(.plain)
                         .glassEffect(.regular.interactive(), in: .circle)
+                        Text(navigator.viewPath.last?.title ?? "")
+                            .bold()
+                    } else {
+                        Text("ViewTitle.SelectAnAlbum")
+                            .bold()
                     }
                     Spacer()
                     if hasSearchBar {

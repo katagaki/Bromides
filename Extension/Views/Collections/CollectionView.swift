@@ -242,7 +242,7 @@ struct CollectionView: View {
             }
             .buttonStyle(.plain)
             .frame(height: 32.0)
-            .glassEffect(.regular.interactive(), in: .capsule)
+            .glassEffect(.regular.interactive().tint(.accent), in: .capsule)
             #else
             Button(
                 "Shared.Save",
