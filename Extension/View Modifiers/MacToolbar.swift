@@ -84,7 +84,7 @@ struct MacToolbar: ViewModifier {
                 }
                 .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                 .padding(8.0)
-                .background(Material.bar)
+                .background(Material.ultraThin)
                 .overlay(alignment: .bottom) {
                     Rectangle()
                         .frame(height: 1.0)
