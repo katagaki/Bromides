@@ -6,18 +6,22 @@
 //
 
 import SwiftUI
+#if os(macOS)
+import Cocoa
+#else
 import UIKit
+#endif
 
 struct ImagePreview: View {
-    var uiImage: UIImage
+    var image: XPImage
 
-    init(_ uiImage: UIImage) {
-        self.uiImage = uiImage
+    init(_ image: XPImage) {
+        self.image = image
     }
 
     var body: some View {
         VStack(alignment: .center) {
-            Image(uiImage: uiImage)
+            Image(xpImage: image)
                 .resizable()
                 .clipShape(.rect(cornerRadius: 6.0))
                 .aspectRatio(contentMode: .fit)

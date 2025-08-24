@@ -9,7 +9,7 @@ import Komponents
 import SwiftUI
 
 extension ShareView {
-    @ViewBuilder func macView(previewImage: UIImage) -> some View {
+    @ViewBuilder func macView(previewImage: XPImage) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
             if isPhotoSaveSuccessful {
                 SaveSuccessfulView(selectedCollection)

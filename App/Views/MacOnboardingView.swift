@@ -77,10 +77,10 @@ struct MacOnboardingView: View {
                     }
                     Section {
                         ShareLink(
-                            item: Image(uiImage: UIImage(resource: .sample)),
+                            item: Image(xpImage: XPImage(resource: .sample)),
                             preview: SharePreview(
                                 "Shared.SamplePhoto",
-                                image: Image(uiImage: UIImage(resource: .sample))
+                                image: Image(xpImage: XPImage(resource: .sample))
                             )
                         ) {
                             Label("Onboarding.Share", systemImage: "square.and.arrow.up")

@@ -35,7 +35,14 @@ struct CollectionList: View {
                             mode: .list,
                             isSelected: { selectedCollection == album }
                         )
+                        #if os(macOS)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .contentShape(.rect)
+                        #endif
                     }
+                    #if os(macOS)
+                    .buttonStyle(.plain)
+                    #endif
                 case .folder:
                     NavigationLink(value: collection) {
                         CollectionButtonLabel(

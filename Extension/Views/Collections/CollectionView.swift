@@ -71,36 +71,46 @@ struct CollectionView: View {
         .navigationTitle(displayedCollection == nil ?
                          NSLocalizedString("ViewTitle.SelectAnAlbum", comment: "") :
                             displayedCollection!.title)
+        #if os(macOS)
+        // Show custom toolbar on macOS
+        .safeAreaInset(edge: .bottom, spacing: 0.0) {
+            HStack(alignment: .center) {
+                switch displayedCollection {
+                case .folder, nil: newMenu()
+                default: EmptyView()
+                }
+                Spacer()
+                saveButton()
+            }
+            .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
+            .padding(8.0)
+            .background(Material.bar)
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .frame(height: 1.0)
+                    .foregroundColor(.primary.opacity(0.2))
+                    .ignoresSafeArea(edges: [.leading, .trailing])
+            }
+        }
+        #else
+        // Use native toolbar on iOS
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
                 switch displayedCollection {
-                case .folder, nil:
-                    Menu {
-                        Button("Shared.NewAlbum", systemImage: "photo.on.rectangle.angled", action: startCreatingAlbum)
-                        Button("Shared.NewFolder", systemImage: "folder", action: startCreatingFolder)
-                    } label: {
-                        Label("Shared.New", systemImage: "plus")
-                    }
+                case .folder, nil: newMenu()
                 default: EmptyView()
                 }
             }
             ToolbarSpacer(.flexible, placement: .bottomBar)
             ToolbarItem(placement: .bottomBar) {
-                Button(
-                    "Shared.Save",
-                    systemImage: "square.and.arrow.down",
-                    role: .confirm,
-                    action: saveAction
-                )
-                .disabled(selectedCollection == nil)
+                saveButton()
             }
             ToolbarItem(placement: .topBarTrailing) {
-                Button(role: .cancel) {
-                    NotificationCenter.default.post(name: NSNotification.Name("close"), object: nil)
-                }
+                closeButton()
             }
         }
+        #endif
         .task {
             reloadCollections(animate: false)
             checkAndResetSelection()
@@ -197,5 +207,56 @@ struct CollectionView: View {
             isCreatingFolder = false
             newCollectionName = ""
         }
+    }
+
+    @ViewBuilder
+    func newMenu() -> some View {
+        Menu {
+            Button("Shared.NewAlbum", systemImage: "photo.on.rectangle.angled", action: startCreatingAlbum)
+            Button("Shared.NewFolder", systemImage: "folder", action: startCreatingFolder)
+        } label: {
+            Label("Shared.New", systemImage: "plus")
+            #if os(macOS)
+                .frame(height: 32.0)
+                .padding(.horizontal, 8.0)
+                .contentShape(.rect)
+            #endif
+        }
+        #if os(macOS)
+        .menuStyle(.borderlessButton)
+        .frame(height: 32.0)
+        .padding(.horizontal, 8.0)
+        .glassEffect(.regular.interactive(), in: .capsule)
+        #endif
+    }
+
+    @ViewBuilder
+    func saveButton() -> some View {
+        Group {
+            #if os(macOS)
+            Button(role: .confirm, action: saveAction) {
+                Label("Shared.Save", systemImage: "square.and.arrow.down")
+                    .frame(height: 32.0)
+                    .padding(.horizontal, 8.0)
+                    .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .frame(height: 32.0)
+            .glassEffect(.regular.interactive(), in: .capsule)
+            #else
+            Button(
+                "Shared.Save",
+                systemImage: "square.and.arrow.down",
+                role: .confirm,
+                action: saveAction
+            )
+            #endif
+        }
+        .disabled(selectedCollection == nil)
+    }
+
+    @ViewBuilder
+    func closeButton() -> some View {
+        Button(role: .cancel, action: close)
     }
 }

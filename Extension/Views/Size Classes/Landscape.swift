@@ -9,7 +9,7 @@ import Komponents
 import SwiftUI
 
 extension ShareView {
-    @ViewBuilder func landscapeView(previewImage: UIImage) -> some View {
+    @ViewBuilder func landscapeView(previewImage: XPImage) -> some View {
         HStack(alignment: .top, spacing: 0.0) {
             VStack(alignment: .leading, spacing: 0.0) {
                 Spacer()

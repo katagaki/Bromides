@@ -9,7 +9,7 @@ import Komponents
 import SwiftUI
 
 extension ShareView {
-    @ViewBuilder func portraitView(previewImage: UIImage) -> some View {
+    @ViewBuilder func portraitView(previewImage: XPImage) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
             ImagePreview(previewImage)
                 .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)

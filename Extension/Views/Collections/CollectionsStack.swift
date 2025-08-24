@@ -13,11 +13,10 @@ struct CollectionsStack: View {
     @Binding var selectedCollection: PHAssetCollection?
 
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
-    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
-
     @FocusState var isSearchFieldFocused: Bool
-    var saveAction: () -> Void
 
+    #if !os(macOS)
+    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
     var recentAlbums: [String] {
         let recentAlbums: [String] = (try? JSONDecoder().decode(
             [String].self,
@@ -25,6 +24,9 @@ struct CollectionsStack: View {
         )) ?? []
         return recentAlbums.reversed()
     }
+    #endif
+
+    var saveAction: () -> Void
 
     init(
         _ navigator: Binding<Navigator>,
@@ -34,7 +36,9 @@ struct CollectionsStack: View {
         self._navigator = navigator
         self._selectedCollection = selectedCollection
         self.saveAction = saveAction
+        #if !os(macOS)
         UITextField.appearance().clearButtonMode = .whileEditing
+        #endif
     }
 
     var body: some View {
@@ -42,7 +46,19 @@ struct CollectionsStack: View {
             @Bindable var navigator = navigator
             CollectionView(selection: $selectedCollection, saveAction: saveAction)
                 .environment(navigator)
-                #if !targetEnvironment(macCatalyst)
+                #if os(macOS)
+                // Show custom toolbar and search bar on macOS
+                // (NavigationStack title/back button/toolbars aren't available in share sheet)
+                .toolbarForMac(
+                    navigator: self.$navigator,
+                    isSearchFieldFocused: $isSearchFieldFocused
+                )
+                #else
+                // Use native search features on iOS
+                .searchable(
+                    text: $navigator.debouncingSearchTerm,
+                    prompt: "Shared.AlbumOrFolderName"
+                )
                 .safeAreaInset(edge: .bottom, spacing: 0.0) {
                     if !recentAlbums.isEmpty && isSearchFieldFocused {
                         ScrollView(.horizontal) {
@@ -70,26 +86,17 @@ struct CollectionsStack: View {
                         .scrollIndicators(.hidden)
                     }
                 }
-                #endif
-                .searchable(
-                    text: $navigator.debouncingSearchTerm,
-                    prompt: "Shared.AlbumOrFolderName"
-                )
-                #if targetEnvironment(macCatalyst)
-                .searchSuggestions {
-                    ForEach(recentAlbums, id: \.self) { albumName in
-                        Text(albumName)
-                            .searchCompletion(albumName)
-                    }
-                }
-                #endif
                 .searchFocused($isSearchFieldFocused)
                 .scrollDismissesKeyboard(.never)
+                #endif
                 .navigationDestination(for: Collection.self) { collection in
-                    CollectionView(
-                        collection, selection: $selectedCollection, saveAction: saveAction
-                    )
+                    CollectionView(collection, selection: $selectedCollection, saveAction: saveAction)
                         .environment(navigator)
+                        .toolbarForMac(
+                            navigator: self.$navigator,
+                            isSearchFieldFocused: $isSearchFieldFocused,
+                            hasSearchBar: false
+                        )
                 }
         }
         .onAppear {

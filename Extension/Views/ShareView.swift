@@ -20,7 +20,7 @@ struct ShareView: View {
 
     @State var navigator: Navigator = Navigator()
     var imageData: Data?
-    var previewImage: UIImage?
+    var previewImage: XPImage?
 
     @State var selectedCollection: PHAssetCollection?
     @State var isPhotoSaving: Bool = false
@@ -35,34 +35,32 @@ struct ShareView: View {
         guard let item = items.first else { return }
         if let url = item as? URL, let imageData = try? Data(contentsOf: url) {
             self.imageData = imageData
-        } else if let image = item as? UIImage {
-            if let pngData = image.pngData() {
-                self.imageData = pngData
-            } else if let jpegData = image.jpegData(compressionQuality: 1.0) {
-                self.imageData = jpegData
-            } else if let heicData = image.heicData() {
-                self.imageData = heicData
-            }
+        } else if let image = item as? XPImage {
+            self.imageData = image.data()
         } else if let data = item as? Data {
             self.imageData = data
         }
         guard let imageData = self.imageData else { return }
-        guard let uiImage = UIImage(data: imageData)?
+        #if os(macOS)
+        guard let previewImage = XPImage(data: imageData) else { return }
+        #else
+        guard let previewImage = XPImage(data: imageData)?
             .preparingThumbnail(of: .init(width: 600.0, height: 600.0)) else { return }
-        self.previewImage = uiImage
+        #endif
+        self.previewImage = previewImage
     }
 
     var body: some View {
         if imageData != nil, let previewImage {
             Group {
-                #if !targetEnvironment(macCatalyst)
+                #if os(macOS)
+                macView(previewImage: previewImage)
+                #else
                 if verticalSizeClass == .regular && horizontalSizeClass == .compact {
                     portraitView(previewImage: previewImage)
                 } else {
                     landscapeView(previewImage: previewImage)
                 }
-                #else
-                macView(previewImage: previewImage)
                 #endif
             }
             .task {
@@ -77,6 +75,10 @@ struct ShareView: View {
             }
             .onChange(of: navigator.debouncingSearchTerm) { _, _ in
                 navigator.debounceSearch()
+            }
+            .onKeyPress(.escape) {
+                close()
+                return .handled
             }
             .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
                 Button(role: .close, action: {})
@@ -103,10 +105,6 @@ struct ShareView: View {
                 .controlSize(.large)
                 .buttonStyle(.glass)
         }
-    }
-
-    func close() {
-        NotificationCenter.default.post(name: NSNotification.Name("close"), object: nil)
     }
 
     func save() {
@@ -144,7 +142,9 @@ struct ShareView: View {
                         closeWithHaptics(shouldWait: false)
                     }
                 } else {
+                    #if os(iOS)
                     UINotificationFeedbackGenerator().notificationOccurred(.error)
+                    #endif
                     isPhotoSaving = false
                     isPhotoSaveFailed = true
                 }
@@ -155,7 +155,9 @@ struct ShareView: View {
     }
 
     func closeWithHaptics(shouldWait: Bool = true) {
+        #if os(iOS)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+        #endif
         if shouldWait {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 close()
