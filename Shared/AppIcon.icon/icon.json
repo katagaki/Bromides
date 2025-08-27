@@ -5,13 +5,26 @@
   "groups" : [
     {
       "blend-mode" : "normal",
-      "blur-material" : 0.5,
+      "blur-material" : null,
       "layers" : [
         {
-          "fill" : {
-            "automatic-gradient" : "srgb:0.27451,0.05098,0.60392,1.00000"
-          },
-          "image-name" : "Shelf.png",
+          "fill-specializations" : [
+            {
+              "value" : {
+                "automatic-gradient" : "display-p3:0.27588,0.05173,0.60547,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "linear-gradient" : [
+                  "srgb:0.68341,0.39012,1.00000,1.00000",
+                  "srgb:0.15156,0.00753,0.31779,1.00000"
+                ]
+              }
+            }
+          ],
+          "image-name" : "Shelf.svg",
           "name" : "Shelf"
         }
       ],
@@ -23,7 +36,7 @@
       "specular" : true,
       "translucency" : {
         "enabled" : true,
-        "value" : 0.5
+        "value" : 0.3
       }
     },
     {
@@ -42,7 +55,8 @@
           "fill" : {
             "solid" : "extended-gray:1.00000,1.00000"
           },
-          "image-name" : "Face.png",
+          "glass" : true,
+          "image-name" : "Face.svg",
           "name" : "Face"
         }
       ],
@@ -59,16 +73,29 @@
       }
     },
     {
-      "blur-material" : 1,
+      "blur-material" : null,
       "layers" : [
         {
-          "fill" : {
-            "linear-gradient" : [
-              "display-p3:0.62353,0.40000,0.96471,1.00000",
-              "srgb:0.83137,0.40392,0.61569,1.00000"
-            ]
-          },
-          "image-name" : "Card.png",
+          "fill-specializations" : [
+            {
+              "value" : {
+                "linear-gradient" : [
+                  "display-p3:0.62305,0.39966,0.96338,1.00000",
+                  "display-p3:0.83008,0.40308,0.61523,1.00000"
+                ]
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "linear-gradient" : [
+                  "srgb:0.79336,0.63333,1.00000,1.00000",
+                  "srgb:0.18011,0.10626,0.27305,1.00000"
+                ]
+              }
+            }
+          ],
+          "image-name" : "Card.svg",
           "name" : "Card"
         }
       ],
