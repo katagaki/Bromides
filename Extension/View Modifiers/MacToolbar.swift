@@ -62,7 +62,8 @@ struct MacToolbar: ViewModifier {
                             .textFieldStyle(.plain)
                             .safeAreaInset(edge: .leading) {
                                 Image(systemName: "magnifyingglass")
-                                    .padding(.leading, 12.0)
+                                    .padding(.leading, 6.0)
+                                    .foregroundStyle(.secondary)
                             }
                             .padding(.horizontal, 6.0)
                             .padding(.vertical, 8.0)
