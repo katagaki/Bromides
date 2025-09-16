@@ -13,13 +13,14 @@ import SwiftUI
 struct ShareView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
+
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     @State var navigator: Navigator = Navigator()
     var imageData: Data?
-    var previewImage: UIImage?
+    var previewImage: XPImage?
 
     @State var selectedCollection: PHAssetCollection?
     @State var isPhotoSaving: Bool = false
@@ -34,34 +35,32 @@ struct ShareView: View {
         guard let item = items.first else { return }
         if let url = item as? URL, let imageData = try? Data(contentsOf: url) {
             self.imageData = imageData
-        } else if let image = item as? UIImage {
-            if let pngData = image.pngData() {
-                self.imageData = pngData
-            } else if let jpegData = image.jpegData(compressionQuality: 1.0) {
-                self.imageData = jpegData
-            } else if let heicData = image.heicData() {
-                self.imageData = heicData
-            }
+        } else if let image = item as? XPImage {
+            self.imageData = image.data()
         } else if let data = item as? Data {
             self.imageData = data
         }
         guard let imageData = self.imageData else { return }
-        guard let uiImage = UIImage(data: imageData)?
+        #if os(macOS)
+        guard let previewImage = XPImage(data: imageData) else { return }
+        #else
+        guard let previewImage = XPImage(data: imageData)?
             .preparingThumbnail(of: .init(width: 600.0, height: 600.0)) else { return }
-        self.previewImage = uiImage
+        #endif
+        self.previewImage = previewImage
     }
 
     var body: some View {
         if imageData != nil, let previewImage {
             Group {
-                #if !targetEnvironment(macCatalyst)
+                #if os(macOS)
+                macView(previewImage: previewImage)
+                #else
                 if verticalSizeClass == .regular && horizontalSizeClass == .compact {
                     portraitView(previewImage: previewImage)
                 } else {
                     landscapeView(previewImage: previewImage)
                 }
-                #else
-                macView(previewImage: previewImage)
                 #endif
             }
             .task {
@@ -74,76 +73,42 @@ struct ShareView: View {
                 }
                 isPhotosAuthorizationComplete = true
             }
+            .onChange(of: navigator.debouncingSearchTerm) { _, _ in
+                navigator.debounceSearch()
+            }
+            .onKeyPress(.escape) {
+                close()
+                return .handled
+            }
             .alert("Error.SaveFailed", isPresented: $isPhotoSaveFailed) {
-                Button("Shared.Dismiss", action: {})
+                Button(role: .close, action: {})
             }
         } else {
-            VStack(alignment: .leading, spacing: 0.0) {
+            VStack(alignment: .center) {
                 Spacer()
                 ContentUnavailableView("Error.NoImage", systemImage: "photo.badge.exclamationmark.fill")
-                    .padding()
+                Button(role: .close, action: close)
+                    .controlSize(.large)
+                    .buttonStyle(.glass)
                 Spacer()
-                Divider()
-                closeButton(isProminent: true)
-                    .padding()
             }
+            .padding()
         }
     }
 
-    @ViewBuilder func saveButton() -> some View {
-        Button {
-            save()
-        } label: {
-            #if !targetEnvironment(macCatalyst)
-            ButtonLabel("Shared.Save", icon: "square.and.arrow.down")
-            #else
-            Text("Shared.Save")
-            #endif
+    @ViewBuilder
+    func noAccessView() -> some View {
+        VStack(alignment: .center) {
+            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
+                .symbolRenderingMode(.multicolor)
+            Button(role: .close, action: close)
+                .controlSize(.large)
+                .buttonStyle(.glass)
         }
-        #if targetEnvironment(macCatalyst)
-        .controlSize(.large)
-        #endif
-        .buttonStyle(.borderedProminent)
-        .disabled(selectedCollection == nil || isPhotoSaving)
-        #if !targetEnvironment(macCatalyst)
-        .clipShape(.capsule)
-        #endif
-    }
-
-    @ViewBuilder func closeButton(isProminent: Bool = false) -> some View {
-        let button = Button {
-            close()
-        } label: {
-            #if !targetEnvironment(macCatalyst)
-            ButtonLabel("Shared.Cancel", icon: "xmark")
-            #else
-            Text("Shared.Cancel")
-            #endif
-        }
-        #if targetEnvironment(macCatalyst)
-            .controlSize(.large)
-        #endif
-        Group {
-            if isProminent {
-                button
-                    .buttonStyle(.borderedProminent)
-            } else {
-                button
-                    .buttonStyle(.bordered)
-            }
-        }
-        #if !targetEnvironment(macCatalyst)
-        .clipShape(.capsule)
-        #endif
-        .disabled(isPhotoSaving)
-    }
-
-    func close() {
-        NotificationCenter.default.post(name: NSNotification.Name("close"), object: nil)
     }
 
     func save() {
-        if let imageData, let selectedCollection {
+        if !isPhotoSaving, let imageData, let selectedCollection {
             isPhotoSaving = true
             Task {
                 let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
@@ -177,7 +142,9 @@ struct ShareView: View {
                         closeWithHaptics(shouldWait: false)
                     }
                 } else {
+                    #if os(iOS)
                     UINotificationFeedbackGenerator().notificationOccurred(.error)
+                    #endif
                     isPhotoSaving = false
                     isPhotoSaveFailed = true
                 }
@@ -188,7 +155,9 @@ struct ShareView: View {
     }
 
     func closeWithHaptics(shouldWait: Bool = true) {
+        #if os(iOS)
         UINotificationFeedbackGenerator().notificationOccurred(.success)
+        #endif
         if shouldWait {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 close()

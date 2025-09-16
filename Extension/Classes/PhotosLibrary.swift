@@ -6,7 +6,11 @@
 //
 
 import Photos
+#if os(macOS)
+import AppKit
+#else
 import UIKit
+#endif
 
 class PhotosLibrary {
 
@@ -140,7 +144,7 @@ class PhotosLibrary {
         return images(in: album).first
     }
 
-    static func image(from asset: PHAsset, completion: @escaping (UIImage?) -> Void) {
+    static func image(from asset: PHAsset, completion: @escaping (XPImage?) -> Void) {
         let options = PHImageRequestOptions()
         options.version = .current
         options.resizeMode = .fast
@@ -158,7 +162,7 @@ class PhotosLibrary {
     }
 
     static func saveImage(data: Data, to album: PHAssetCollection) async -> Bool {
-        guard let image = UIImage(data: data) else { return false }
+        guard let image = XPImage(data: data) else { return false }
         do {
             try await PHPhotoLibrary.shared().performChanges {
                 let imageRequest: PHAssetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)

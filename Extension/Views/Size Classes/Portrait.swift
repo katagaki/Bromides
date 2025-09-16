@@ -9,7 +9,7 @@ import Komponents
 import SwiftUI
 
 extension ShareView {
-    @ViewBuilder func portraitView(previewImage: UIImage) -> some View {
+    @ViewBuilder func portraitView(previewImage: XPImage) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
             ImagePreview(previewImage)
                 .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: 160.0)
@@ -24,34 +24,13 @@ extension ShareView {
                 ZStack(alignment: .center) {
                     if isPhotosAuthorizationComplete {
                         if isPhotosAuthorizationDenied {
-                            ContentUnavailableView("Error.PhotosAccess", systemImage: "xmark.circle.fill")
-                                .symbolRenderingMode(.multicolor)
+                            noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection)
+                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
                                 .matchedGeometryEffect(
                                     id: "@$_bromidesPrivateIdentifier_albumBrowser",
                                     in: namespace
                                 )
-                                .safeAreaInset(edge: .bottom, spacing: 0.0) {
-                                    BarAccessory(placement: .bottom, isBackgroundSolid: false) {
-                                        VStack(spacing: 16.0) {
-                                            SearchField($navigator.searchTerm)
-                                            HStack {
-                                                saveButton()
-                                                    .matchedGeometryEffect(
-                                                        id: "@$_bromidesPrivateIdentifier_save",
-                                                        in: namespace
-                                                    )
-                                                closeButton()
-                                                    .matchedGeometryEffect(
-                                                        id: "@$_bromidesPrivateIdentifier_close",
-                                                        in: namespace
-                                                    )
-                                            }
-                                            .padding([.leading, .trailing, .bottom])
-                                        }
-                                    }
-                                }
                                 .id("@$_bromidesPrivateIdentifier_albumBrowser")
                         }
                     } else {

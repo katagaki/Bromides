@@ -19,12 +19,16 @@ extension Color {
           hash = Int(char.value) + ((hash << 5) - hash)
       }
       let finalHash = abs(hash) % (256*256*256)
-      let color = UIColor(
+      let color = XPColor(
         red: max(CGFloat(0.2), CGFloat((finalHash & 0xFF0000) >> 16) / 255.0),
         green: max(CGFloat(0.2), CGFloat((finalHash & 0xFF00) >> 8) / 255.0),
         blue: max(CGFloat(0.2), CGFloat((finalHash & 0xFF)) / 255.0),
         alpha: 1.0
       )
+      #if os(macOS)
+      self.init(nsColor: color)
+      #else
       self.init(uiColor: color)
+      #endif
   }
 }

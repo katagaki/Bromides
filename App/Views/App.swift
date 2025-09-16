@@ -11,16 +11,21 @@ import SwiftUI
 struct BromidesApp: App {
     var body: some Scene {
         WindowGroup {
-            #if !targetEnvironment(macCatalyst)
-            OnboardingView()
-            #else
+            #if os(macOS)
             MacOnboardingView()
                 .frame(width: 600.0, height: 400.0)
+                .onAppear {
+                    NSWindow.allowsAutomaticWindowTabbing = false
+                }
+            #else
+            OnboardingView()
             #endif
         }
-        #if targetEnvironment(macCatalyst)
+        #if os(macOS)
         .windowResizability(.contentSize)
-        .commandsRemoved()
+        .commands {
+            CommandGroup(replacing: .newItem) { }
+        }
         #endif
     }
 }

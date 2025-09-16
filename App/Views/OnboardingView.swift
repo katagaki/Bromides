@@ -25,10 +25,9 @@ struct OnboardingView: View {
                             .multilineTextAlignment(.center)
                         Image(systemName: "arrow.down")
                             .font(.title2)
-                        Image(.appIconMasked)
+                        Image(.onboardingIcon)
                             .resizable()
                             .frame(width: 64.0, height: 64.0)
-                            .clipShape(.rect(cornerRadius: 14.0))
                             .shadow(radius: 2.0, y: 2.0)
                         Text("Onboarding.2")
                             .multilineTextAlignment(.center)
@@ -73,6 +72,7 @@ struct OnboardingView: View {
                     }
                 }
             }
+            #if os(iOS)
             .listSectionSpacing(.compact)
             .scrollContentBackground(.hidden)
             .background(
@@ -82,13 +82,14 @@ struct OnboardingView: View {
                     endPoint: .bottom
                 )
             )
+            #endif
             .navigationTitle("Bromides")
             .safeAreaInset(edge: .bottom, spacing: 0.0) {
                 ShareLink(
-                    item: Image(uiImage: UIImage(resource: .sample)),
+                    item: Image(xpImage: XPImage(resource: .sample)),
                     preview: SharePreview(
                         "Shared.SamplePhoto",
-                        image: Image(uiImage: UIImage(resource: .sample))
+                        image: Image(xpImage: XPImage(resource: .sample))
                     )
                 ) {
                     Label("Onboarding.Share", systemImage: "square.and.arrow.up")
@@ -97,7 +98,7 @@ struct OnboardingView: View {
                         .frame(maxWidth: .infinity)
                         .bold()
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.glassProminent)
                 .clipShape(.capsule)
                 .shadow(color: .black.opacity(0.3), radius: 4.0, y: 3.0)
                 .padding()

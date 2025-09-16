@@ -9,33 +9,29 @@ import Foundation
 import Observation
 
 @Observable
-class Navigator {
+class Navigator: @unchecked Sendable {
     var viewPath: [Collection] = []
     var searchTerm: String = ""
+    var debouncingSearchTerm: String = ""
 
-    func isSearching() -> Bool {
-        if let lastViewPath = viewPath.last {
-            return lastViewPath == .search
-        }
-        return false
+    @ObservationIgnored var timer: Timer?
+
+    var isSearching: Bool {
+        return searchTerm.trimmingCharacters(in: .whitespaces) != ""
     }
 
-    func startSearching() {
-        if !viewPath.contains(.search) {
-            viewPath.append(.search)
-        }
-    }
-
-    func stopSearching() {
-        if let searchViewPath = viewPath.firstIndex(of: .search) {
-            viewPath.remove(
-                atOffsets: IndexSet(
-                    searchViewPath...(viewPath.count - 1)
-                )
-            )
-        }
-        if !searchTerm.trimmingCharacters(in: .whitespaces).isEmpty {
+    func debounceSearch() {
+        if debouncingSearchTerm.trimmingCharacters(in: .whitespaces) == "" {
             searchTerm = ""
+        } else if debouncingSearchTerm == searchTerm {
+            return
+        } else {
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(
+                withTimeInterval: 0.2, repeats: false
+            ) { _ in
+                self.searchTerm = self.debouncingSearchTerm
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct CollectionCover: View {
     var collection: Collection
     var iconSize: CGFloat
-    @State var thumbnail: UIImage?
+    @State var thumbnail: XPImage?
 
     init(_ collection: Collection, iconSize: CGFloat) {
         self.collection = collection
@@ -23,7 +23,7 @@ struct CollectionCover: View {
             switch collection {
             case .album:
                 if let thumbnail {
-                    Image(uiImage: thumbnail)
+                    Image(xpImage: thumbnail)
                         .resizable()
                 } else {
                     GenericThumbnail(

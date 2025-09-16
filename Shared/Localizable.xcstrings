@@ -418,39 +418,15 @@
     "Settings.AutoOpenKeyboard" : {
       "localizations" : {
         "en" : {
-          "variations" : {
-            "device" : {
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Make Search Bar Active on Launch"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Open Keyboard on Launch"
-                }
-              }
-            }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Search When Sharing"
           }
         },
         "ja" : {
-          "variations" : {
-            "device" : {
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "起動時に検索バーを有効化"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "起動時にキーボードを開く"
-                }
-              }
-            }
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "起動時に検索を開始"
           }
         }
       }
@@ -460,7 +436,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatically Select Sole Search Result"
+            "value" : "Automatically Select Search Result"
           }
         },
         "ja" : {
@@ -618,18 +594,18 @@
         }
       }
     },
-    "Shared.AlbumOrFolderName.%@" : {
+    "Shared.AlbumOrFolderName" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ Album Name"
+            "value" : "Album Name"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ アルバム名"
+            "value" : "アルバム名"
           }
         }
       }
@@ -662,22 +638,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "作成"
-          }
-        }
-      }
-    },
-    "Shared.Dismiss" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dismiss"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "閉じる"
           }
         }
       }

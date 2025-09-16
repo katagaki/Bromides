@@ -12,30 +12,96 @@ struct CollectionsStack: View {
     @Binding var navigator: Navigator
     @Binding var selectedCollection: PHAssetCollection?
 
-    init(_ navigator: Binding<Navigator>, selection selectedCollection: Binding<PHAssetCollection?>) {
+    @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
+    @FocusState var isSearchFieldFocused: Bool
+
+    #if !os(macOS)
+    @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
+    var recentAlbums: [String] {
+        let recentAlbums: [String] = (try? JSONDecoder().decode(
+            [String].self,
+            from: recentAlbumsData
+        )) ?? []
+        return recentAlbums.reversed()
+    }
+    #endif
+
+    var saveAction: () -> Void
+
+    init(
+        _ navigator: Binding<Navigator>,
+        selection selectedCollection: Binding<PHAssetCollection?>,
+        saveAction: @escaping () -> Void
+    ) {
         self._navigator = navigator
         self._selectedCollection = selectedCollection
+        self.saveAction = saveAction
+        #if !os(macOS)
+        UITextField.appearance().clearButtonMode = .whileEditing
+        #endif
     }
 
     var body: some View {
         NavigationStack(path: $navigator.viewPath) {
-            CollectionView(selection: $selectedCollection)
+            @Bindable var navigator = navigator
+            CollectionView(selection: $selectedCollection, saveAction: saveAction)
                 .environment(navigator)
+                #if os(macOS)
+                // Show custom toolbar and search bar on macOS
+                // (NavigationStack title/back button/toolbars aren't available in share sheet)
+                .toolbarForMac(
+                    navigator: self.$navigator,
+                    isSearchFieldFocused: $isSearchFieldFocused
+                )
+                #else
+                // Use native search features on iOS
+                .searchable(
+                    text: $navigator.debouncingSearchTerm,
+                    prompt: "Shared.AlbumOrFolderName"
+                )
+                .safeAreaInset(edge: .bottom, spacing: 0.0) {
+                    if !recentAlbums.isEmpty && isSearchFieldFocused {
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 6.0) {
+                                ForEach(recentAlbums, id: \.self) { albumName in
+                                    Button {
+                                        navigator.searchTerm = albumName
+                                        navigator.debouncingSearchTerm = albumName
+                                        isSearchFieldFocused = false
+                                    } label: {
+                                        Text(albumName)
+                                            .font(.subheadline)
+                                            .padding(.horizontal, 10.0)
+                                            .padding(.vertical, 6.0)
+                                            .lineLimit(1)
+                                    }
+                                    .clipShape(.capsule)
+                                    .buttonStyle(.glass)
+                                }
+                            }
+                            .padding(.horizontal)
+                            .padding(.bottom, 10.0)
+                            .padding(.top, 1.0)
+                        }
+                        .scrollIndicators(.hidden)
+                    }
+                }
+                .searchFocused($isSearchFieldFocused)
+                .scrollDismissesKeyboard(.never)
+                #endif
                 .navigationDestination(for: Collection.self) { collection in
-                    CollectionView(collection, selection: $selectedCollection)
+                    CollectionView(collection, selection: $selectedCollection, saveAction: saveAction)
                         .environment(navigator)
+                        .toolbarForMac(
+                            navigator: self.$navigator,
+                            isSearchFieldFocused: $isSearchFieldFocused,
+                            hasSearchBar: false
+                        )
                 }
         }
-        .onChange(of: navigator.searchTerm) { _, newValue in
-            if !newValue.trimmingCharacters(in: .whitespaces).isEmpty {
-                navigator.startSearching()
-            } else if newValue.trimmingCharacters(in: .whitespaces).isEmpty {
-                navigator.stopSearching()
-            }
-        }
-        .onChange(of: navigator.viewPath) { oldValue, newValue in
-            if oldValue.contains(.search) && !newValue.contains(.search) {
-                navigator.stopSearching()
+        .onAppear {
+            if autoOpenKeyboard {
+                isSearchFieldFocused = true
             }
         }
     }
