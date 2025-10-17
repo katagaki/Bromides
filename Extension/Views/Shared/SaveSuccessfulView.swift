@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SaveSuccessfulView: View {
     var navigator: Navigator
+    
+    @State private var albumNames: String = ""
 
     init(_ navigator: Navigator) {
         self.navigator = navigator
@@ -25,12 +27,16 @@ struct SaveSuccessfulView: View {
             if navigator.selectedAlbumIdentifiers.isEmpty {
                 Text("Message.Save.CameraRoll")
                     .bold()
-            } else {
-                let albums = PhotosLibrary.albumsFromIdentifiers(Array(navigator.selectedAlbumIdentifiers))
-                let albumNames = albums.compactMap { $0.localizedTitle }.joined(separator: ", ")
+            } else if !albumNames.isEmpty {
                 Text("Message.Save.\(albumNames)")
                     .bold()
                     .multilineTextAlignment(.center)
+            }
+        }
+        .task {
+            if !navigator.selectedAlbumIdentifiers.isEmpty {
+                let albums = PhotosLibrary.albumsFromIdentifiers(Array(navigator.selectedAlbumIdentifiers))
+                albumNames = albums.compactMap { $0.localizedTitle }.joined(separator: ", ")
             }
         }
     }

@@ -1,364 +1,324 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "About.Developer" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Thank you for using Bromides!"
+  "sourceLanguage": "en",
+  "strings": {
+    "About.Developer": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thank you for using Bromides!"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「ブロマイド」をご利用いただきありがとうございます！"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「ブロマイド」をご利用いただきありがとうございます！"
           }
         }
       }
     },
-    "About.SourceCode" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Read Bromide’s source code:"
+    "About.SourceCode": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read Bromide’s source code:"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ソースコードを閲覧："
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソースコードを閲覧："
           }
         }
       }
     },
-    "About.Title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About"
+    "About.Title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "About"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アプリ情報"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリ情報"
           }
         }
       }
     },
-    "Alert.CreateAlbum" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create New Album"
+    "Alert.CreateAlbum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create New Album"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新規アルバム"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規アルバム"
           }
         }
       }
     },
-    "Alert.CreateAlbum.Name" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Album Name"
+    "Alert.CreateAlbum.Name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Album Name"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバム名"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバム名"
           }
         }
       }
     },
-    "Alert.CreateFolder" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create New Folder"
+    "Alert.CreateFolder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create New Folder"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新規フォルダー"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規フォルダー"
           }
         }
       }
     },
-    "Alert.CreateFolder.Name" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Folder Name"
+    "Alert.CreateFolder.Name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Folder Name"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "フォルダー名"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダー名"
           }
         }
       }
     },
-    "Bromides" : {
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ブロマイド"
+    "Bromides": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロマイド"
           }
         }
       }
     },
-    "EnableExtension.1" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open “System Settings”, and select \"General\""
+    "EnableExtension.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open “System Settings”, and select \"General\""
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「システム設定」アプリを開き、「一般」画面に移動"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「システム設定」アプリを開き、「一般」画面に移動"
           }
         }
       }
     },
-    "EnableExtension.2" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select “Login Items & Extensions\""
+    "EnableExtension.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select “Login Items & Extensions\""
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「ログイン項目と拡張機能」を選択"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「ログイン項目と拡張機能」を選択"
           }
         }
       }
     },
-    "EnableExtension.3" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Scroll down and turn on “Bromides” in “Actions” and “Sharing”"
+    "EnableExtension.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scroll down and turn on “Bromides” in “Actions” and “Sharing”"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "下にスクロールし、「アクション」と「共有」の画面で「ブロマイド」を有効化"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下にスクロールし、「アクション」と「共有」の画面で「ブロマイド」を有効化"
           }
         }
       }
     },
-    "EnableExtension.OpenSystemSettings" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open System Settings"
+    "EnableExtension.OpenSystemSettings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「システム設定」を開く"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「システム設定」を開く"
           }
         }
       }
     },
-    "EnableExtension.Title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get Started"
+    "EnableExtension.Title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Started"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "準備"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "準備"
           }
         }
       }
     },
-    "Error.NoAlbums" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No albums found"
+    "Error.NoAlbums": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No albums found"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバムがありません"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバムがありません"
           }
         }
       }
     },
-    "Error.NoImage" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not load image"
+    "Error.NoImage": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not load image"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "画像の読み込みができませんでした"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像の読み込みができませんでした"
           }
         }
       }
     },
-    "Error.PhotosAccess" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not access your Photos library"
+    "Error.PhotosAccess": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not access your Photos library"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "写真ライブラリにアクセスできませんでした"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真ライブラリにアクセスできませんでした"
           }
         }
       }
     },
-    "Error.SaveFailed" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Could not save photo to album. Please try again or select another album."
+    "Error.SaveFailed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not save photo to album. Please try again or select another album."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "写真がアルバムに保存できませんでした。他のアルバムを選択する、または再度お試しください。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真がアルバムに保存できませんでした。他のアルバムを選択する、または再度お試しください。"
           }
         }
       }
     },
-    "katagaki/Bromides" : {
-      "shouldTranslate" : false
+    "katagaki/Bromides": {
+      "shouldTranslate": false
     },
-    "Message.Save.%@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saved to ‘%@’"
+    "Message.Save.%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to ‘%@’"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "「%@」に保存しました"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」に保存しました"
           }
         }
       }
     },
-    "Onboarding.1.%@" : {
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "device" : {
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Share %@ a photo from any other app"
+    "Onboarding.1.%@": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "device": {
+              "mac": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Share %@ a photo from any other app"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Tap the %@ icon on a photo from any other app"
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Tap the %@ icon on a photo from any other app"
                 }
               }
             }
           }
         },
-        "ja" : {
-          "variations" : {
-            "device" : {
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "他のアプリから写真を共有 %@"
+        "ja": {
+          "variations": {
+            "device": {
+              "mac": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "他のアプリから写真を共有 %@"
                 }
               },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "他のアプリで写真の「%@」アイコンをタッチ"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "Onboarding.2" : {
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "device" : {
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Select ‘Bromides’ or ‘Save to Album’"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Tap ‘Bromides’ or ‘Save to Album’"
-                }
-              }
-            }
-          }
-        },
-        "ja" : {
-          "variations" : {
-            "device" : {
-              "mac" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "「ブロマイド」または「アルバムに保存」を選択"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "「ブロマイド」または「アルバムに保存」をタッチ"
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "他のアプリで写真の「%@」アイコンをタッチ"
                 }
               }
             }
@@ -366,413 +326,469 @@
         }
       }
     },
-    "Onboarding.3" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select an album"
+    "Onboarding.2": {
+      "localizations": {
+        "en": {
+          "variations": {
+            "device": {
+              "mac": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Select ‘Bromides’ or ‘Save to Album’"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "Tap ‘Bromides’ or ‘Save to Album’"
+                }
+              }
+            }
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバムを選択"
+        "ja": {
+          "variations": {
+            "device": {
+              "mac": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "「ブロマイド」または「アルバムに保存」を選択"
+                }
+              },
+              "other": {
+                "stringUnit": {
+                  "state": "translated",
+                  "value": "「ブロマイド」または「アルバムに保存」をタッチ"
+                }
+              }
+            }
           }
         }
       }
     },
-    "Onboarding.Share" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Try It"
+    "Onboarding.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select an album"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "試してみる"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバムを選択"
           }
         }
       }
     },
-    "Onboarding.Title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "How to Use"
+    "Onboarding.Share": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try It"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使い方"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "試してみる"
           }
         }
       }
     },
-    "Settings.AutoOpenKeyboard" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Open Search When Sharing"
+    "Onboarding.Title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How to Use"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "起動時に検索を開始"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使い方"
           }
         }
       }
     },
-    "Settings.AutoSelectFirstSearchResult" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatically Select Search Result"
+    "Settings.AutoOpenKeyboard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Search When Sharing"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "検索結果が一件の場合自動的に選択"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "起動時に検索を開始"
           }
         }
       }
     },
-    "Settings.DisplayMode" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album Display Style"
+    "Settings.AutoSelectFirstSearchResult": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatically Select Search Result"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバム表示"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索結果が一件の場合自動的に選択"
           }
         }
       }
     },
-    "Settings.DisplayMode.Grid" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Grid"
+    "Settings.DisplayMode": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Album Display Style"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "グリッド"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバム表示"
           }
         }
       }
     },
-    "Settings.DisplayMode.List" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "List"
+    "Settings.DisplayMode.Grid": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grid"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "リスト"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "グリッド"
           }
         }
       }
     },
-    "Settings.DisplayMode.Panels" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Panels"
+    "Settings.DisplayMode.List": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "パネル"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リスト"
           }
         }
       }
     },
-    "Settings.EnableSaveAnimation" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show Animation When Saving"
+    "Settings.DisplayMode.Panels": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panels"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存時にアニメーションを再生"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル"
           }
         }
       }
     },
-    "Settings.GitHub" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Source Code"
+    "Settings.EnableSaveAnimation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show Animation When Saving"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ソースコード"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存時にアニメーションを再生"
           }
         }
       }
     },
-    "Settings.SaveRecents" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Remember Recent Albums"
+    "Settings.GitHub": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source Code"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "最近使用したアルバムを記憶"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソースコード"
           }
         }
       }
     },
-    "Settings.Title" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Settings"
+    "Settings.SaveRecents": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remember Recent Albums"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "設定"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近使用したアルバムを記憶"
           }
         }
       }
     },
-    "Shared.Album" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album"
+    "Settings.Title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバム"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
           }
         }
       }
     },
-    "Shared.AlbumOrFolderName" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Album Name"
+    "Shared.Album": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Album"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバム名"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバム"
           }
         }
       }
     },
-    "Shared.Cancel" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
+    "Shared.AlbumOrFolderName": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Album Name"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キャンセル"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバム名"
           }
         }
       }
     },
-    "Shared.Create" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Create"
+    "Shared.Cancel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "作成"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
           }
         }
       }
     },
-    "Shared.Folder" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Folder"
+    "Shared.Create": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "フォルダー"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成"
           }
         }
       }
     },
-    "Shared.New" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New"
+    "Shared.Folder": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "新規"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダー"
           }
         }
       }
     },
-    "Shared.NewAlbum" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Album"
+    "Shared.New": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバムを作成"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新規"
           }
         }
       }
     },
-    "Shared.NewFolder" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New Folder"
+    "Shared.NewAlbum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Album"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "フォルダーを作成"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバムを作成"
           }
         }
       }
     },
-    "Shared.SamplePhoto" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Photo of a Delicious Melon"
+    "Shared.NewFolder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New Folder"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "美味しいメロンの写真"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダーを作成"
           }
         }
       }
     },
-    "Shared.Save" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save"
+    "Shared.SamplePhoto": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Photo of a Delicious Melon"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "美味しいメロンの写真"
           }
         }
       }
     },
-    "Shared.SearchResults" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Search Results"
+    "Shared.Save": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "検索結果"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
           }
         }
       }
     },
-    "ViewTitle.SelectAnAlbum" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Select an Album"
+    "Shared.SearchResults": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search Results"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "アルバムを選択"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索結果"
+          }
+        }
+      }
+    },
+    "ViewTitle.SelectAnAlbum": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select an Album"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバムを選択"
+          }
+        }
+      }
+    },
+    "Message.Save.CameraRoll": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saved to Camera Roll"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラロールに保存しました"
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }
