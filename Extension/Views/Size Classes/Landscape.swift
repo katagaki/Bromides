@@ -17,7 +17,7 @@ extension ShareView {
                     .frame(maxWidth: .infinity, minHeight: 160.0, maxHeight: .infinity)
                     .matchedGeometryEffect(id: "@$_bromidesPrivateIdentifier_preview", in: namespace)
                 if isPhotoSaveSuccessful {
-                    SaveSuccessfulView(selectedCollection)
+                    SaveSuccessfulView(navigator)
                         .frame(maxWidth: .infinity)
                         .padding()
                     Spacer()
@@ -31,7 +31,7 @@ extension ShareView {
                         if isPhotosAuthorizationDenied {
                             noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
+                            CollectionsStack($navigator, saveAction: save)
                                 .matchedGeometryEffect(
                                     id: "@$_bromidesPrivateIdentifier_albumBrowser",
                                     in: namespace

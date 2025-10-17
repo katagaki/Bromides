@@ -10,14 +10,14 @@ import SwiftUI
 
 struct CollectionGrid: View {
     var collections: [Collection]?
-    @Binding var selectedCollection: PHAssetCollection?
+    var navigator: Navigator
 
     init(
         _ collections: [Collection]?,
-        selection selectedCollection: Binding<PHAssetCollection?>
+        navigator: Navigator
     ) {
         self.collections = collections
-        self._selectedCollection = selectedCollection
+        self.navigator = navigator
     }
 
     var body: some View {
@@ -29,18 +29,20 @@ struct CollectionGrid: View {
                 ForEach(collections ?? []) { collection in
                     switch collection {
                     case .album(let album):
-                        Button {
-                            withAnimation(.smooth.speed(2.0)) {
-                                selectedCollection = album as? PHAssetCollection
+                        if let album = album as? PHAssetCollection {
+                            Button {
+                                withAnimation(.smooth.speed(2.0)) {
+                                    navigator.toggleAlbumSelection(album)
+                                }
+                            } label: {
+                                CollectionButtonLabel(
+                                    collection: collection,
+                                    mode: .grid,
+                                    isSelected: { navigator.isAlbumSelected(album) }
+                                )
                             }
-                        } label: {
-                            CollectionButtonLabel(
-                                collection: collection,
-                                mode: .grid,
-                                isSelected: { selectedCollection == album }
-                            )
+                            .buttonStyle(.plain)
                         }
-                        .buttonStyle(.plain)
                     case .folder:
                         NavigationLink(value: collection) {
                             CollectionButtonLabel(

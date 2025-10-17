@@ -9,10 +9,10 @@ import Photos
 import SwiftUI
 
 struct SaveSuccessfulView: View {
-    var selectedCollection: PHAssetCollection?
+    var navigator: Navigator
 
-    init(_ selectedCollection: PHAssetCollection? = nil) {
-        self.selectedCollection = selectedCollection
+    init(_ navigator: Navigator) {
+        self.navigator = navigator
     }
 
     var body: some View {
@@ -21,10 +21,17 @@ struct SaveSuccessfulView: View {
                 .resizable()
                 .frame(width: 48.0, height: 48.0)
                 .symbolRenderingMode(.multicolor)
-            Text("""
-Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))
-""")
-                .bold()
+            
+            if navigator.selectedAlbumIdentifiers.isEmpty {
+                Text("Message.Save.CameraRoll")
+                    .bold()
+            } else {
+                let albums = PhotosLibrary.albumsFromIdentifiers(Array(navigator.selectedAlbumIdentifiers))
+                let albumNames = albums.compactMap { $0.localizedTitle }.joined(separator: ", ")
+                Text("Message.Save.\(albumNames)")
+                    .bold()
+                    .multilineTextAlignment(.center)
+            }
         }
     }
 }

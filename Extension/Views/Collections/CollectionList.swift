@@ -10,14 +10,14 @@ import SwiftUI
 
 struct CollectionList: View {
     var collections: [Collection]?
-    @Binding var selectedCollection: PHAssetCollection?
+    var navigator: Navigator
 
     init(
         _ collections: [Collection]?,
-        selection selectedCollection: Binding<PHAssetCollection?>
+        navigator: Navigator
     ) {
         self.collections = collections
-        self._selectedCollection = selectedCollection
+        self.navigator = navigator
     }
 
     var body: some View {
@@ -25,24 +25,26 @@ struct CollectionList: View {
             Group {
                 switch collection {
                 case .album(let album):
-                    Button {
-                        withAnimation(.smooth.speed(2.0)) {
-                            selectedCollection = album as? PHAssetCollection
+                    if let album = album as? PHAssetCollection {
+                        Button {
+                            withAnimation(.smooth.speed(2.0)) {
+                                navigator.toggleAlbumSelection(album)
+                            }
+                        } label: {
+                            CollectionButtonLabel(
+                                collection: collection,
+                                mode: .list,
+                                isSelected: { navigator.isAlbumSelected(album) }
+                            )
+                            #if os(macOS)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(.rect)
+                            #endif
                         }
-                    } label: {
-                        CollectionButtonLabel(
-                            collection: collection,
-                            mode: .list,
-                            isSelected: { selectedCollection == album }
-                        )
                         #if os(macOS)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .contentShape(.rect)
+                        .buttonStyle(.plain)
                         #endif
                     }
-                    #if os(macOS)
-                    .buttonStyle(.plain)
-                    #endif
                 case .folder:
                     NavigationLink(value: collection) {
                         CollectionButtonLabel(

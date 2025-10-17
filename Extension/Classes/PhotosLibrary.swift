@@ -139,6 +139,18 @@ class PhotosLibrary {
         }
         return photos
     }
+    
+    static func albumsFromIdentifiers(_ identifiers: [String]) -> [PHAssetCollection] {
+        let fetchResult = PHAssetCollection.fetchAssetCollections(
+            withLocalIdentifiers: identifiers,
+            options: nil
+        )
+        var albums: [PHAssetCollection] = []
+        fetchResult.enumerateObjects { (collection, _, _) in
+            albums.append(collection)
+        }
+        return albums
+    }
 
     static func thumbnail(in album: PHAssetCollection) -> PHAsset? {
         return images(in: album).first
@@ -170,6 +182,41 @@ class PhotosLibrary {
                 let albumRequest = PHAssetCollectionChangeRequest(for: album)
                 let enumeration: NSArray = [placeholder!]
                 albumRequest!.addAssets(enumeration)
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+    }
+    
+    static func saveImage(data: Data, to albums: [PHAssetCollection]) async -> Bool {
+        guard let image = XPImage(data: data) else { return false }
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                let imageRequest: PHAssetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+                let placeholder: PHObjectPlaceholder? = imageRequest.placeholderForCreatedAsset
+                
+                // Add to each selected album
+                for album in albums {
+                    if let albumRequest = PHAssetCollectionChangeRequest(for: album) {
+                        let enumeration: NSArray = [placeholder!]
+                        albumRequest.addAssets(enumeration)
+                    }
+                }
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+    }
+    
+    static func saveImageToCameraRoll(data: Data) async -> Bool {
+        guard let image = XPImage(data: data) else { return false }
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                _ = PHAssetChangeRequest.creationRequestForAsset(from: image)
             }
             return true
         } catch {

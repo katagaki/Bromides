@@ -28,44 +28,47 @@ struct CollectionView: View {
 
     var saveAction: () -> Void
 
-    @Binding var selectedCollection: PHAssetCollection?
+    @Binding var navigatorBinding: Navigator
 
     init(
         _ collection: Collection? = nil,
-        selection: Binding<PHAssetCollection?>,
+        navigator: Binding<Navigator>,
         saveAction: @escaping () -> Void
     ) {
         self.displayedCollection = collection
-        self._selectedCollection = selection
+        self._navigatorBinding = navigator
         self.saveAction = saveAction
     }
 
     init(
         searchTerm: String,
-        selection: Binding<PHAssetCollection?>,
+        navigator: Binding<Navigator>,
         saveAction: @escaping () -> Void
     ) {
         self.displayedCollection = .search
-        self._selectedCollection = selection
+        self._navigatorBinding = navigator
         self.searchTerm = searchTerm
         self.saveAction = saveAction
     }
 
     var body: some View {
-        Group {
-            switch displayMode {
-            case .grid:
-                CollectionGrid(collections, selection: $selectedCollection)
-            case .list:
-                CollectionList(collections, selection: $selectedCollection)
-            case .panels:
-                CollectionPanels(collections, selection: $selectedCollection)
+        VStack(spacing: 0.0) {
+            SelectedAlbumsView(navigator: $navigatorBinding)
+            Group {
+                switch displayMode {
+                case .grid:
+                    CollectionGrid(collections, navigator: navigatorBinding)
+                case .list:
+                    CollectionList(collections, navigator: navigatorBinding)
+                case .panels:
+                    CollectionPanels(collections, navigator: navigatorBinding)
+                }
             }
-        }
-        .overlay {
-            if let collections, collections.isEmpty {
-                ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
-                    .symbolRenderingMode(.multicolor)
+            .overlay {
+                if let collections, collections.isEmpty {
+                    ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
+                        .symbolRenderingMode(.multicolor)
+                }
             }
         }
         .navigationTitle(displayedCollection == nil ?
@@ -114,9 +117,6 @@ struct CollectionView: View {
         .task {
             reloadCollections(animate: false)
         }
-        .onAppear {
-            checkAndResetSelection()
-        }
         .onChange(of: navigator.searchTerm) { _, _ in
             if navigator.isSearching {
                 self.displayedCollection = .search
@@ -124,9 +124,6 @@ struct CollectionView: View {
                 self.displayedCollection = nil
             }
             reloadCollections()
-        }
-        .onChange(of: collections) { _, _ in
-            checkAndResetSelection()
         }
         .alert("Alert.CreateAlbum", isPresented: $isCreatingAlbum) {
             TextField("Alert.CreateAlbum.Name", text: $newCollectionName)
@@ -153,21 +150,15 @@ struct CollectionView: View {
                 if autoSelectFirstSearchResult, let collections, collections.count == 1 {
                     switch collections.first {
                     case .album(let album):
-                        selectedCollection = album as? PHAssetCollection
+                        if let album = album as? PHAssetCollection {
+                            navigatorBinding.toggleAlbumSelection(album)
+                        }
                     default: break
                     }
                 }
             } else {
                 collections = PhotosLibrary.albumsAndFolders(in: displayedCollection)
             }
-        }
-    }
-
-    func checkAndResetSelection() {
-        if !(collections ?? []).contains(where: {
-            $0.id == selectedCollection?.localIdentifier
-        }) {
-            selectedCollection = nil
         }
     }
 
@@ -254,7 +245,6 @@ struct CollectionView: View {
             )
             #endif
         }
-        .disabled(selectedCollection == nil)
     }
 
     @ViewBuilder

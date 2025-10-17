@@ -22,7 +22,6 @@ struct ShareView: View {
     var imageData: Data?
     var previewImage: XPImage?
 
-    @State var selectedCollection: PHAssetCollection?
     @State var isPhotoSaving: Bool = false
     @State var isPhotoSaveSuccessful: Bool = false
     @State var isPhotoSaveFailed: Bool = false
@@ -108,29 +107,40 @@ struct ShareView: View {
     }
 
     func save() {
-        if !isPhotoSaving, let imageData, let selectedCollection {
+        if !isPhotoSaving, let imageData {
             isPhotoSaving = true
             Task {
-                let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
-                    data: imageData,
-                    to: selectedCollection
-                )
+                let isPhotoSaved: Bool
+                let selectedAlbumIdentifiers = navigator.selectedAlbumIdentifiers
+                
+                if selectedAlbumIdentifiers.isEmpty {
+                    // Save to camera roll only
+                    isPhotoSaved = await PhotosLibrary.saveImageToCameraRoll(data: imageData)
+                } else {
+                    // Get all selected albums
+                    let selectedAlbums = PhotosLibrary.albumsFromIdentifiers(Array(selectedAlbumIdentifiers))
+                    isPhotoSaved = await PhotosLibrary.saveImage(data: imageData, to: selectedAlbums)
+                }
+                
                 if isPhotoSaved {
-                    if saveRecentAlbums {
-                        if let albumName = selectedCollection.localizedTitle {
-                            var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
-                                [String].self,
-                                from: recentAlbumsData
-                            )) ?? []
-                            if existingRecentAlbums.contains(where: { $0 == albumName}) {
-                                existingRecentAlbums.removeAll(where: { $0 == albumName})
+                    if saveRecentAlbums && !selectedAlbumIdentifiers.isEmpty {
+                        let selectedAlbums = PhotosLibrary.albumsFromIdentifiers(Array(selectedAlbumIdentifiers))
+                        var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
+                            [String].self,
+                            from: recentAlbumsData
+                        )) ?? []
+                        
+                        for album in selectedAlbums {
+                            if let albumName = album.localizedTitle {
+                                existingRecentAlbums.removeAll(where: { $0 == albumName })
+                                existingRecentAlbums.append(albumName)
                             }
-                            existingRecentAlbums.append(albumName)
-                            if existingRecentAlbums.count > 10 {
-                                existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
-                            }
-                            recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
                         }
+                        
+                        if existingRecentAlbums.count > 10 {
+                            existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
+                        }
+                        recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
                     }
                     if showSaveAnimation {
                         withAnimation(.smooth.speed(2.0)) {

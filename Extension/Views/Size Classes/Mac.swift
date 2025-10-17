@@ -12,7 +12,7 @@ extension ShareView {
     @ViewBuilder func macView(previewImage: XPImage) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
             if isPhotoSaveSuccessful {
-                SaveSuccessfulView(selectedCollection)
+                SaveSuccessfulView(navigator)
                     .frame(maxWidth: .infinity)
                     .padding()
             } else {
@@ -21,7 +21,7 @@ extension ShareView {
                         if isPhotosAuthorizationDenied {
                             noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
+                            CollectionsStack($navigator, saveAction: save)
                         }
                     } else {
                         ProgressView()
