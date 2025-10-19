@@ -14,7 +14,7 @@ struct SelectedAlbumsView: View {
     @State private var selectedAlbums: [(identifier: String, name: String)] = []
     
     var body: some View {
-        if !selectedAlbums.isEmpty {
+        if !navigator.selectedAlbumIdentifiers.isEmpty {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8.0) {
                     ForEach(selectedAlbums, id: \.identifier) { album in
@@ -42,10 +42,10 @@ struct SelectedAlbumsView: View {
                 .padding(.horizontal)
             }
             .frame(height: 36.0)
-            .onChange(of: navigator.selectedAlbumIdentifiers) { _, _ in
+            .task {
                 updateSelectedAlbums()
             }
-            .onAppear {
+            .onChange(of: navigator.selectedAlbumIdentifiers) { _, _ in
                 updateSelectedAlbums()
             }
         }

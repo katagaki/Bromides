@@ -788,6 +788,38 @@
           }
         }
       }
+    },
+    "Settings.AllowMultipleAlbumSelection": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Multiple Album Selection"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "複数アルバム選択を許可"
+          }
+        }
+      }
+    },
+    "Settings.AllowSaveWithoutAlbum": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Save Without Album"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバムなしで保存を許可"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

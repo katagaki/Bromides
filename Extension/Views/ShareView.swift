@@ -17,6 +17,8 @@ struct ShareView: View {
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
+    @AppStorage(wrappedValue: false, "AllowSaveWithoutAlbum", store: defaults) var allowSaveWithoutAlbum: Bool
+    @AppStorage(wrappedValue: false, "AllowMultipleAlbumSelection", store: defaults) var allowMultipleAlbumSelection: Bool
 
     @State var navigator: Navigator = Navigator()
     var imageData: Data?
@@ -114,8 +116,16 @@ struct ShareView: View {
                 let selectedAlbumIdentifiers = navigator.selectedAlbumIdentifiers
                 
                 if selectedAlbumIdentifiers.isEmpty {
-                    // Save to camera roll only
-                    isPhotoSaved = await PhotosLibrary.saveImageToCameraRoll(data: imageData)
+                    // Check if saving without album is allowed
+                    if allowSaveWithoutAlbum {
+                        // Save to camera roll only
+                        isPhotoSaved = await PhotosLibrary.saveImageToCameraRoll(data: imageData)
+                    } else {
+                        // Not allowed to save without album
+                        isPhotoSaving = false
+                        isPhotoSaveFailed = true
+                        return
+                    }
                 } else {
                     // Get all selected albums
                     let selectedAlbums = PhotosLibrary.albumsFromIdentifiers(Array(selectedAlbumIdentifiers))

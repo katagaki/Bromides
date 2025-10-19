@@ -11,13 +11,16 @@ import SwiftUI
 struct CollectionPanels: View {
     var collections: [Collection]?
     var navigator: Navigator
+    var allowMultipleSelection: Bool
 
     init(
         _ collections: [Collection]?,
-        navigator: Navigator
+        navigator: Navigator,
+        allowMultipleSelection: Bool = true
     ) {
         self.collections = collections
         self.navigator = navigator
+        self.allowMultipleSelection = allowMultipleSelection
     }
 
     var body: some View {
@@ -32,7 +35,7 @@ struct CollectionPanels: View {
                         if let album = album as? PHAssetCollection {
                             Button {
                                 withAnimation(.smooth.speed(2.0)) {
-                                    navigator.toggleAlbumSelection(album)
+                                    navigator.toggleAlbumSelection(album, allowMultiple: allowMultipleSelection)
                                 }
                             } label: {
                                 CollectionButtonLabel(

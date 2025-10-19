@@ -14,6 +14,8 @@ struct MacOnboardingView: View {
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
+    @AppStorage(wrappedValue: false, "AllowSaveWithoutAlbum", store: defaults) var allowSaveWithoutAlbum: Bool
+    @AppStorage(wrappedValue: false, "AllowMultipleAlbumSelection", store: defaults) var allowMultipleAlbumSelection: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     var body: some View {
@@ -109,6 +111,8 @@ struct MacOnboardingView: View {
                     Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
                     Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
                     Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
+                    Toggle("Settings.AllowMultipleAlbumSelection", isOn: $allowMultipleAlbumSelection)
+                    Toggle("Settings.AllowSaveWithoutAlbum", isOn: $allowSaveWithoutAlbum)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 .padding()

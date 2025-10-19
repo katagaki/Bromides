@@ -16,6 +16,8 @@ struct CollectionView: View {
 
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
+    @AppStorage(wrappedValue: false, "AllowSaveWithoutAlbum", store: defaults) var allowSaveWithoutAlbum: Bool
+    @AppStorage(wrappedValue: false, "AllowMultipleAlbumSelection", store: defaults) var allowMultipleAlbumSelection: Bool
 
     @State var displayedCollection: Collection?
     @State var collections: [Collection]?
@@ -57,11 +59,11 @@ struct CollectionView: View {
             Group {
                 switch displayMode {
                 case .grid:
-                    CollectionGrid(collections, navigator: navigatorBinding)
+                    CollectionGrid(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
                 case .list:
-                    CollectionList(collections, navigator: navigatorBinding)
+                    CollectionList(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
                 case .panels:
-                    CollectionPanels(collections, navigator: navigatorBinding)
+                    CollectionPanels(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
                 }
             }
             .overlay {
@@ -151,7 +153,7 @@ struct CollectionView: View {
                     switch collections.first {
                     case .album(let album):
                         if let album = album as? PHAssetCollection {
-                            navigatorBinding.toggleAlbumSelection(album)
+                            navigatorBinding.selectAlbum(album, allowMultiple: allowMultipleAlbumSelection)
                         }
                     default: break
                     }
@@ -245,6 +247,7 @@ struct CollectionView: View {
             )
             #endif
         }
+        .disabled(!allowSaveWithoutAlbum && navigatorBinding.selectedAlbumIdentifiers.isEmpty)
     }
 
     @ViewBuilder

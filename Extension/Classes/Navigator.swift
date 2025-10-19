@@ -37,13 +37,26 @@ class Navigator: @unchecked Sendable {
         }
     }
     
-    func toggleAlbumSelection(_ album: PHAssetCollection) {
+    func toggleAlbumSelection(_ album: PHAssetCollection, allowMultiple: Bool = true) {
         let identifier = album.localIdentifier
         if selectedAlbumIdentifiers.contains(identifier) {
             selectedAlbumIdentifiers.remove(identifier)
         } else {
+            if !allowMultiple {
+                // Clear all selections before adding new one
+                selectedAlbumIdentifiers.removeAll()
+            }
             selectedAlbumIdentifiers.insert(identifier)
         }
+    }
+    
+    func selectAlbum(_ album: PHAssetCollection, allowMultiple: Bool = true) {
+        let identifier = album.localIdentifier
+        if !allowMultiple {
+            // Clear all selections before adding new one
+            selectedAlbumIdentifiers.removeAll()
+        }
+        selectedAlbumIdentifiers.insert(identifier)
     }
     
     func isAlbumSelected(_ album: PHAssetCollection) -> Bool {
