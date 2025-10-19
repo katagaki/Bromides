@@ -820,6 +820,54 @@
           }
         }
       }
+    },
+    "Settings.Animation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アニメーション"
+          }
+        }
+      }
+    },
+    "Settings.AlbumManagement": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Album Management"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アルバム管理"
+          }
+        }
+      }
+    },
+    "Settings.SearchAndKeyboard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search & Keyboard"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索とキーボード"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

@@ -96,26 +96,53 @@ struct MacOnboardingView: View {
                 }
             }
             Tab("Settings.Title", systemImage: "gear") {
-                VStack(alignment: .leading, spacing: 8.0) {
-                    Picker(selection: $displayMode) {
-                        Text("Settings.DisplayMode.Grid")
-                            .tag(DisplayMode.grid)
-                        Text("Settings.DisplayMode.List")
-                            .tag(DisplayMode.list)
-                        Text("Settings.DisplayMode.Panels")
-                            .tag(DisplayMode.panels)
-                    } label: {
-                        Text("Settings.DisplayMode")
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16.0) {
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            Text("Settings.Title")
+                                .font(.headline)
+                            Picker(selection: $displayMode) {
+                                Text("Settings.DisplayMode.Grid")
+                                    .tag(DisplayMode.grid)
+                                Text("Settings.DisplayMode.List")
+                                    .tag(DisplayMode.list)
+                                Text("Settings.DisplayMode.Panels")
+                                    .tag(DisplayMode.panels)
+                            } label: {
+                                Text("Settings.DisplayMode")
+                            }
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            Text("Settings.Animation")
+                                .font(.headline)
+                            Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            Text("Settings.AlbumManagement")
+                                .font(.headline)
+                            Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
+                            Toggle("Settings.AllowMultipleAlbumSelection", isOn: $allowMultipleAlbumSelection)
+                            Toggle("Settings.AllowSaveWithoutAlbum", isOn: $allowSaveWithoutAlbum)
+                        }
+                        
+                        Divider()
+                        
+                        VStack(alignment: .leading, spacing: 8.0) {
+                            Text("Settings.SearchAndKeyboard")
+                                .font(.headline)
+                            Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
+                            Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
+                        }
                     }
-                    Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
-                    Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
-                    Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
-                    Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
-                    Toggle("Settings.AllowMultipleAlbumSelection", isOn: $allowMultipleAlbumSelection)
-                    Toggle("Settings.AllowSaveWithoutAlbum", isOn: $allowSaveWithoutAlbum)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding()
             }
             Tab("About.Title", systemImage: "info.circle") {
                 VStack(alignment: .center, spacing: 8.0) {

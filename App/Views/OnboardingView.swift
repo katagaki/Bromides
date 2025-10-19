@@ -53,14 +53,26 @@ struct OnboardingView: View {
                     } label: {
                         Text("Settings.DisplayMode")
                     }
+                } header: {
+                    ListSectionHeader(text: "Settings.Title")
+                }
+                Section {
                     Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
+                } header: {
+                    ListSectionHeader(text: "Settings.Animation")
+                }
+                Section {
                     Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
-                    Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
-                    Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
                     Toggle("Settings.AllowMultipleAlbumSelection", isOn: $allowMultipleAlbumSelection)
                     Toggle("Settings.AllowSaveWithoutAlbum", isOn: $allowSaveWithoutAlbum)
                 } header: {
-                    ListSectionHeader(text: "Settings.Title")
+                    ListSectionHeader(text: "Settings.AlbumManagement")
+                }
+                Section {
+                    Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
+                    Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
+                } header: {
+                    ListSectionHeader(text: "Settings.SearchAndKeyboard")
                 }
                 Section {
                     Link(destination: URL(string: "https://github.com/katagaki/Bromides")!) {
