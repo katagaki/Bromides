@@ -54,23 +54,20 @@ struct CollectionView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0.0) {
-            SelectedAlbumsView(navigator: $navigatorBinding)
-            Group {
-                switch displayMode {
-                case .grid:
-                    CollectionGrid(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
-                case .list:
-                    CollectionList(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
-                case .panels:
-                    CollectionPanels(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
-                }
+        Group {
+            switch displayMode {
+            case .grid:
+                CollectionGrid(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
+            case .list:
+                CollectionList(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
+            case .panels:
+                CollectionPanels(collections, navigator: navigatorBinding, allowMultipleSelection: allowMultipleAlbumSelection)
             }
-            .overlay {
-                if let collections, collections.isEmpty {
-                    ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
-                        .symbolRenderingMode(.multicolor)
-                }
+        }
+        .overlay {
+            if let collections, collections.isEmpty {
+                ContentUnavailableView("Error.NoAlbums", systemImage: "questionmark.square.dashed")
+                    .symbolRenderingMode(.multicolor)
             }
         }
         .navigationTitle(displayedCollection == nil ?

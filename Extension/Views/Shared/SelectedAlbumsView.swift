@@ -52,10 +52,19 @@ struct SelectedAlbumsView: View {
     }
     
     private func updateSelectedAlbums() {
-        let albums = PhotosLibrary.albumsFromIdentifiers(Array(navigator.selectedAlbumIdentifiers))
-        selectedAlbums = albums.compactMap { album in
-            guard let name = album.localizedTitle else { return nil }
-            return (identifier: album.localIdentifier, name: name)
+        // Maintain the order from selectedAlbumIdentifiers
+        let albums = PhotosLibrary.albumsFromIdentifiers(navigator.selectedAlbumIdentifiers)
+        // Create a dictionary for quick lookup
+        var albumDict: [String: String] = [:]
+        for album in albums {
+            if let name = album.localizedTitle {
+                albumDict[album.localIdentifier] = name
+            }
+        }
+        // Build the array in the correct order
+        selectedAlbums = navigator.selectedAlbumIdentifiers.compactMap { identifier in
+            guard let name = albumDict[identifier] else { return nil }
+            return (identifier: identifier, name: name)
         }
     }
 }

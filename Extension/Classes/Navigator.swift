@@ -14,7 +14,7 @@ class Navigator: @unchecked Sendable {
     var viewPath: [Collection] = []
     var searchTerm: String = ""
     var debouncingSearchTerm: String = ""
-    var selectedAlbumIdentifiers: Set<String> = []
+    var selectedAlbumIdentifiers: [String] = []
 
     @ObservationIgnored var timer: Timer?
 
@@ -39,14 +39,14 @@ class Navigator: @unchecked Sendable {
     
     func toggleAlbumSelection(_ album: PHAssetCollection, allowMultiple: Bool = true) {
         let identifier = album.localIdentifier
-        if selectedAlbumIdentifiers.contains(identifier) {
-            selectedAlbumIdentifiers.remove(identifier)
+        if let index = selectedAlbumIdentifiers.firstIndex(of: identifier) {
+            selectedAlbumIdentifiers.remove(at: index)
         } else {
             if !allowMultiple {
                 // Clear all selections before adding new one
                 selectedAlbumIdentifiers.removeAll()
             }
-            selectedAlbumIdentifiers.insert(identifier)
+            selectedAlbumIdentifiers.append(identifier)
         }
     }
     
@@ -56,7 +56,9 @@ class Navigator: @unchecked Sendable {
             // Clear all selections before adding new one
             selectedAlbumIdentifiers.removeAll()
         }
-        selectedAlbumIdentifiers.insert(identifier)
+        if !selectedAlbumIdentifiers.contains(identifier) {
+            selectedAlbumIdentifiers.append(identifier)
+        }
     }
     
     func isAlbumSelected(_ album: PHAssetCollection) -> Bool {
@@ -64,6 +66,8 @@ class Navigator: @unchecked Sendable {
     }
     
     func removeAlbum(withIdentifier identifier: String) {
-        selectedAlbumIdentifiers.remove(identifier)
+        if let index = selectedAlbumIdentifiers.firstIndex(of: identifier) {
+            selectedAlbumIdentifiers.remove(at: index)
+        }
     }
 }
