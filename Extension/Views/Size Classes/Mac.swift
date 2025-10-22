@@ -21,7 +21,7 @@ extension ShareView {
                         if isPhotosAuthorizationDenied {
                             noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
+                            CollectionsStack($navigator, selection: $selectedCollection, allowSaveWithoutAlbum: allowSaveWithoutAlbum, saveAction: save)
                         }
                     } else {
                         ProgressView()

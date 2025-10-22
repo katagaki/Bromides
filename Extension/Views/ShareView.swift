@@ -16,6 +16,7 @@ struct ShareView: View {
 
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
+    @AppStorage(wrappedValue: false, "AllowSaveWithoutAlbum", store: defaults) var allowSaveWithoutAlbum: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
 
     @State var navigator: Navigator = Navigator()
@@ -108,46 +109,57 @@ struct ShareView: View {
     }
 
     func save() {
-        if !isPhotoSaving, let imageData, let selectedCollection {
-            isPhotoSaving = true
-            Task {
-                let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
-                    data: imageData,
-                    to: selectedCollection
-                )
-                if isPhotoSaved {
-                    if saveRecentAlbums {
-                        if let albumName = selectedCollection.localizedTitle {
-                            var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
-                                [String].self,
-                                from: recentAlbumsData
-                            )) ?? []
-                            if existingRecentAlbums.contains(where: { $0 == albumName}) {
-                                existingRecentAlbums.removeAll(where: { $0 == albumName})
-                            }
-                            existingRecentAlbums.append(albumName)
-                            if existingRecentAlbums.count > 10 {
-                                existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
-                            }
-                            recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
-                        }
+        if !isPhotoSaving, let imageData {
+            // Check if we have a selected collection or if saving without album is allowed
+            if selectedCollection != nil || allowSaveWithoutAlbum {
+                isPhotoSaving = true
+                Task {
+                    let isPhotoSaved: Bool
+                    if let selectedCollection {
+                        isPhotoSaved = await PhotosLibrary.saveImage(
+                            data: imageData,
+                            to: selectedCollection
+                        )
+                    } else {
+                        isPhotoSaved = await PhotosLibrary.saveImage(data: imageData)
                     }
-                    if showSaveAnimation {
-                        withAnimation(.smooth.speed(2.0)) {
-                            isPhotoSaveSuccessful = true
-                        } completion: {
-                            closeWithHaptics()
+                    
+                    if isPhotoSaved {
+                        if saveRecentAlbums, let selectedCollection {
+                            if let albumName = selectedCollection.localizedTitle {
+                                var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
+                                    [String].self,
+                                    from: recentAlbumsData
+                                )) ?? []
+                                if existingRecentAlbums.contains(where: { $0 == albumName}) {
+                                    existingRecentAlbums.removeAll(where: { $0 == albumName})
+                                }
+                                existingRecentAlbums.append(albumName)
+                                if existingRecentAlbums.count > 10 {
+                                    existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
+                                }
+                                recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
+                            }
+                        }
+                        if showSaveAnimation {
+                            withAnimation(.smooth.speed(2.0)) {
+                                isPhotoSaveSuccessful = true
+                            } completion: {
+                                closeWithHaptics()
+                            }
+                        } else {
+                            closeWithHaptics(shouldWait: false)
                         }
                     } else {
-                        closeWithHaptics(shouldWait: false)
+                        #if os(iOS)
+                        UINotificationFeedbackGenerator().notificationOccurred(.error)
+                        #endif
+                        isPhotoSaving = false
+                        isPhotoSaveFailed = true
                     }
-                } else {
-                    #if os(iOS)
-                    UINotificationFeedbackGenerator().notificationOccurred(.error)
-                    #endif
-                    isPhotoSaving = false
-                    isPhotoSaveFailed = true
                 }
+            } else {
+                isPhotoSaveFailed = true
             }
         } else {
             isPhotoSaveFailed = true

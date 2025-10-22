@@ -26,15 +26,18 @@ struct CollectionsStack: View {
     }
     #endif
 
+    var allowSaveWithoutAlbum: Bool
     var saveAction: () -> Void
 
     init(
         _ navigator: Binding<Navigator>,
         selection selectedCollection: Binding<PHAssetCollection?>,
+        allowSaveWithoutAlbum: Bool = false,
         saveAction: @escaping () -> Void
     ) {
         self._navigator = navigator
         self._selectedCollection = selectedCollection
+        self.allowSaveWithoutAlbum = allowSaveWithoutAlbum
         self.saveAction = saveAction
         #if !os(macOS)
         UITextField.appearance().clearButtonMode = .whileEditing
@@ -44,7 +47,7 @@ struct CollectionsStack: View {
     var body: some View {
         NavigationStack(path: $navigator.viewPath) {
             @Bindable var navigator = navigator
-            CollectionView(selection: $selectedCollection, saveAction: saveAction)
+            CollectionView(selection: $selectedCollection, allowSaveWithoutAlbum: allowSaveWithoutAlbum, saveAction: saveAction)
                 .environment(navigator)
                 #if os(macOS)
                 // Show custom toolbar and search bar on macOS
@@ -90,7 +93,7 @@ struct CollectionsStack: View {
                 .scrollDismissesKeyboard(.never)
                 #endif
                 .navigationDestination(for: Collection.self) { collection in
-                    CollectionView(collection, selection: $selectedCollection, saveAction: saveAction)
+                    CollectionView(collection, selection: $selectedCollection, allowSaveWithoutAlbum: allowSaveWithoutAlbum, saveAction: saveAction)
                         .environment(navigator)
                         .toolbarForMac(
                             navigator: self.$navigator,

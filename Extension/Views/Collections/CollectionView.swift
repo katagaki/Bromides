@@ -26,6 +26,7 @@ struct CollectionView: View {
     @State var isCreatingFolder: Bool = false
     @State var newCollectionName: String = ""
 
+    var allowSaveWithoutAlbum: Bool
     var saveAction: () -> Void
 
     @Binding var selectedCollection: PHAssetCollection?
@@ -33,21 +34,25 @@ struct CollectionView: View {
     init(
         _ collection: Collection? = nil,
         selection: Binding<PHAssetCollection?>,
+        allowSaveWithoutAlbum: Bool = false,
         saveAction: @escaping () -> Void
     ) {
         self.displayedCollection = collection
         self._selectedCollection = selection
+        self.allowSaveWithoutAlbum = allowSaveWithoutAlbum
         self.saveAction = saveAction
     }
 
     init(
         searchTerm: String,
         selection: Binding<PHAssetCollection?>,
+        allowSaveWithoutAlbum: Bool = false,
         saveAction: @escaping () -> Void
     ) {
         self.displayedCollection = .search
         self._selectedCollection = selection
         self.searchTerm = searchTerm
+        self.allowSaveWithoutAlbum = allowSaveWithoutAlbum
         self.saveAction = saveAction
     }
 
@@ -254,7 +259,7 @@ struct CollectionView: View {
             )
             #endif
         }
-        .disabled(selectedCollection == nil)
+        .disabled(!allowSaveWithoutAlbum && selectedCollection == nil)
     }
 
     @ViewBuilder
