@@ -415,6 +415,22 @@
         }
       }
     },
+    "Settings.AllowSaveWithoutAlbum" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Saving Without Album"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アルバムなしで保存を許可"
+          }
+        }
+      }
+    },
     "Settings.AutoOpenKeyboard" : {
       "localizations" : {
         "en" : {

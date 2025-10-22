@@ -12,6 +12,7 @@ struct OnboardingView: View {
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
+    @AppStorage(wrappedValue: false, "AllowSaveWithoutAlbum", store: defaults) var allowSaveWithoutAlbum: Bool
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
@@ -53,6 +54,7 @@ struct OnboardingView: View {
                     }
                     Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
                     Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
+                    Toggle("Settings.AllowSaveWithoutAlbum", isOn: $allowSaveWithoutAlbum)
                     Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
                     Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
                 } header: {
