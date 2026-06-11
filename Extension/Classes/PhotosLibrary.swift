@@ -52,22 +52,63 @@ class PhotosLibrary {
         return items
     }
 
-    static func albums(containing searchTerm: String) -> [Collection] {
-        var items: [Collection] = []
-        let options: PHFetchOptions = PHFetchOptions()
-        options.sortDescriptors = [
-            NSSortDescriptor(key: "localizedTitle", ascending: true)
-        ]
-        let collections: PHFetchResult = PHAssetCollection.fetchAssetCollections(
-            with: .album, subtype: .any, options: options
-        )
-        collections.enumerateObjects { (collection, _, _) in
-            items.append(.album(collection: collection))
+    static func albumsAndFolders(matching searchTerm: String, in path: Collection? = nil) -> [Collection] {
+        let trimmedSearchTerm = searchTerm.trimmingCharacters(in: .whitespacesAndNewlines)
+        let searchTokens = trimmedSearchTerm
+            .components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }
+        guard !searchTokens.isEmpty else { return [] }
+        var candidates: [Collection] = []
+        if let path, case .folder(let collection) = path, let folder = collection as? PHCollectionList {
+            candidates = albumsAndFoldersRecursively(in: folder)
+        } else {
+            let options: PHFetchOptions = PHFetchOptions()
+            options.sortDescriptors = [
+                NSSortDescriptor(key: "localizedTitle", ascending: true)
+            ]
+            let albums: PHFetchResult = PHAssetCollection.fetchAssetCollections(
+                with: .album, subtype: .any, options: options
+            )
+            albums.enumerateObjects { (collection, _, _) in
+                candidates.append(.album(collection: collection))
+            }
+            let folders: PHFetchResult = PHCollectionList.fetchCollectionLists(
+                with: .folder, subtype: .any, options: options
+            )
+            folders.enumerateObjects { (collection, _, _) in
+                candidates.append(.folder(collection: collection))
+            }
         }
-        items.removeAll(where: { !$0.title.localizedCaseInsensitiveContains(
-            searchTerm.trimmingCharacters(in: .whitespaces)
-        ) })
-        items.sort(by: { $0.title.localizedStandardCompare($1.title) == .orderedAscending })
+        var fullMatches: [Collection] = []
+        var tokenMatches: [Collection] = []
+        for candidate in candidates {
+            let title = candidate.title
+            if title.localizedCaseInsensitiveContains(trimmedSearchTerm) {
+                fullMatches.append(candidate)
+            } else if searchTokens.contains(where: { title.localizedCaseInsensitiveContains($0) }) {
+                tokenMatches.append(candidate)
+            }
+        }
+        fullMatches.sort(by: { $0.title.localizedStandardCompare($1.title) == .orderedAscending })
+        tokenMatches.sort(by: { $0.title.localizedStandardCompare($1.title) == .orderedAscending })
+        return fullMatches + tokenMatches
+    }
+
+    static func albumsAndFoldersRecursively(in folder: PHCollectionList) -> [Collection] {
+        var items: [Collection] = []
+        let collectionItems: PHFetchResult = PHCollection.fetchCollections(in: folder, options: nil)
+        collectionItems.enumerateObjects { (collection, _, _) in
+            if collection.canContainAssets {
+                items.append(.album(collection: collection))
+            } else if collection.canContainCollections {
+                items.append(.folder(collection: collection))
+            }
+        }
+        for item in items {
+            if case .folder(let collection) = item, let childFolder = collection as? PHCollectionList {
+                items.append(contentsOf: albumsAndFoldersRecursively(in: childFolder))
+            }
+        }
         return items
     }
 

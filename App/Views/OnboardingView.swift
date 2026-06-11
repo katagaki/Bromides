@@ -7,6 +7,7 @@ struct OnboardingView: View {
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
+    @AppStorage(wrappedValue: .everywhere, "SearchScope", store: defaults) var searchScope: SearchScope
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
     @AppStorage(wrappedValue: false, "MultipleAlbumSelection", store: defaults) var multipleAlbumSelection: Bool
     @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
@@ -48,13 +49,33 @@ struct OnboardingView: View {
                         Text("Settings.DisplayMode")
                     }
                     Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
+                } header: {
+                    ListSectionHeader(text: "Settings.Appearance")
+                }
+                Section {
                     Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
                     Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
+                } header: {
+                    ListSectionHeader(text: "Settings.Behaviors")
+                }
+                Section {
                     Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
+                    Picker(selection: $searchScope) {
+                        Text("Settings.SearchIn.CurrentFolder")
+                            .tag(SearchScope.currentFolder)
+                        Text("Settings.SearchIn.Everywhere")
+                            .tag(SearchScope.everywhere)
+                    } label: {
+                        Text("Settings.SearchIn")
+                    }
+                } header: {
+                    ListSectionHeader(text: "Settings.Search")
+                }
+                Section {
                     Toggle("Settings.MultipleAlbumSelection", isOn: $multipleAlbumSelection)
                     Toggle("Settings.NoAlbumSelection", isOn: $noAlbumSelection)
                 } header: {
-                    ListSectionHeader(text: "Settings.Title")
+                    ListSectionHeader(text: "Settings.Selection")
                 }
                 Section {
                     Link(destination: URL(string: "https://github.com/katagaki/Bromides")!) {
