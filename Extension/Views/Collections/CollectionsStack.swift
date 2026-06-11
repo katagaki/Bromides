@@ -13,7 +13,6 @@ struct CollectionsStack: View {
     @Binding var selectedCollections: [PHAssetCollection]
 
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
-    @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
     @FocusState var isSearchFieldFocused: Bool
 
     #if !os(macOS)
@@ -52,9 +51,7 @@ struct CollectionsStack: View {
                 // (NavigationStack title/back button/toolbars aren't available in share sheet)
                 .toolbarForMac(
                     navigator: self.$navigator,
-                    isSearchFieldFocused: $isSearchFieldFocused,
-                    saveAction: saveAction,
-                    isSaveDisabled: selectedCollections.isEmpty && !noAlbumSelection
+                    isSearchFieldFocused: $isSearchFieldFocused
                 )
                 #else
                 // Use native search features on iOS
@@ -98,9 +95,7 @@ struct CollectionsStack: View {
                         .toolbarForMac(
                             navigator: self.$navigator,
                             isSearchFieldFocused: $isSearchFieldFocused,
-                            hasSearchBar: false,
-                            saveAction: saveAction,
-                            isSaveDisabled: selectedCollections.isEmpty && !noAlbumSelection
+                            hasSearchBar: false
                         )
                 }
         }

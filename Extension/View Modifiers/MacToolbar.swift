@@ -23,22 +23,12 @@ struct MacToolbar: ViewModifier {
     @FocusState.Binding var isSearchFieldFocused: Bool
 
     var hasSearchBar: Bool
-    var saveAction: (() -> Void)?
-    var isSaveDisabled: Bool
 
     func body(content: Content) -> some View {
         content
             #if os(macOS)
             .safeAreaInset(edge: .top, spacing: 0.0) {
                 HStack(alignment: .center) {
-                    Button(role: .cancel, action: close) {
-                        Text("Shared.Cancel")
-                            .frame(height: 32.0)
-                            .padding(.horizontal, 8.0)
-                            .contentShape(.rect)
-                    }
-                    .buttonStyle(.plain)
-                    .glassEffect(.regular.interactive(), in: .capsule)
                     if !navigator.viewPath.isEmpty {
                         Button {
                             _ = navigator.viewPath.popLast()
@@ -85,19 +75,17 @@ struct MacToolbar: ViewModifier {
                             }
                             .glassEffect(.regular.interactive(), in: .capsule)
                     }
-                    if let saveAction {
-                        Button(role: .confirm, action: saveAction) {
-                            Text("Shared.Save")
-                                .frame(height: 32.0)
-                                .padding(.horizontal, 8.0)
-                                .contentShape(.rect)
-                        }
-                        .buttonStyle(.plain)
-                        .frame(height: 32.0)
-                        .glassEffect(.regular.interactive().tint(.accent), in: .capsule)
-                        .accessibilityLabel(Text("Shared.Save"))
-                        .disabled(isSaveDisabled)
+                    Button(role: .cancel, action: close) {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 14.0, height: 14.0)
+                            .padding(10.0)
+                            .contentShape(.rect)
                     }
+                    .buttonStyle(.plain)
+                    .glassEffect(.regular.interactive(), in: .circle)
+                    .accessibilityLabel(Text("Shared.Cancel"))
                 }
                 .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                 .padding(8.0)
@@ -117,16 +105,12 @@ extension View {
     func toolbarForMac(
         navigator: Binding<Navigator>,
         isSearchFieldFocused: FocusState<Bool>.Binding,
-        hasSearchBar: Bool = true,
-        saveAction: (() -> Void)? = nil,
-        isSaveDisabled: Bool = false
+        hasSearchBar: Bool = true
     ) -> some View {
         self.modifier(MacToolbar(
             navigator: navigator,
             isSearchFieldFocused: isSearchFieldFocused,
-            hasSearchBar: hasSearchBar,
-            saveAction: saveAction,
-            isSaveDisabled: isSaveDisabled
+            hasSearchBar: hasSearchBar
         ))
     }
 }

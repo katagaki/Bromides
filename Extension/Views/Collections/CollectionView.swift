@@ -33,6 +33,13 @@ struct CollectionView: View {
 
     @Binding var selectedCollections: [PHAssetCollection]
 
+    var hasNewMenu: Bool {
+        switch displayedCollection {
+        case .folder, nil: return true
+        default: return false
+        }
+    }
+
     init(
         _ collection: Collection? = nil,
         selection: Binding<[PHAssetCollection]>,
@@ -77,18 +84,22 @@ struct CollectionView: View {
         #if os(macOS)
         // Show custom toolbar on macOS
         .safeAreaInset(edge: .bottom, spacing: 0.0) {
-            HStack(alignment: .center) {
-                switch displayedCollection {
-                case .folder, nil: newMenu()
-                default: EmptyView()
+            VStack(alignment: .center, spacing: 8.0) {
+                if hasNewMenu || multipleAlbumSelection {
+                    HStack(alignment: .center) {
+                        if hasNewMenu {
+                            newMenu()
+                        }
+                        Spacer()
+                        if multipleAlbumSelection {
+                            selectionSummaryButton()
+                            Spacer()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                 }
-                Spacer()
-                if multipleAlbumSelection {
-                    selectionSummaryButton()
-                    Spacer()
-                }
+                saveButton()
             }
-            .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
             .padding(8.0)
             .background(Material.ultraThin)
             .overlay(alignment: .top) {
@@ -108,10 +119,9 @@ struct CollectionView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 saveButton()
             }
-            ToolbarItem(placement: .bottomBar) {
-                switch displayedCollection {
-                case .folder, nil: newMenu()
-                default: EmptyView()
+            if hasNewMenu {
+                ToolbarItem(placement: .bottomBar) {
+                    newMenu()
                 }
             }
             ToolbarSpacer(.flexible, placement: .bottomBar)
@@ -252,9 +262,22 @@ struct CollectionView: View {
 
     @ViewBuilder
     func saveButton() -> some View {
-        Button(role: .confirm, action: saveAction)
-            .accessibilityLabel(Text("Shared.Save"))
-            .disabled(selectedCollections.isEmpty && !noAlbumSelection)
+        Group {
+            #if os(macOS)
+            Button(role: .confirm, action: saveAction) {
+                Label("Shared.Save", systemImage: "square.and.arrow.down")
+                    .bold()
+                    .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
+                    .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .glassEffect(.regular.interactive().tint(.accent), in: .capsule)
+            #else
+            Button(role: .confirm, action: saveAction)
+            #endif
+        }
+        .accessibilityLabel(Text("Shared.Save"))
+        .disabled(selectedCollections.isEmpty && !noAlbumSelection)
     }
 
     @ViewBuilder
