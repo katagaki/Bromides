@@ -34,13 +34,17 @@ struct SelectedAlbumsView: View {
                 .accessibilityLabel(Text("Shared.Remove"))
             }
             .listRowInsets(.init(top: 6.0, leading: 20.0, bottom: 6.0, trailing: 20.0))
+            .listRowSeparator(
+                collection.localIdentifier == selectedCollections.last?.localIdentifier ? .hidden : .automatic,
+                edges: .bottom
+            )
         }
         .listStyle(.plain)
-        // 14pt margin + 6pt row inset = 20pt, matching the rows' leading and trailing insets
-        .contentMargins(.vertical, 14.0, for: .scrollContent)
+        // 2pt margin + 6pt row inset keeps the top and bottom of the list compact
+        .contentMargins(.vertical, 2.0, for: .scrollContent)
         .frame(
             minWidth: 280.0,
-            minHeight: min(CGFloat(max(selectedCollections.count, 1)) * 50.0 + 40.0, 340.0)
+            minHeight: min(CGFloat(max(selectedCollections.count, 1)) * 50.0 + 16.0, 340.0)
         )
         .onChange(of: selectedCollections) { _, newValue in
             if newValue.isEmpty {
