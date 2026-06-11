@@ -130,16 +130,14 @@ struct ShareView: View {
                 if collectionsToSaveTo.isEmpty {
                     isPhotoSaved = await PhotosLibrary.saveImage(data: imageData)
                 } else {
-                    for collection in collectionsToSaveTo {
+                    if collectionsToSaveTo.count == 1, let collection = collectionsToSaveTo.first {
                         withAnimation(.smooth.speed(2.0)) {
                             savingAlbumName = collection.localizedTitle ??
                                 NSLocalizedString("Shared.Album", comment: "")
                         }
-                        isPhotoSaved = await PhotosLibrary.saveImage(data: imageData, to: collection)
-                        if !isPhotoSaved {
-                            break
-                        }
                     }
+                    // Save a single copy of the image and assign it to every selected album.
+                    isPhotoSaved = await PhotosLibrary.saveImage(data: imageData, to: collectionsToSaveTo)
                 }
                 savingAlbumName = nil
                 if isPhotoSaved {
