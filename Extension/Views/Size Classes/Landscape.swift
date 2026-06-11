@@ -1,9 +1,3 @@
-//
-//  Landscape.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/05/10.
-//
 
 import Komponents
 import SwiftUI

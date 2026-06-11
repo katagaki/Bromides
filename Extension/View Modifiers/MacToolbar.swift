@@ -1,9 +1,3 @@
-//
-//  MacToolbar.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/08/24.
-//
 
 import SwiftUI
 

@@ -1,9 +1,3 @@
-//
-//  CollectionView.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/03/23.
-//
 
 import Komponents
 import Photos

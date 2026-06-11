@@ -1,9 +1,3 @@
-//
-//  ShareView.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/03/22.
-//
 
 import Komponents
 import Photos

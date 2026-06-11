@@ -1,9 +1,3 @@
-//
-//  CollectionPanels.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/04/05.
-//
 
 import Photos
 import SwiftUI

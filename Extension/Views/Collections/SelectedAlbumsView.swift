@@ -1,9 +1,3 @@
-//
-//  SelectedAlbumsView.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2026/06/11.
-//
 
 import Photos
 import SwiftUI
