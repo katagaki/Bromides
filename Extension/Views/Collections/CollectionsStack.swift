@@ -1,16 +1,10 @@
-//
-//  CollectionsStack.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/04/06.
-//
 
 import Photos
 import SwiftUI
 
 struct CollectionsStack: View {
     @Binding var navigator: Navigator
-    @Binding var selectedCollection: PHAssetCollection?
+    @Binding var selectedCollections: [PHAssetCollection]
 
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
     @FocusState var isSearchFieldFocused: Bool
@@ -30,11 +24,11 @@ struct CollectionsStack: View {
 
     init(
         _ navigator: Binding<Navigator>,
-        selection selectedCollection: Binding<PHAssetCollection?>,
+        selection selectedCollections: Binding<[PHAssetCollection]>,
         saveAction: @escaping () -> Void
     ) {
         self._navigator = navigator
-        self._selectedCollection = selectedCollection
+        self._selectedCollections = selectedCollections
         self.saveAction = saveAction
         #if !os(macOS)
         UITextField.appearance().clearButtonMode = .whileEditing
@@ -44,7 +38,7 @@ struct CollectionsStack: View {
     var body: some View {
         NavigationStack(path: $navigator.viewPath) {
             @Bindable var navigator = navigator
-            CollectionView(selection: $selectedCollection, saveAction: saveAction)
+            CollectionView(selection: $selectedCollections, saveAction: saveAction)
                 .environment(navigator)
                 #if os(macOS)
                 // Show custom toolbar and search bar on macOS
@@ -90,7 +84,7 @@ struct CollectionsStack: View {
                 .scrollDismissesKeyboard(.never)
                 #endif
                 .navigationDestination(for: Collection.self) { collection in
-                    CollectionView(collection, selection: $selectedCollection, saveAction: saveAction)
+                    CollectionView(collection, selection: $selectedCollections, saveAction: saveAction)
                         .environment(navigator)
                         .toolbarForMac(
                             navigator: self.$navigator,

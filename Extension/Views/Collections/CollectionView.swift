@@ -1,9 +1,3 @@
-//
-//  CollectionView.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/03/23.
-//
 
 import Komponents
 import Photos
@@ -16,6 +10,8 @@ struct CollectionView: View {
 
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
+    @AppStorage(wrappedValue: false, "MultipleAlbumSelection", store: defaults) var multipleAlbumSelection: Bool
+    @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
 
     @State var displayedCollection: Collection?
     @State var collections: [Collection]?
@@ -25,28 +21,36 @@ struct CollectionView: View {
     @State var isCreatingAlbum: Bool = false
     @State var isCreatingFolder: Bool = false
     @State var newCollectionName: String = ""
+    @State var isSelectionPopoverPresented: Bool = false
 
     var saveAction: () -> Void
 
-    @Binding var selectedCollection: PHAssetCollection?
+    @Binding var selectedCollections: [PHAssetCollection]
+
+    var hasNewMenu: Bool {
+        switch displayedCollection {
+        case .folder, nil: return true
+        default: return false
+        }
+    }
 
     init(
         _ collection: Collection? = nil,
-        selection: Binding<PHAssetCollection?>,
+        selection: Binding<[PHAssetCollection]>,
         saveAction: @escaping () -> Void
     ) {
         self.displayedCollection = collection
-        self._selectedCollection = selection
+        self._selectedCollections = selection
         self.saveAction = saveAction
     }
 
     init(
         searchTerm: String,
-        selection: Binding<PHAssetCollection?>,
+        selection: Binding<[PHAssetCollection]>,
         saveAction: @escaping () -> Void
     ) {
         self.displayedCollection = .search
-        self._selectedCollection = selection
+        self._selectedCollections = selection
         self.searchTerm = searchTerm
         self.saveAction = saveAction
     }
@@ -55,11 +59,11 @@ struct CollectionView: View {
         Group {
             switch displayMode {
             case .grid:
-                CollectionGrid(collections, selection: $selectedCollection)
+                CollectionGrid(collections, selection: $selectedCollections)
             case .list:
-                CollectionList(collections, selection: $selectedCollection)
+                CollectionList(collections, selection: $selectedCollections)
             case .panels:
-                CollectionPanels(collections, selection: $selectedCollection)
+                CollectionPanels(collections, selection: $selectedCollections)
             }
         }
         .overlay {
@@ -74,15 +78,22 @@ struct CollectionView: View {
         #if os(macOS)
         // Show custom toolbar on macOS
         .safeAreaInset(edge: .bottom, spacing: 0.0) {
-            HStack(alignment: .center) {
-                switch displayedCollection {
-                case .folder, nil: newMenu()
-                default: EmptyView()
+            VStack(alignment: .center, spacing: 8.0) {
+                if hasNewMenu || multipleAlbumSelection {
+                    HStack(alignment: .center) {
+                        if hasNewMenu {
+                            newMenu()
+                        }
+                        Spacer()
+                        if multipleAlbumSelection {
+                            selectionSummaryButton()
+                            Spacer()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                 }
-                Spacer()
                 saveButton()
             }
-            .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
             .padding(8.0)
             .background(Material.ultraThin)
             .overlay(alignment: .top) {
@@ -96,18 +107,23 @@ struct CollectionView: View {
         // Use native toolbar on iOS
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                switch displayedCollection {
-                case .folder, nil: newMenu()
-                default: EmptyView()
+            ToolbarItem(placement: .topBarLeading) {
+                cancelButton()
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                saveButton()
+            }
+            if hasNewMenu {
+                ToolbarItem(placement: .bottomBar) {
+                    newMenu()
                 }
             }
             ToolbarSpacer(.flexible, placement: .bottomBar)
-            ToolbarItem(placement: .bottomBar) {
-                saveButton()
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                closeButton()
+            if multipleAlbumSelection {
+                ToolbarItem(placement: .bottomBar) {
+                    selectionSummaryButton()
+                }
+                ToolbarSpacer(.flexible, placement: .bottomBar)
             }
         }
         #endif
@@ -153,7 +169,10 @@ struct CollectionView: View {
                 if autoSelectFirstSearchResult, let collections, collections.count == 1 {
                     switch collections.first {
                     case .album(let album):
-                        selectedCollection = album as? PHAssetCollection
+                        if let album = album as? PHAssetCollection,
+                           !selectedCollections.isSelected(album) {
+                            selectedCollections.toggle(album, allowingMultiple: multipleAlbumSelection)
+                        }
                     default: break
                     }
                 }
@@ -164,10 +183,13 @@ struct CollectionView: View {
     }
 
     func checkAndResetSelection() {
-        if !(collections ?? []).contains(where: {
-            $0.id == selectedCollection?.localIdentifier
-        }) {
-            selectedCollection = nil
+        // Keep selections made in other albums and folders when selecting multiple albums
+        if !multipleAlbumSelection {
+            selectedCollections.removeAll { selectedCollection in
+                !(collections ?? []).contains(where: {
+                    $0.id == selectedCollection.localIdentifier
+                })
+            }
         }
     }
 
@@ -238,27 +260,47 @@ struct CollectionView: View {
             #if os(macOS)
             Button(role: .confirm, action: saveAction) {
                 Label("Shared.Save", systemImage: "square.and.arrow.down")
-                    .frame(height: 32.0)
-                    .padding(.horizontal, 8.0)
+                    .bold()
+                    .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                     .contentShape(.rect)
             }
             .buttonStyle(.plain)
-            .frame(height: 32.0)
             .glassEffect(.regular.interactive().tint(.accent), in: .capsule)
             #else
-            Button(
-                "Shared.Save",
-                systemImage: "square.and.arrow.down",
-                role: .confirm,
-                action: saveAction
-            )
+            Button(role: .confirm, action: saveAction)
             #endif
         }
-        .disabled(selectedCollection == nil)
+        .accessibilityLabel(Text("Shared.Save"))
+        .disabled(selectedCollections.isEmpty && !noAlbumSelection)
     }
 
     @ViewBuilder
-    func closeButton() -> some View {
+    func cancelButton() -> some View {
         Button(role: .cancel, action: close)
+            .accessibilityLabel(Text("Shared.Cancel"))
+    }
+
+    @ViewBuilder
+    func selectionSummaryButton() -> some View {
+        Button {
+            isSelectionPopoverPresented = true
+        } label: {
+            Text("Shared.AlbumsSelected.\(selectedCollections.count)")
+            #if os(macOS)
+                .frame(height: 32.0)
+                .padding(.horizontal, 8.0)
+                .contentShape(.rect)
+            #endif
+        }
+        #if os(macOS)
+        .buttonStyle(.plain)
+        .frame(height: 32.0)
+        .glassEffect(.regular.interactive(), in: .capsule)
+        #endif
+        .disabled(selectedCollections.isEmpty)
+        .popover(isPresented: $isSelectionPopoverPresented) {
+            SelectedAlbumsView(selection: $selectedCollections)
+                .presentationCompactAdaptation(.popover)
+        }
     }
 }

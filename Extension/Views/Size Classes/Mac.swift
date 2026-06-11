@@ -1,9 +1,3 @@
-//
-//  Mac.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/05/10.
-//
 
 import Komponents
 import SwiftUI
@@ -12,16 +6,18 @@ extension ShareView {
     @ViewBuilder func macView(previewImage: XPImage) -> some View {
         VStack(alignment: .leading, spacing: 0.0) {
             if isPhotoSaveSuccessful {
-                SaveSuccessfulView(selectedCollection)
+                SaveSuccessfulView(selectedCollections)
                     .frame(maxWidth: .infinity)
                     .padding()
             } else {
                 ZStack(alignment: .center) {
-                    if isPhotosAuthorizationComplete {
+                    if isPhotoSaving {
+                        savingProgressView()
+                    } else if isPhotosAuthorizationComplete {
                         if isPhotosAuthorizationDenied {
                             noAccessView()
                         } else {
-                            CollectionsStack($navigator, selection: $selectedCollection, saveAction: save)
+                            CollectionsStack($navigator, selection: $selectedCollections, saveAction: save)
                         }
                     } else {
                         ProgressView()

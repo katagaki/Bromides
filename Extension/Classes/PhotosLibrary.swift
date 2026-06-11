@@ -1,9 +1,3 @@
-//
-//  PhotosLibrary.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/03/23.
-//
 
 import Photos
 #if os(macOS)
@@ -158,6 +152,19 @@ class PhotosLibrary {
             options: options
         ) { image, _ in
             completion(image)
+        }
+    }
+
+    static func saveImage(data: Data) async -> Bool {
+        guard let image = XPImage(data: data) else { return false }
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                PHAssetChangeRequest.creationRequestForAsset(from: image)
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
         }
     }
 

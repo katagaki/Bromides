@@ -1,23 +1,19 @@
-//
-//  CollectionList.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/04/05.
-//
 
 import Photos
 import SwiftUI
 
 struct CollectionList: View {
     var collections: [Collection]?
-    @Binding var selectedCollection: PHAssetCollection?
+    @Binding var selectedCollections: [PHAssetCollection]
+
+    @AppStorage(wrappedValue: false, "MultipleAlbumSelection", store: defaults) var multipleAlbumSelection: Bool
 
     init(
         _ collections: [Collection]?,
-        selection selectedCollection: Binding<PHAssetCollection?>
+        selection selectedCollections: Binding<[PHAssetCollection]>
     ) {
         self.collections = collections
-        self._selectedCollection = selectedCollection
+        self._selectedCollections = selectedCollections
     }
 
     var body: some View {
@@ -26,14 +22,16 @@ struct CollectionList: View {
                 switch collection {
                 case .album(let album):
                     Button {
-                        withAnimation(.smooth.speed(2.0)) {
-                            selectedCollection = album as? PHAssetCollection
+                        if let album = album as? PHAssetCollection {
+                            withAnimation(.smooth.speed(2.0)) {
+                                selectedCollections.toggle(album, allowingMultiple: multipleAlbumSelection)
+                            }
                         }
                     } label: {
                         CollectionButtonLabel(
                             collection: collection,
                             mode: .list,
-                            isSelected: { selectedCollection == album }
+                            isSelected: { selectedCollections.isSelected(album) }
                         )
                         #if os(macOS)
                         .frame(maxWidth: .infinity, alignment: .leading)

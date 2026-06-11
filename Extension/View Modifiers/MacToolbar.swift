@@ -1,9 +1,3 @@
-//
-//  MacToolbar.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/08/24.
-//
 
 import SwiftUI
 
@@ -29,14 +23,6 @@ struct MacToolbar: ViewModifier {
             #if os(macOS)
             .safeAreaInset(edge: .top, spacing: 0.0) {
                 HStack(alignment: .center) {
-                    Button(role: .cancel, action: close) {
-                        Text("Shared.Cancel")
-                            .frame(height: 32.0)
-                            .padding(.horizontal, 8.0)
-                            .contentShape(.rect)
-                    }
-                    .buttonStyle(.plain)
-                    .glassEffect(.regular.interactive(), in: .capsule)
                     if !navigator.viewPath.isEmpty {
                         Button {
                             _ = navigator.viewPath.popLast()
@@ -83,6 +69,17 @@ struct MacToolbar: ViewModifier {
                             }
                             .glassEffect(.regular.interactive(), in: .capsule)
                     }
+                    Button(role: .cancel, action: close) {
+                        Image(systemName: "xmark")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 14.0, height: 14.0)
+                            .padding(10.0)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.plain)
+                    .glassEffect(.regular.interactive(), in: .circle)
+                    .accessibilityLabel(Text("Shared.Cancel"))
                 }
                 .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                 .padding(8.0)

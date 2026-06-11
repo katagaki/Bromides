@@ -1,9 +1,3 @@
-//
-//  ShareViewController.swift
-//  Bromides
-//
-//  Created by シン・ジャスティン on 2025/03/22.
-//
 
 import SwiftData
 @preconcurrency import SwiftUI
