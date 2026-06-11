@@ -16,6 +16,7 @@ class Navigator: @unchecked Sendable {
 
     func debounceSearch() {
         if debouncingSearchTerm.trimmingCharacters(in: .whitespaces) == "" {
+            timer?.invalidate()
             searchTerm = ""
         } else if debouncingSearchTerm == searchTerm {
             return

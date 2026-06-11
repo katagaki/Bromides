@@ -10,13 +10,13 @@ struct CollectionView: View {
 
     @AppStorage(wrappedValue: .grid, "DisplayMode", store: defaults) var displayMode: DisplayMode
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
+    @AppStorage(wrappedValue: .everywhere, "SearchScope", store: defaults) var searchScope: SearchScope
     @AppStorage(wrappedValue: false, "MultipleAlbumSelection", store: defaults) var multipleAlbumSelection: Bool
     @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
 
+    var baseCollection: Collection?
     @State var displayedCollection: Collection?
     @State var collections: [Collection]?
-
-    @State var searchTerm: String?
 
     @State var isCreatingAlbum: Bool = false
     @State var isCreatingFolder: Bool = false
@@ -39,19 +39,9 @@ struct CollectionView: View {
         selection: Binding<[PHAssetCollection]>,
         saveAction: @escaping () -> Void
     ) {
+        self.baseCollection = collection
         self.displayedCollection = collection
         self._selectedCollections = selection
-        self.saveAction = saveAction
-    }
-
-    init(
-        searchTerm: String,
-        selection: Binding<[PHAssetCollection]>,
-        saveAction: @escaping () -> Void
-    ) {
-        self.displayedCollection = .search
-        self._selectedCollections = selection
-        self.searchTerm = searchTerm
         self.saveAction = saveAction
     }
 
@@ -137,7 +127,7 @@ struct CollectionView: View {
             if navigator.isSearching {
                 self.displayedCollection = .search
             } else {
-                self.displayedCollection = nil
+                self.displayedCollection = baseCollection
             }
             reloadCollections()
         }
@@ -165,15 +155,23 @@ struct CollectionView: View {
             }
         } else {
             if displayedCollection == .search {
-                collections = PhotosLibrary.albums(containing: navigator.searchTerm)
-                if autoSelectFirstSearchResult, let collections, collections.count == 1 {
-                    switch collections.first {
-                    case .album(let album):
-                        if let album = album as? PHAssetCollection,
-                           !selectedCollections.isSelected(album) {
-                            selectedCollections.toggle(album, allowingMultiple: multipleAlbumSelection)
+                collections = PhotosLibrary.albumsAndFolders(
+                    matching: navigator.searchTerm,
+                    in: searchScope == .currentFolder ? baseCollection : nil
+                )
+                if autoSelectFirstSearchResult {
+                    // Folders cannot be saved to, so only the first album is auto selected
+                    let firstAlbum: PHAssetCollection? = (collections ?? [])
+                        .lazy
+                        .compactMap { collection -> PHAssetCollection? in
+                            if case .album(let album) = collection {
+                                return album as? PHAssetCollection
+                            }
+                            return nil
                         }
-                    default: break
+                        .first
+                    if let firstAlbum, !selectedCollections.isSelected(firstAlbum) {
+                        selectedCollections.toggle(firstAlbum, allowingMultiple: multipleAlbumSelection)
                     }
                 }
             } else {

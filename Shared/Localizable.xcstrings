@@ -475,6 +475,22 @@
         }
       }
     },
+    "Settings.Appearance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "外観"
+          }
+        }
+      }
+    },
     "Settings.AutoOpenKeyboard" : {
       "localizations" : {
         "en" : {
@@ -496,13 +512,29 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatically Select Search Result"
+            "value" : "Automatically Select First Search Result"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "検索結果が一件の場合自動的に選択"
+            "value" : "最初の検索結果を自動的に選択"
+          }
+        }
+      }
+    },
+    "Settings.Behaviors" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Behaviors"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "動作"
           }
         }
       }
@@ -652,6 +684,86 @@
         }
       }
     },
+    "Settings.Search" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "検索"
+          }
+        }
+      }
+    },
+    "Settings.SearchIn" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search In"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "検索範囲"
+          }
+        }
+      }
+    },
+    "Settings.SearchIn.CurrentFolder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Folder"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在のフォルダ"
+          }
+        }
+      }
+    },
+    "Settings.SearchIn.Everywhere" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Everywhere"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべての場所"
+          }
+        }
+      }
+    },
+    "Settings.Selection" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selection"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択"
+          }
+        }
+      }
+    },
     "Settings.Title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -691,13 +803,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Album Name"
+            "value" : "Album or Folder Name"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アルバム名"
+            "value" : "アルバムまたはフォルダ名"
           }
         }
       }

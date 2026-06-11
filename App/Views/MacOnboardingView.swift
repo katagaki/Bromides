@@ -7,6 +7,7 @@ struct MacOnboardingView: View {
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: false, "AutoSelectSearch", store: defaults) var autoSelectFirstSearchResult: Bool
+    @AppStorage(wrappedValue: .everywhere, "SearchScope", store: defaults) var searchScope: SearchScope
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
     @AppStorage(wrappedValue: false, "MultipleAlbumSelection", store: defaults) var multipleAlbumSelection: Bool
     @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
@@ -90,26 +91,41 @@ struct MacOnboardingView: View {
                 }
             }
             Tab("Settings.Title", systemImage: "gear") {
-                VStack(alignment: .leading, spacing: 8.0) {
-                    Picker(selection: $displayMode) {
-                        Text("Settings.DisplayMode.Grid")
-                            .tag(DisplayMode.grid)
-                        Text("Settings.DisplayMode.List")
-                            .tag(DisplayMode.list)
-                        Text("Settings.DisplayMode.Panels")
-                            .tag(DisplayMode.panels)
-                    } label: {
-                        Text("Settings.DisplayMode")
+                Form {
+                    Section("Settings.Appearance") {
+                        Picker(selection: $displayMode) {
+                            Text("Settings.DisplayMode.Grid")
+                                .tag(DisplayMode.grid)
+                            Text("Settings.DisplayMode.List")
+                                .tag(DisplayMode.list)
+                            Text("Settings.DisplayMode.Panels")
+                                .tag(DisplayMode.panels)
+                        } label: {
+                            Text("Settings.DisplayMode")
+                        }
+                        Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
                     }
-                    Toggle("Settings.EnableSaveAnimation", isOn: $showSaveAnimation)
-                    Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
-                    Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
-                    Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
-                    Toggle("Settings.MultipleAlbumSelection", isOn: $multipleAlbumSelection)
-                    Toggle("Settings.NoAlbumSelection", isOn: $noAlbumSelection)
+                    Section("Settings.Behaviors") {
+                        Toggle("Settings.SaveRecents", isOn: $saveRecentAlbums)
+                        Toggle("Settings.AutoOpenKeyboard", isOn: $autoOpenKeyboard)
+                    }
+                    Section("Settings.Search") {
+                        Toggle("Settings.AutoSelectFirstSearchResult", isOn: $autoSelectFirstSearchResult)
+                        Picker(selection: $searchScope) {
+                            Text("Settings.SearchIn.CurrentFolder")
+                                .tag(SearchScope.currentFolder)
+                            Text("Settings.SearchIn.Everywhere")
+                                .tag(SearchScope.everywhere)
+                        } label: {
+                            Text("Settings.SearchIn")
+                        }
+                    }
+                    Section("Settings.Selection") {
+                        Toggle("Settings.MultipleAlbumSelection", isOn: $multipleAlbumSelection)
+                        Toggle("Settings.NoAlbumSelection", isOn: $noAlbumSelection)
+                    }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding()
+                .formStyle(.grouped)
             }
             Tab("About.Title", systemImage: "info.circle") {
                 VStack(alignment: .center, spacing: 8.0) {
