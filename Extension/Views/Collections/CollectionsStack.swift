@@ -10,9 +10,10 @@ import SwiftUI
 
 struct CollectionsStack: View {
     @Binding var navigator: Navigator
-    @Binding var selectedCollection: PHAssetCollection?
+    @Binding var selectedCollections: [PHAssetCollection]
 
     @AppStorage(wrappedValue: false, "AutoOpenKeyboard", store: defaults) var autoOpenKeyboard: Bool
+    @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
     @FocusState var isSearchFieldFocused: Bool
 
     #if !os(macOS)
@@ -30,11 +31,11 @@ struct CollectionsStack: View {
 
     init(
         _ navigator: Binding<Navigator>,
-        selection selectedCollection: Binding<PHAssetCollection?>,
+        selection selectedCollections: Binding<[PHAssetCollection]>,
         saveAction: @escaping () -> Void
     ) {
         self._navigator = navigator
-        self._selectedCollection = selectedCollection
+        self._selectedCollections = selectedCollections
         self.saveAction = saveAction
         #if !os(macOS)
         UITextField.appearance().clearButtonMode = .whileEditing
@@ -44,14 +45,16 @@ struct CollectionsStack: View {
     var body: some View {
         NavigationStack(path: $navigator.viewPath) {
             @Bindable var navigator = navigator
-            CollectionView(selection: $selectedCollection, saveAction: saveAction)
+            CollectionView(selection: $selectedCollections, saveAction: saveAction)
                 .environment(navigator)
                 #if os(macOS)
                 // Show custom toolbar and search bar on macOS
                 // (NavigationStack title/back button/toolbars aren't available in share sheet)
                 .toolbarForMac(
                     navigator: self.$navigator,
-                    isSearchFieldFocused: $isSearchFieldFocused
+                    isSearchFieldFocused: $isSearchFieldFocused,
+                    saveAction: saveAction,
+                    isSaveDisabled: selectedCollections.isEmpty && !noAlbumSelection
                 )
                 #else
                 // Use native search features on iOS
@@ -90,12 +93,14 @@ struct CollectionsStack: View {
                 .scrollDismissesKeyboard(.never)
                 #endif
                 .navigationDestination(for: Collection.self) { collection in
-                    CollectionView(collection, selection: $selectedCollection, saveAction: saveAction)
+                    CollectionView(collection, selection: $selectedCollections, saveAction: saveAction)
                         .environment(navigator)
                         .toolbarForMac(
                             navigator: self.$navigator,
                             isSearchFieldFocused: $isSearchFieldFocused,
-                            hasSearchBar: false
+                            hasSearchBar: false,
+                            saveAction: saveAction,
+                            isSaveDisabled: selectedCollections.isEmpty && !noAlbumSelection
                         )
                 }
         }

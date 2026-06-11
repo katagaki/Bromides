@@ -161,6 +161,19 @@ class PhotosLibrary {
         }
     }
 
+    static func saveImage(data: Data) async -> Bool {
+        guard let image = XPImage(data: data) else { return false }
+        do {
+            try await PHPhotoLibrary.shared().performChanges {
+                PHAssetChangeRequest.creationRequestForAsset(from: image)
+            }
+            return true
+        } catch {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+    }
+
     static func saveImage(data: Data, to album: PHAssetCollection) async -> Bool {
         guard let image = XPImage(data: data) else { return false }
         do {

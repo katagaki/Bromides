@@ -17,12 +17,14 @@ struct ShareView: View {
     @AppStorage(wrappedValue: true, "SaveRecentAlbums", store: defaults) var saveRecentAlbums: Bool
     @AppStorage(wrappedValue: true, "ShowSaveAnimation", store: defaults) var showSaveAnimation: Bool
     @AppStorage(wrappedValue: Data(), "RecentAlbums", store: defaults) var recentAlbumsData: Data
+    @AppStorage(wrappedValue: false, "NoAlbumSelection", store: defaults) var noAlbumSelection: Bool
 
     @State var navigator: Navigator = Navigator()
     var imageData: Data?
     var previewImage: XPImage?
 
-    @State var selectedCollection: PHAssetCollection?
+    @State var selectedCollections: [PHAssetCollection] = []
+    @State var savingAlbumName: String?
     @State var isPhotoSaving: Bool = false
     @State var isPhotoSaveSuccessful: Bool = false
     @State var isPhotoSaveFailed: Bool = false
@@ -107,30 +109,48 @@ struct ShareView: View {
         }
     }
 
+    @ViewBuilder
+    func savingProgressView() -> some View {
+        VStack(alignment: .center, spacing: 16.0) {
+            ProgressView()
+                .progressViewStyle(.circular)
+            Group {
+                if let savingAlbumName {
+                    Text("Message.Saving.\(savingAlbumName)")
+                } else {
+                    Text("Shared.Saving")
+                }
+            }
+            .bold()
+        }
+    }
+
     func save() {
-        if !isPhotoSaving, let imageData, let selectedCollection {
-            isPhotoSaving = true
+        if !isPhotoSaving, let imageData, !selectedCollections.isEmpty || noAlbumSelection {
+            withAnimation(.smooth.speed(2.0)) {
+                isPhotoSaving = true
+            }
+            let collectionsToSaveTo = selectedCollections
             Task {
-                let isPhotoSaved: Bool = await PhotosLibrary.saveImage(
-                    data: imageData,
-                    to: selectedCollection
-                )
+                var isPhotoSaved: Bool = true
+                if collectionsToSaveTo.isEmpty {
+                    isPhotoSaved = await PhotosLibrary.saveImage(data: imageData)
+                } else {
+                    for collection in collectionsToSaveTo {
+                        withAnimation(.smooth.speed(2.0)) {
+                            savingAlbumName = collection.localizedTitle ??
+                                NSLocalizedString("Shared.Album", comment: "")
+                        }
+                        isPhotoSaved = await PhotosLibrary.saveImage(data: imageData, to: collection)
+                        if !isPhotoSaved {
+                            break
+                        }
+                    }
+                }
+                savingAlbumName = nil
                 if isPhotoSaved {
                     if saveRecentAlbums {
-                        if let albumName = selectedCollection.localizedTitle {
-                            var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
-                                [String].self,
-                                from: recentAlbumsData
-                            )) ?? []
-                            if existingRecentAlbums.contains(where: { $0 == albumName}) {
-                                existingRecentAlbums.removeAll(where: { $0 == albumName})
-                            }
-                            existingRecentAlbums.append(albumName)
-                            if existingRecentAlbums.count > 10 {
-                                existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
-                            }
-                            recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
-                        }
+                        updateRecentAlbums(with: collectionsToSaveTo.compactMap(\.localizedTitle))
                     }
                     if showSaveAnimation {
                         withAnimation(.smooth.speed(2.0)) {
@@ -145,13 +165,31 @@ struct ShareView: View {
                     #if os(iOS)
                     UINotificationFeedbackGenerator().notificationOccurred(.error)
                     #endif
-                    isPhotoSaving = false
+                    withAnimation(.smooth.speed(2.0)) {
+                        isPhotoSaving = false
+                    }
                     isPhotoSaveFailed = true
                 }
             }
         } else {
             isPhotoSaveFailed = true
         }
+    }
+
+    func updateRecentAlbums(with albumNames: [String]) {
+        guard !albumNames.isEmpty else { return }
+        var existingRecentAlbums: [String] = (try? JSONDecoder().decode(
+            [String].self,
+            from: recentAlbumsData
+        )) ?? []
+        for albumName in albumNames {
+            existingRecentAlbums.removeAll(where: { $0 == albumName })
+            existingRecentAlbums.append(albumName)
+        }
+        if existingRecentAlbums.count > 10 {
+            existingRecentAlbums = Array(existingRecentAlbums.suffix(10))
+        }
+        recentAlbumsData = (try? JSONEncoder().encode(existingRecentAlbums)) ?? Data()
     }
 
     func closeWithHaptics(shouldWait: Bool = true) {

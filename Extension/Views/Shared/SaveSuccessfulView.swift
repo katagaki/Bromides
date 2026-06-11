@@ -9,10 +9,10 @@ import Photos
 import SwiftUI
 
 struct SaveSuccessfulView: View {
-    var selectedCollection: PHAssetCollection?
+    var selectedCollections: [PHAssetCollection]
 
-    init(_ selectedCollection: PHAssetCollection? = nil) {
-        self.selectedCollection = selectedCollection
+    init(_ selectedCollections: [PHAssetCollection] = []) {
+        self.selectedCollections = selectedCollections
     }
 
     var body: some View {
@@ -21,10 +21,19 @@ struct SaveSuccessfulView: View {
                 .resizable()
                 .frame(width: 48.0, height: 48.0)
                 .symbolRenderingMode(.multicolor)
-            Text("""
-Message.Save.\(selectedCollection?.localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))
+            Group {
+                switch selectedCollections.count {
+                case 0:
+                    Text("Message.Save.Library")
+                case 1:
+                    Text("""
+Message.Save.\(selectedCollections[0].localizedTitle ?? NSLocalizedString("Shared.Album", comment: ""))
 """)
-                .bold()
+                default:
+                    Text("Message.Save.Multiple.\(selectedCollections.count)")
+                }
+            }
+            .bold()
         }
     }
 }

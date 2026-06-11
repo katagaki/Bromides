@@ -26,6 +26,7 @@ struct CollectionCheckmark: View {
                     Circle()
                         .stroke(.white, lineWidth: lineWidth)
                 }
+                .shadow(color: .black.opacity(0.3), radius: 2.0, y: 1.0)
         }
     }
 }

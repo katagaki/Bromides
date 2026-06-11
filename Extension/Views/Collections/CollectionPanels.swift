@@ -10,14 +10,16 @@ import SwiftUI
 
 struct CollectionPanels: View {
     var collections: [Collection]?
-    @Binding var selectedCollection: PHAssetCollection?
+    @Binding var selectedCollections: [PHAssetCollection]
+
+    @AppStorage(wrappedValue: false, "MultipleAlbumSelection", store: defaults) var multipleAlbumSelection: Bool
 
     init(
         _ collections: [Collection]?,
-        selection selectedCollection: Binding<PHAssetCollection?>
+        selection selectedCollections: Binding<[PHAssetCollection]>
     ) {
         self.collections = collections
-        self._selectedCollection = selectedCollection
+        self._selectedCollections = selectedCollections
     }
 
     var body: some View {
@@ -30,14 +32,16 @@ struct CollectionPanels: View {
                     switch collection {
                     case .album(let album):
                         Button {
-                            withAnimation(.smooth.speed(2.0)) {
-                                selectedCollection = album as? PHAssetCollection
+                            if let album = album as? PHAssetCollection {
+                                withAnimation(.smooth.speed(2.0)) {
+                                    selectedCollections.toggle(album, allowingMultiple: multipleAlbumSelection)
+                                }
                             }
                         } label: {
                             CollectionButtonLabel(
                                 collection: collection,
                                 mode: .panels,
-                                isSelected: { selectedCollection == album }
+                                isSelected: { selectedCollections.isSelected(album) }
                             )
                         }
                         .buttonStyle(.plain)

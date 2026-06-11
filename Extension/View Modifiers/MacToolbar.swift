@@ -23,6 +23,8 @@ struct MacToolbar: ViewModifier {
     @FocusState.Binding var isSearchFieldFocused: Bool
 
     var hasSearchBar: Bool
+    var saveAction: (() -> Void)?
+    var isSaveDisabled: Bool
 
     func body(content: Content) -> some View {
         content
@@ -83,6 +85,19 @@ struct MacToolbar: ViewModifier {
                             }
                             .glassEffect(.regular.interactive(), in: .capsule)
                     }
+                    if let saveAction {
+                        Button(role: .confirm, action: saveAction) {
+                            Text("Shared.Save")
+                                .frame(height: 32.0)
+                                .padding(.horizontal, 8.0)
+                                .contentShape(.rect)
+                        }
+                        .buttonStyle(.plain)
+                        .frame(height: 32.0)
+                        .glassEffect(.regular.interactive().tint(.accent), in: .capsule)
+                        .accessibilityLabel(Text("Shared.Save"))
+                        .disabled(isSaveDisabled)
+                    }
                 }
                 .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                 .padding(8.0)
@@ -102,12 +117,16 @@ extension View {
     func toolbarForMac(
         navigator: Binding<Navigator>,
         isSearchFieldFocused: FocusState<Bool>.Binding,
-        hasSearchBar: Bool = true
+        hasSearchBar: Bool = true,
+        saveAction: (() -> Void)? = nil,
+        isSaveDisabled: Bool = false
     ) -> some View {
         self.modifier(MacToolbar(
             navigator: navigator,
             isSearchFieldFocused: isSearchFieldFocused,
-            hasSearchBar: hasSearchBar
+            hasSearchBar: hasSearchBar,
+            saveAction: saveAction,
+            isSaveDisabled: isSaveDisabled
         ))
     }
 }
