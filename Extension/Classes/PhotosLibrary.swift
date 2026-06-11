@@ -210,14 +210,21 @@ class PhotosLibrary {
     }
 
     static func saveImage(data: Data, to album: PHAssetCollection) async -> Bool {
+        return await saveImage(data: data, to: [album])
+    }
+
+    static func saveImage(data: Data, to albums: [PHAssetCollection]) async -> Bool {
         guard let image = XPImage(data: data) else { return false }
         do {
             try await PHPhotoLibrary.shared().performChanges {
+                // Save a single copy of the image, then assign it to every album.
                 let imageRequest: PHAssetChangeRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
                 let placeholder: PHObjectPlaceholder? = imageRequest.placeholderForCreatedAsset
-                let albumRequest = PHAssetCollectionChangeRequest(for: album)
                 let enumeration: NSArray = [placeholder!]
-                albumRequest!.addAssets(enumeration)
+                for album in albums {
+                    let albumRequest = PHAssetCollectionChangeRequest(for: album)
+                    albumRequest!.addAssets(enumeration)
+                }
             }
             return true
         } catch {
