@@ -270,6 +270,17 @@
 				en,
 				ja,
 				Base,
+				de,
+				es,
+				fr,
+				it,
+				ko,
+				nl,
+				pl,
+				"pt-PT",
+				ru,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = E4DB58CD2D8E8146009A20B2;
 			packageReferences = (
