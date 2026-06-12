@@ -97,11 +97,8 @@ struct CollectionView: View {
         // Use native toolbar on iOS
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                cancelButton()
-            }
             ToolbarItem(placement: .topBarTrailing) {
-                saveButton()
+                cancelButton()
             }
             if hasNewMenu {
                 ToolbarItem(placement: .bottomBar) {
@@ -114,6 +111,9 @@ struct CollectionView: View {
                     selectionSummaryButton()
                 }
                 ToolbarSpacer(.flexible, placement: .bottomBar)
+            }
+            ToolbarItem(placement: .bottomBar) {
+                saveButton()
             }
         }
         #endif
