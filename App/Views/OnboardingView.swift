@@ -80,14 +80,12 @@ struct OnboardingView: View {
                 Section {
                     Link(destination: URL(string: "https://github.com/katagaki/Bromides")!) {
                         HStack {
-                            ListRow(image: "GitHub",
-                                    title: "Settings.GitHub",
-                                    subtitle: "katagaki/Bromides",
-                                    includeSpacer: true)
-                            Image(systemName: "safari")
-                                .opacity(0.5)
+                            Text("Settings.GitHub")
+                            Spacer()
+                            Text(verbatim: "katagaki/Bromides")
+                                .foregroundStyle(.secondary)
                         }
-                        .foregroundColor(.primary)
+                        .tint(.primary)
                     }
                 }
             }
