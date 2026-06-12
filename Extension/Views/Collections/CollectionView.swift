@@ -256,16 +256,20 @@ struct CollectionView: View {
     func saveButton() -> some View {
         Group {
             #if os(macOS)
-            Button(role: .confirm, action: saveAction) {
+            Button(action: saveAction) {
                 Label("Shared.Save", systemImage: "square.and.arrow.down")
                     .bold()
                     .frame(maxWidth: .infinity, minHeight: 32.0, maxHeight: 32.0)
                     .contentShape(.rect)
             }
-            .buttonStyle(.plain)
-            .glassEffect(.regular.interactive().tint(.accent), in: .capsule)
+            .buttonStyle(.borderedProminent)
+            .clipShape(.capsule)
             #else
-            Button(role: .confirm, action: saveAction)
+            Button(action: saveAction) {
+                Label("Shared.Save", systemImage: "square.and.arrow.down")
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(.capsule)
             #endif
         }
         .accessibilityLabel(Text("Shared.Save"))
